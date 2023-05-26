@@ -13,6 +13,10 @@ it('matches snapshot', () => {
           element={<Home />}
           index={true}
         />
+        <Route
+          element={<NotFoundLoader />}
+          index={true}
+        />
       </Route>
     </Route>
   `);
