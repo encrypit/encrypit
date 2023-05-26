@@ -1,4 +1,7 @@
 /* istanbul ignore file */
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { grey } from '@mui/material/colors';
 import { useCallback, useMemo } from 'react';
 import { type DropzoneOptions, useDropzone } from 'react-dropzone';
 
@@ -23,22 +26,23 @@ export default function Dropzone() {
   const style = useMemo(
     () => ({
       ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
+      ...(isFocused && focusedStyle),
+      ...(isDragAccept && acceptStyle),
+      ...(isDragReject && rejectStyle),
     }),
     [isFocused, isDragAccept, isDragReject]
   );
 
+  const { style: rootStyle, ...rootProps } = getRootProps({ style });
+
   return (
-    <section {...getRootProps({ style })}>
+    <Box component="section" sx={rootStyle} {...rootProps}>
       <input {...getInputProps()} />
 
-      {isDragActive ? (
-        <p>Drop file...</p>
-      ) : (
-        <p>Drag and drop file or click to select file</p>
-      )}
-    </section>
+      <Button color="info" sx={{ color: grey[900] }}>
+        {isDragActive ? 'Drop your file here' : 'Drag & drop your file here'}
+        &hellip;
+      </Button>
+    </Box>
   );
 }
