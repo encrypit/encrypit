@@ -5,13 +5,7 @@ import Home from './Home';
 
 it('renders home', () => {
   renderWithProviders(<Home />);
-  expect(screen.getByText(/Welcome/)).toHaveTextContent('Welcome to Encrypit!');
-});
-
-it('renders GitHub link', () => {
-  renderWithProviders(<Home />);
-  expect(screen.getByText('Encrypit')).toHaveAttribute(
-    'href',
-    'https://github.com/encrypit/encrypit'
-  );
+  expect(
+    screen.getByRole('heading', { level: 1, name: 'New file' })
+  ).toBeInTheDocument();
 });
