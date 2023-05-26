@@ -6,13 +6,15 @@
   "scripts": {
     "build": "vite build",
     "clean": "rm -rf dist",
+    "client": "vite --open",
     "cypress:open": "cypress open",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --noEmit",
     "postinstall": "husky install",
     "preview": "vite preview",
-    "start": "vite --open",
+    "server": "wrangler pages dev . --r2=BUCKET",
+    "start": "yarn client & yarn server",
     "test": "jest",
     "test:ci": "CI=true jest --coverage --colors",
     "test:watch": "jest --watch"
