@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { type DropzoneOptions, useDropzone } from 'react-dropzone';
 
-import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from './styles';
+import useStyle from './useStyle';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
@@ -22,20 +22,16 @@ export default function Dropzone() {
     isFocused,
   } = useDropzone({ onDrop });
 
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused && focusedStyle),
-      ...(isDragAccept && acceptStyle),
-      ...(isDragReject && /* istanbul ignore next */ rejectStyle),
+  const { style, ...rootProps } = getRootProps({
+    style: useStyle({
+      isFocused,
+      isDragAccept,
+      isDragReject,
     }),
-    [isFocused, isDragAccept, isDragReject]
-  );
-
-  const { style: rootStyle, ...rootProps } = getRootProps({ style });
+  });
 
   return (
-    <Box component="section" sx={rootStyle} {...rootProps}>
+    <Box component="section" sx={style} {...rootProps}>
       <input {...getInputProps()} />
 
       <Button color="info" sx={{ color: grey[900] }}>
