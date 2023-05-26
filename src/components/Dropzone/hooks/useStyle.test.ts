@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 
-import useStyle from './useStyle';
+import { useStyle } from './useStyle';
 
 it('renders base style by default', () => {
   const { result } = renderHook(() => useStyle({}));

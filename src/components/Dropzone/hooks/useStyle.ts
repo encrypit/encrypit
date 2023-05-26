@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from './styles';
+import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from '../styles';
 
-export default function useStyle({
+export function useStyle({
   isFocused = false,
   isDragAccept = false,
   isDragReject = false,
