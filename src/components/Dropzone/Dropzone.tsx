@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
@@ -28,7 +27,7 @@ export default function Dropzone() {
       ...baseStyle,
       ...(isFocused && focusedStyle),
       ...(isDragAccept && acceptStyle),
-      ...(isDragReject && rejectStyle),
+      ...(isDragReject && /* istanbul ignore next */ rejectStyle),
     }),
     [isFocused, isDragAccept, isDragReject]
   );
