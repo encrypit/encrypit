@@ -1,0 +1,23 @@
+name: dependabot
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Approve Dependabot PR
+        run: gh pr review --approve $PR_URL
+
+      - name: Auto-merge Dependabot PR
+        if: contains(github.event.pull_request.title, 'deps-dev')
+        run: gh pr merge --auto --squash $PR_URL
