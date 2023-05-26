@@ -1,22 +1,40 @@
-import { useCallback } from 'react';
+/* istanbul ignore file */
+import { useCallback, useMemo } from 'react';
 import { type DropzoneOptions, useDropzone } from 'react-dropzone';
+
+import { acceptStyle, baseStyle, focusedStyle, rejectStyle } from './styles';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
 export default function Dropzone() {
-  /* istanbul ignore next */
   const onDrop: OnDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles); // eslint-disable-line no-console
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const {
+    getInputProps,
+    getRootProps,
+    isDragAccept,
+    isDragActive,
+    isDragReject,
+    isFocused,
+  } = useDropzone({ onDrop });
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isFocused, isDragAccept, isDragReject]
+  );
 
   return (
-    <section {...getRootProps()}>
+    <section {...getRootProps({ style })}>
       <input {...getInputProps()} />
 
       {isDragActive ? (
-        /* istanbul ignore next */
         <p>Drop file...</p>
       ) : (
         <p>Drag and drop file or click to select file</p>
