@@ -1,17 +1,12 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
-import { useCallback } from 'react';
-import { type DropzoneOptions, useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 
-import { useStyle } from './hooks';
-
-type OnDrop = Required<DropzoneOptions>['onDrop'];
+import { useOnDrop, useStyle } from './hooks';
 
 export default function Dropzone() {
-  const onDrop: OnDrop = useCallback((acceptedFiles: File[]) => {
-    console.log(acceptedFiles); // eslint-disable-line no-console
-  }, []);
+  const onDrop = useOnDrop();
 
   const {
     getInputProps,
