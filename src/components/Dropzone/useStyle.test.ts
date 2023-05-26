@@ -13,6 +13,7 @@ it('renders base style by default', () => {
       "borderStyle": "dashed",
       "borderWidth": 2,
       "color": "#bdbdbd",
+      "cursor": "pointer",
       "display": "flex",
       "flex": 1,
       "flexDirection": "column",

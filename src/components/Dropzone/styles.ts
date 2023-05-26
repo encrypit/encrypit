@@ -2,18 +2,19 @@
  * @see {@link https://react-dropzone.js.org/#section-styling-dropzone}
  */
 export const baseStyle = {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
-  padding: '20px',
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
-  borderStyle: 'dashed',
   backgroundColor: '#fafafa',
+  borderColor: '#eeeeee',
+  borderRadius: 2,
+  borderStyle: 'dashed',
+  borderWidth: 2,
   color: '#bdbdbd',
+  cursor: 'pointer',
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
   outline: 'none',
+  padding: '20px',
   transition: 'border .24s ease-in-out',
 } as const;
 
