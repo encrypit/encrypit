@@ -5,12 +5,12 @@ import Header from './Header';
 
 it('renders header', () => {
   renderWithProviders(<Header />);
-  expect(screen.getByRole('banner')).toHaveTextContent('MUI Template');
+  expect(screen.getByRole('banner')).toHaveTextContent('Encrypit');
 });
 
 it('renders heading link', () => {
   renderWithProviders(<Header />);
-  expect(screen.getByRole('link', { name: 'MUI Template' })).toHaveAttribute(
+  expect(screen.getByRole('link', { name: 'Encrypit' })).toHaveAttribute(
     'href',
     '/'
   );
@@ -20,6 +20,6 @@ it('renders GitHub link', () => {
   renderWithProviders(<Header />);
   expect(screen.getByLabelText('Open GitHub repository')).toHaveAttribute(
     'href',
-    'https://github.com/remarkablemark/mui-template'
+    'https://github.com/encrypit/encrypit'
   );
 });

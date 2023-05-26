@@ -1,9 +1,9 @@
-# mui-template
+# encrypit
 
-[![build](https://github.com/remarkablemark/mui-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/mui-template/actions/workflows/build.yml)
-[![cypress](https://github.com/remarkablemark/mui-template/actions/workflows/cypress.yml/badge.svg)](https://github.com/remarkablemark/mui-template/actions/workflows/cypress.yml)
+[![build](https://github.com/encrypit/encrypit/actions/workflows/build.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/build.yml)
+[![cypress](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml)
 
-MUI Template.
+Encrypit.
 
 This project is built with:
 
@@ -22,8 +22,8 @@ This project is built with:
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablemark/mui-template.git
-cd mui-template
+git clone https://github.com/encrypit/encrypit.git
+cd encrypit
 ```
 
 Use the project's Node.js version:

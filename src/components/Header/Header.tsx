@@ -21,7 +21,7 @@ export default function Header() {
               underline="hover"
               variant="h6"
             >
-              MUI Template
+              Encrypit
             </Link>
           </Box>
 
@@ -29,7 +29,7 @@ export default function Header() {
             aria-label="Open GitHub repository"
             color="inherit"
             component={IconButton}
-            href="https://github.com/remarkablemark/mui-template"
+            href="https://github.com/encrypit/encrypit"
             target="_blank"
             rel="noopener noreferrer"
           >

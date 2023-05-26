@@ -1,7 +1,7 @@
 {
-  "name": "mui-template",
+  "name": "encrypit",
   "version": "1.0.0-alpha",
-  "description": "MUI Template",
+  "description": "Encrypit",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
     "build": "vite build",

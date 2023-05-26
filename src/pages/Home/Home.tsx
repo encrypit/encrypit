@@ -6,11 +6,11 @@ export default function Home() {
     <Typography>
       Welcome to{' '}
       <Link
-        href="https://github.com/remarkablemark/mui-template"
+        href="https://github.com/encrypit/encrypit"
         target="_blank"
         rel="noopener noreferrer"
       >
-        MUI Template
+        Encrypit
       </Link>
       !
     </Typography>
