@@ -6,6 +6,8 @@ import '@testing-library/jest-dom';
 
 import { resetStore } from './helpers';
 
+jest.mock('src/config');
+
 afterEach(() => {
   resetStore();
 });
