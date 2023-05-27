@@ -1,21 +1,46 @@
-import { FILE } from '../../src/constants';
+import { FILE, HTTP_STATUS_CODES } from '../../src/constants';
 import type { Env } from '../types';
 
+/**
+ * POST /api/files
+ *
+ * @param context - Context.
+ * @returns - Response.
+ */
 export const onRequestPost: PagesFunction<Env> = async (context) => {
+  let body: BodyInit = null;
+  const init = getResponseInit(context.env.NODE_ENV);
+
   const formData = await context.request.formData();
   const file = formData.get(FILE) as unknown as File;
+
+  if (!file.size) {
+    init.status = HTTP_STATUS_CODES.LENGTH_REQUIRED;
+    return new Response(body, init);
+  }
+
   const fileData = await file.arrayBuffer();
   const uuid = crypto.randomUUID();
   const obj = await context.env.BUCKET.put(uuid, fileData);
   obj.writeHttpMetadata(context.request.headers);
 
-  const init: ResponseInit = {};
-  if (context.env.NODE_ENV === 'development') {
-    init.headers = {
+  body = uuid;
+  return new Response(body, init);
+};
+
+/**
+ * Generates response init.
+ *
+ * @param environment - Node environment.
+ * @returns - Response init.
+ */
+function getResponseInit(environment: Env['NODE_ENV']) {
+  const responseInit: ResponseInit = {};
+  if (environment === 'development') {
+    responseInit.headers = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',
     };
   }
-  const body: BodyInit = uuid;
-  return new Response(body, init);
-};
+  return responseInit;
+}
