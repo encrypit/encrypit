@@ -38,3 +38,5 @@ export function renderWithProviders(ui: ReactElement) {
 export function resetStore() {
   resetActions.forEach((resetAction) => store.dispatch(resetAction()));
 }
+
+export const fetch = jest.mocked((global.fetch = jest.fn()));

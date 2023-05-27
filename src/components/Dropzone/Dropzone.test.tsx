@@ -1,5 +1,5 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { renderWithProviders } from 'test/helpers';
+import { fetch, renderWithProviders } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
@@ -47,13 +47,18 @@ it('drops file to Dropzone', async () => {
   const data = mockData([file]);
 
   renderWithProviders(<Dropzone />);
+
   const spy = jest.spyOn(console, 'log').mockImplementation();
+  const uuid = 'uuid';
+  fetch.mockResolvedValueOnce({
+    text: jest.fn().mockResolvedValueOnce(uuid),
+  } as unknown as Response);
 
   await act(() => {
     fireEvent.drop(screen.getByRole('presentation'), data);
   });
 
-  expect(spy).toBeCalled();
+  expect(spy).toBeCalledWith(uuid);
   spy.mockRestore();
 });
 
