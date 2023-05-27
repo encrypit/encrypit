@@ -40,3 +40,22 @@ export function resetStore() {
 }
 
 export const fetch = jest.mocked((global.fetch = jest.fn()));
+
+const mockFile = () =>
+  new File([JSON.stringify({ ping: true })], 'ping.json', {
+    type: 'application/json',
+  });
+
+export const mockFiles = (count = 2) => Array(count).fill(null).map(mockFile);
+
+export const mockData = (files = mockFiles(1)) => ({
+  dataTransfer: {
+    files,
+    items: files.map((file) => ({
+      kind: 'file',
+      type: file.type,
+      getAsFile: () => file,
+    })),
+    types: ['Files'],
+  },
+});

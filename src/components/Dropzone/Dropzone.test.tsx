@@ -1,5 +1,5 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { fetch, renderWithProviders } from 'test/helpers';
+import { fetch, mockData, mockFiles, renderWithProviders } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
@@ -23,16 +23,11 @@ it.each(['click', 'focus', 'blur'] as const)(
 );
 
 it('drags file to Dropzone', async () => {
-  const file = new File([JSON.stringify({ ping: true })], 'ping.json', {
-    type: 'application/json',
-  });
-  const data = mockData([file]);
-
   renderWithProviders(<Dropzone />);
 
   await act(() => {
     const rootElement = screen.getByRole('presentation');
-    fireEvent.dragEnter(rootElement, data);
+    fireEvent.dragEnter(rootElement, mockData());
   });
 
   expect(
@@ -40,38 +35,46 @@ it('drags file to Dropzone', async () => {
   ).toBeInTheDocument();
 });
 
-it('drops file to Dropzone', async () => {
-  const file = new File([JSON.stringify({ ping: true })], 'ping.json', {
-    type: 'application/json',
-  });
-  const data = mockData([file]);
-
-  renderWithProviders(<Dropzone />);
-
-  const spy = jest.spyOn(console, 'log').mockImplementation();
+describe('drop', () => {
   const uuid = 'uuid';
-  fetch.mockResolvedValueOnce({
-    text: jest.fn().mockResolvedValueOnce(uuid),
-  } as unknown as Response);
 
-  await act(() => {
-    fireEvent.drop(screen.getByRole('presentation'), data);
+  beforeAll(() => {
+    jest.spyOn(console, 'log').mockImplementation();
   });
 
-  expect(spy).toBeCalledWith(uuid);
-  spy.mockRestore();
-});
+  afterAll(() => {
+    // eslint-disable-next-line no-console
+    (console.log as jest.Mock).mockRestore();
+  });
 
-function mockData(files: File[]) {
-  return {
-    dataTransfer: {
-      files,
-      items: files.map((file) => ({
-        kind: 'file',
-        type: file.type,
-        getAsFile: () => file,
-      })),
-      types: ['Files'],
-    },
-  };
-}
+  beforeEach(() => {
+    // eslint-disable-next-line no-console
+    (console.log as jest.Mock).mockClear();
+
+    fetch.mockResolvedValueOnce({
+      text: jest.fn().mockResolvedValueOnce(uuid),
+    } as unknown as Response);
+  });
+
+  it('drops file to Dropzone', async () => {
+    renderWithProviders(<Dropzone />);
+
+    await act(() => {
+      fireEvent.drop(screen.getByRole('presentation'), mockData());
+    });
+
+    // eslint-disable-next-line no-console
+    expect(console.log).toBeCalledWith(uuid);
+  });
+
+  it('rejects if there are too many files', async () => {
+    renderWithProviders(<Dropzone />);
+
+    await act(() => {
+      fireEvent.drop(screen.getByRole('presentation'), mockData(mockFiles(2)));
+    });
+
+    // eslint-disable-next-line no-console
+    expect(console.log).not.toBeCalled();
+  });
+});

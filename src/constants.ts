@@ -1,5 +1,15 @@
 export const FILE = 'FILE';
 
+const ONE_MEGABYTE_IN_BYTES = 1048576;
+
+export enum MAX_SIZE {
+  DEFAULT = ONE_MEGABYTE_IN_BYTES * 5,
+}
+
+export enum MAX_FILES {
+  DEFAULT = 1,
+}
+
 /**
  * @see {@link https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}
  */
