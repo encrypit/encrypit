@@ -3,11 +3,13 @@ import Layout from 'src/components/Layout';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
 import Home from 'src/pages/Home';
 import NotFound from 'src/pages/NotFound';
+import Share from 'src/pages/Share';
 
 const routes = (
   <Route path="/" element={<Layout />}>
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<Home />} />
+      <Route path="/share" element={<Share />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   </Route>
