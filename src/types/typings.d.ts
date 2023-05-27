@@ -1,11 +1,3 @@
-/// <reference types="node" />
-
-declare namespace NodeJS {
-  interface ProcessEnv {
-    readonly NODE_ENV: 'development' | 'production';
-  }
-}
-
 declare module '*.avif' {
   const src: string;
   export default src;
