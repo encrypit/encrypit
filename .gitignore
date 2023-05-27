@@ -11,6 +11,9 @@
 # vite
 /dist
 
+# cloudflare
+/.wrangler
+
 # misc
 *.swp
 .DS_Store
