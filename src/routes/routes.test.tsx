@@ -15,7 +15,7 @@ it('matches snapshot', () => {
         />
         <Route
           element={<NotFoundLoader />}
-          index={true}
+          path="*"
         />
       </Route>
     </Route>

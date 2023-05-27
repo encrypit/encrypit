@@ -8,7 +8,7 @@ const routes = (
   <Route path="/" element={<Layout />}>
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<Home />} />
-      <Route index element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   </Route>
 );
