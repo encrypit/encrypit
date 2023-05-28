@@ -1,14 +1,14 @@
 import { Route } from 'react-router-dom';
 import Layout from 'src/components/Layout';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
-import Home from 'src/pages/Home';
 import NotFound from 'src/pages/NotFound';
 import Share from 'src/pages/Share';
+import Upload from 'src/pages/Upload';
 
 const routes = (
   <Route path="/" element={<Layout />}>
     <Route errorElement={<ErrorBoundary />}>
-      <Route index element={<Home />} />
+      <Route index element={<Upload />} />
       <Route path="/share" element={<Share />} />
       <Route path="*" element={<NotFound />} />
     </Route>

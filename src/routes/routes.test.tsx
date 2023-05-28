@@ -10,7 +10,7 @@ it('matches snapshot', () => {
         errorElement={<ErrorBoundaryLoader />}
       >
         <Route
-          element={<HomeLoader />}
+          element={<UploadLoader />}
           index={true}
         />
         <Route

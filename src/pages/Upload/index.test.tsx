@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import HomeLoader from '.';
+import UploadLoader from '.';
 
-jest.mock('./Home', () => () => <>Home</>);
+jest.mock('./Upload', () => () => <>Upload</>);
 
-it('lazy loads Home', async () => {
-  render(<HomeLoader />);
+it('lazy loads Upload', async () => {
+  render(<UploadLoader />);
   expect(screen.getByRole('progressbar')).toBeInTheDocument();
   await waitFor(() => {
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   });
-  expect(screen.getByText('Home')).toBeInTheDocument();
+  expect(screen.getByText('Upload')).toBeInTheDocument();
 });

@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'test/helpers';
 
-import Home from './Home';
+import Upload from './Upload';
 
-it('renders home', () => {
-  renderWithProviders(<Home />);
+it('renders heading', () => {
+  renderWithProviders(<Upload />);
   expect(
     screen.getByRole('heading', { level: 1, name: 'New file' })
   ).toBeInTheDocument();

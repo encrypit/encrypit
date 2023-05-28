@@ -1,12 +1,12 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { lazy, Suspense } from 'react';
 
-const Home = lazy(() => import('./Home'));
+const Upload = lazy(() => import('./Upload'));
 
-export default function HomeLoader() {
+export default function UploadLoader() {
   return (
     <Suspense fallback={<CircularProgress />}>
-      <Home />
+      <Upload />
     </Suspense>
   );
 }
