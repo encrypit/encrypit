@@ -23,7 +23,10 @@ const jestConfig: JestConfigWithTsJest = {
   },
   modulePathIgnorePatterns: ['<rootDir>/src/config'],
   preset: 'ts-jest',
-  reporters: [['github-actions', { silent: false }], 'summary'],
+  reporters:
+    process.env.CI === 'true'
+      ? [['github-actions', { silent: false }], 'summary']
+      : undefined,
   setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
   testEnvironment: 'jsdom',
 };
