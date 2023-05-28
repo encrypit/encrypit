@@ -15,4 +15,5 @@ export enum MAX_FILES {
  */
 export enum HTTP_STATUS_CODES {
   LENGTH_REQUIRED = 411,
+  NOT_FOUND = 404,
 }
