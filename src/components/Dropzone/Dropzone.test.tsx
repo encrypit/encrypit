@@ -1,10 +1,16 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { fetch, mockData, mockFiles, renderWithProviders } from 'test/helpers';
+import { mockData, mockFiles, renderWithProviders } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(jest.fn),
+}));
+
+const mockUploadFile = jest.fn();
+
+jest.mock('src/hooks', () => ({
+  useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
 
 it('renders Dropzone', () => {
@@ -55,12 +61,11 @@ describe('drop', () => {
   });
 
   beforeEach(() => {
-    // eslint-disable-next-line no-console
-    (console.log as jest.Mock).mockClear();
+    jest.clearAllMocks();
 
-    fetch.mockResolvedValueOnce({
-      text: jest.fn().mockResolvedValueOnce(uuid),
-    } as unknown as Response);
+    mockUploadFile.mockReturnValueOnce({
+      unwrap: jest.fn().mockResolvedValueOnce(uuid),
+    });
   });
 
   it('drops file to Dropzone', async () => {

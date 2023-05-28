@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from 'src/config';
 import { FILE } from 'src/constants';
+import { useUploadFileMutation } from 'src/hooks';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
 export function useOnDrop() {
   const navigate = useNavigate();
+  const [uploadFile] = useUploadFileMutation();
 
   const onDrop: OnDrop = useCallback(
     async (
@@ -23,13 +24,7 @@ export function useOnDrop() {
 
       const formData = new FormData();
       formData.append(FILE, acceptedFiles[0]);
-
-      const response = await fetch(`${API_URL}/api/files`, {
-        body: formData,
-        method: 'POST',
-      });
-
-      const uuid = await response.text();
+      const uuid = await uploadFile(formData).unwrap();
       // eslint-disable-next-line no-console
       console.log(uuid);
 

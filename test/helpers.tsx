@@ -5,10 +5,10 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { resetActions, store } from 'src/store';
 
 export { store };
-
+export { default as fetchMock } from 'jest-fetch-mock';
 export let router: ReturnType<typeof createMemoryRouter>;
 
-function wrapper(props: { children?: ReactNode }) {
+export function wrapper(props: { children?: ReactNode }) {
   const routes = [
     {
       path: '/',
@@ -38,8 +38,6 @@ export function renderWithProviders(ui: ReactElement) {
 export function resetStore() {
   resetActions.forEach((resetAction) => store.dispatch(resetAction()));
 }
-
-export const fetch = jest.mocked((global.fetch = jest.fn()));
 
 const mockFile = () =>
   new File([JSON.stringify({ ping: true })], 'ping.json', {
