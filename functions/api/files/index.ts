@@ -1,5 +1,6 @@
-import { FILE, HTTP_STATUS_CODES } from '../../src/constants';
-import type { Env } from '../types';
+import { FILE, HTTP_STATUS_CODES } from '../../../src/constants';
+import type { Env } from '../../types';
+import { getResponseInit } from '../../utils';
 
 /**
  * POST /api/files
@@ -27,20 +28,3 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   body = uuid;
   return new Response(body, init);
 };
-
-/**
- * Generates response init.
- *
- * @param environment - Node environment.
- * @returns - Response init.
- */
-function getResponseInit(environment: Env['NODE_ENV']) {
-  const responseInit: ResponseInit = {};
-  if (environment === 'development') {
-    responseInit.headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-    };
-  }
-  return responseInit;
-}
