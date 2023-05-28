@@ -1,5 +1,5 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { mockData, mockFiles, renderWithProviders } from 'test/helpers';
+import { mockData, mockFiles, renderWithProviders, store } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
@@ -10,6 +10,7 @@ jest.mock('react-router-dom', () => ({
 const mockUploadFile = jest.fn();
 
 jest.mock('src/hooks', () => ({
+  ...jest.requireActual('src/hooks'),
   useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
 
@@ -37,12 +38,10 @@ it.each(['click', 'focus', 'blur'] as const)(
 
 it('drags file to Dropzone', async () => {
   renderWithProviders(<Dropzone />);
-
   await act(() => {
     const rootElement = screen.getByRole('presentation');
     fireEvent.dragEnter(rootElement, mockData());
   });
-
   expect(
     screen.getByRole('button', { name: /Drop your file here/ })
   ).toBeInTheDocument();
@@ -51,18 +50,8 @@ it('drags file to Dropzone', async () => {
 describe('drop', () => {
   const uuid = 'uuid';
 
-  beforeAll(() => {
-    jest.spyOn(console, 'log').mockImplementation();
-  });
-
-  afterAll(() => {
-    // eslint-disable-next-line no-console
-    (console.log as jest.Mock).mockRestore();
-  });
-
   beforeEach(() => {
     jest.clearAllMocks();
-
     mockUploadFile.mockReturnValueOnce({
       unwrap: jest.fn().mockResolvedValueOnce(uuid),
     });
@@ -70,23 +59,17 @@ describe('drop', () => {
 
   it('drops file to Dropzone', async () => {
     renderWithProviders(<Dropzone />);
-
     await act(() => {
       fireEvent.drop(screen.getByRole('presentation'), mockData());
     });
-
-    // eslint-disable-next-line no-console
-    expect(console.log).toBeCalledWith(uuid);
+    expect(store.getState().file.key).toBe(uuid);
   });
 
   it('rejects if there are too many files', async () => {
     renderWithProviders(<Dropzone />);
-
     await act(() => {
       fireEvent.drop(screen.getByRole('presentation'), mockData(mockFiles(2)));
     });
-
-    // eslint-disable-next-line no-console
-    expect(console.log).not.toBeCalled();
+    expect(store.getState().file.key).toBe(undefined);
   });
 });

@@ -2,11 +2,13 @@ import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import { FILE } from 'src/constants';
-import { useUploadFileMutation } from 'src/hooks';
+import { useDispatch, useUploadFileMutation } from 'src/hooks';
+import { actions } from 'src/store';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
 export function useOnDrop() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [uploadFile] = useUploadFileMutation();
 
@@ -25,9 +27,8 @@ export function useOnDrop() {
       const formData = new FormData();
       formData.append(FILE, acceptedFiles[0]);
       const uuid = await uploadFile(formData).unwrap();
-      // eslint-disable-next-line no-console
-      console.log(uuid);
 
+      dispatch(actions.setFile({ key: uuid }));
       navigate('/share', { replace: true });
     },
     []

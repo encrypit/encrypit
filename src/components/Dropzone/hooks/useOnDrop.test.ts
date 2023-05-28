@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { fetchMock, mockFiles, wrapper } from 'test/helpers';
+import { fetchMock, mockFiles, store, wrapper } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
 
@@ -12,6 +12,7 @@ jest.mock('react-router-dom', () => ({
 const mockUploadFile = jest.fn();
 
 jest.mock('src/hooks', () => ({
+  ...jest.requireActual('src/hooks'),
   useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
 
@@ -29,15 +30,6 @@ it('returns onDrop callback', () => {
 describe('success', () => {
   const uuid = 'uuid';
 
-  beforeAll(() => {
-    jest.spyOn(console, 'log').mockImplementation();
-  });
-
-  afterAll(() => {
-    // eslint-disable-next-line no-console
-    (console.log as jest.Mock).mockRestore();
-  });
-
   beforeEach(() => {
     mockUploadFile.mockReturnValueOnce({
       unwrap: jest.fn().mockResolvedValueOnce(uuid),
@@ -49,8 +41,7 @@ describe('success', () => {
     const files = mockFiles();
     await result.current(files, [], event);
     expect(mockUploadFile).toBeCalledWith(expect.any(FormData));
-    // eslint-disable-next-line no-console
-    expect(console.log).toBeCalledWith(uuid);
+    expect(store.getState().file.key).toBe(uuid);
   });
 
   it('navigates to /share', async () => {
