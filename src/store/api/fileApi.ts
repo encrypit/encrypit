@@ -11,7 +11,10 @@ export const fileApi = createApi({
 
   endpoints: (build) => ({
     downloadFile: build.query<File, string>({
-      query: (fileKey: string) => `/${fileKey}`,
+      query: (fileKey: string) => ({
+        url: `/${fileKey}`,
+        responseHandler: 'content-type',
+      }),
     }),
 
     uploadFile: build.mutation<string, FormData>({
@@ -19,6 +22,7 @@ export const fileApi = createApi({
         url: '',
         method: 'POST',
         body,
+        responseHandler: 'content-type',
       }),
     }),
   }),
