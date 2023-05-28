@@ -46,11 +46,27 @@ In the project directory, you can run:
 
 Runs the web app in the development mode.
 
-Open [http://localhost:1234](http://localhost:1234) to view it in the browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 The page will reload if you make edits.
 
 You will also see any errors in the console.
+
+Alternatively, you can run the client and the server separately:
+
+```sh
+yarn client
+```
+
+```sh
+yarn server
+```
+
+If the server exits without killing the app, then kill the process:
+
+```sh
+kill $(lsof -ti :8788)
+```
 
 ### `yarn lint`
 
