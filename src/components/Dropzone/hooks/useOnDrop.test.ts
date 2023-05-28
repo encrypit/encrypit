@@ -4,6 +4,12 @@ import { fetch, mockFiles } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
 
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(() => mockNavigate),
+}));
+
 const uuid = 'uuid';
 const event = new Event('drop');
 
@@ -17,7 +23,8 @@ afterAll(() => {
 });
 
 beforeEach(() => {
-  fetch.mockReset().mockResolvedValueOnce({
+  jest.clearAllMocks();
+  fetch.mockResolvedValueOnce({
     text: jest.fn().mockResolvedValueOnce(uuid),
   } as unknown as Response);
 });
@@ -28,16 +35,25 @@ it('returns onDrop callback', () => {
 });
 
 describe('success', () => {
-  it('uploads file', async () => {
+  it('uploads first file', async () => {
     const { result } = renderHook(() => useOnDrop());
-    const files = mockFiles(2);
+    const files = mockFiles();
     await result.current(files, [], event);
     expect(fetch).toBeCalledWith(
       `${API_URL}/api/files`,
-      expect.objectContaining({
-        method: 'POST',
-      })
+      expect.objectContaining({ method: 'POST' })
     );
+  });
+
+  it('navigates to /share', async () => {
+    const { result } = renderHook(() => useOnDrop());
+    const files = mockFiles(1);
+    await result.current(files, [], event);
+    expect(fetch).toBeCalledWith(
+      `${API_URL}/api/files`,
+      expect.objectContaining({ method: 'POST' })
+    );
+    expect(mockNavigate).toBeCalledWith('/share', { replace: true });
   });
 });
 

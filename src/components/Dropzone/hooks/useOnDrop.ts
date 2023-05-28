@@ -1,11 +1,14 @@
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from 'src/config';
 import { FILE } from 'src/constants';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
 export function useOnDrop() {
+  const navigate = useNavigate();
+
   const onDrop: OnDrop = useCallback(
     async (
       acceptedFiles: File[],
@@ -29,8 +32,11 @@ export function useOnDrop() {
       const uuid = await response.text();
       // eslint-disable-next-line no-console
       console.log(uuid);
+
+      navigate('/share', { replace: true });
     },
     []
   );
+
   return onDrop;
 }

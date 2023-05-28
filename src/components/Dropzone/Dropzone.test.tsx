@@ -3,6 +3,10 @@ import { fetch, mockData, mockFiles, renderWithProviders } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(jest.fn),
+}));
+
 it('renders Dropzone', () => {
   renderWithProviders(<Dropzone />);
   expect(
