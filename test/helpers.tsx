@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { resetActions, store } from 'src/store';
+import { actions, resetActions, store } from 'src/store';
 
-export { store };
+export { actions, store };
 export { default as fetchMock } from 'jest-fetch-mock';
 export let router: ReturnType<typeof createMemoryRouter>;
 
