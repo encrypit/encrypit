@@ -9,3 +9,8 @@ it('renders heading', () => {
     screen.getByRole('heading', { level: 1, name: 'New file' })
   ).toBeInTheDocument();
 });
+
+it('renders Dropzone', () => {
+  renderWithProviders(<Upload />);
+  expect(screen.getByText(/Drag and drop your file here/)).toBeInTheDocument();
+});
