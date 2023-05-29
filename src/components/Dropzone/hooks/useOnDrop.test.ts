@@ -40,7 +40,7 @@ describe('success', () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles();
     await result.current(files, [], event);
-    expect(mockUploadFile).toBeCalledWith(expect.any(FormData));
+    expect(mockUploadFile).toBeCalledWith(files);
     expect(store.getState().file.key).toBe(uuid);
   });
 
@@ -48,7 +48,7 @@ describe('success', () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles(1);
     await result.current(files, [], event);
-    expect(mockUploadFile).toBeCalledWith(expect.any(FormData));
+    expect(mockUploadFile).toBeCalledWith(files);
     expect(mockNavigate).toBeCalledWith('/share', { replace: true });
   });
 });

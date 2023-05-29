@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
-import { FILE } from 'src/constants';
 import { useDispatch, useUploadFileMutation } from 'src/hooks';
 import { actions } from 'src/store';
 
@@ -24,10 +23,7 @@ export function useOnDrop() {
         return;
       }
 
-      const formData = new FormData();
-      formData.append(FILE, acceptedFiles[0]);
-      const uuid = await uploadFile(formData).unwrap();
-
+      const uuid = await uploadFile(acceptedFiles).unwrap();
       dispatch(actions.setFile({ key: uuid }));
       navigate('/share', { replace: true });
     },
