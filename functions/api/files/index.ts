@@ -20,10 +20,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return new Response(body, init);
   }
 
-  const fileData = await file.arrayBuffer();
   const uuid = crypto.randomUUID();
-  const obj = await context.env.BUCKET.put(uuid, fileData);
-  obj.writeHttpMetadata(context.request.headers);
+  await context.env.BUCKET.put(uuid, await file.arrayBuffer(), {
+    customMetadata: {
+      lastModified: String(file.lastModified),
+      name: file.name,
+      size: String(file.size),
+      type: file.type,
+    },
+    httpMetadata: context.request.headers,
+  });
 
   body = uuid;
   return new Response(body, init);

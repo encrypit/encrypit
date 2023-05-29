@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'src/hooks';
 
 export default function Share() {
-  const key = useSelector((state) => state.file.key);
+  const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!key) {
+    if (!fileKey) {
       navigate('/', { replace: true });
     }
   }, []);
 
-  const link = `${location.origin}/${key}`;
+  const link = `${location.origin}/${fileKey}`;
 
   return (
     <>

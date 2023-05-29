@@ -10,6 +10,10 @@ export enum MAX_FILES {
   DEFAULT = 1,
 }
 
+export enum HEADERS {
+  CUSTOM_METADATA = 'X-Custom-Metadata',
+}
+
 /**
  * @see {@link https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}
  */

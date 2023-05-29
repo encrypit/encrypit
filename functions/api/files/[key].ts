@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODES } from '../../../src/constants';
+import { HEADERS, HTTP_STATUS_CODES } from '../../../src/constants';
 import type { Env } from '../../types';
 import { getResponseInit } from '../../utils';
 
@@ -27,5 +27,7 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
 
   body = readable;
   init.headers['Content-Disposition'] = 'attachment';
+  init.headers['Access-Control-Expose-Headers'] = HEADERS.CUSTOM_METADATA;
+  init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(obj.customMetadata);
   return new Response(body, init);
 };
