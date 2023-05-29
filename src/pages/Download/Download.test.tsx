@@ -1,7 +1,3 @@
-// Warning: Received `true` for a non-boolean attribute `replace`.
-// If you want to write it to the DOM, pass a string instead: replace="true" or replace={value.toString()}.
-jest.spyOn(console, 'error').mockImplementation();
-
 import { screen } from '@testing-library/react';
 import { useParams } from 'react-router-dom';
 import { API_URL } from 'src/config';
@@ -9,17 +5,27 @@ import { renderWithProviders } from 'test/helpers';
 
 import Download from './Download';
 
+const mockNavigate = jest.fn();
 const mockedUseParams = jest.mocked(useParams);
 
 jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(() => mockNavigate),
   useParams: jest.fn(),
 }));
 
 const params = { fileKey: 'abc123' };
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  jest.clearAllMocks();
   mockedUseParams.mockReturnValueOnce(params);
+});
+
+describe('invalid param fileKey', () => {
+  it('navigates to home', () => {
+    mockedUseParams.mockReset().mockReturnValueOnce({ fileKey: '' });
+    renderWithProviders(<Download />);
+    expect(mockNavigate).toBeCalledWith('/', { replace: true });
+  });
 });
 
 it('renders heading', () => {

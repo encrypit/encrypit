@@ -1,12 +1,20 @@
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { API_URL } from 'src/config';
 
 export default function Download() {
   const params = useParams<{ fileKey: string }>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!params.fileKey) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   return (
     <>
