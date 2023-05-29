@@ -18,6 +18,10 @@ it('matches snapshot', () => {
           path="/share"
         />
         <Route
+          element={<DownloadLoader />}
+          path="/:fileKey"
+        />
+        <Route
           element={<NotFoundLoader />}
           path="*"
         />

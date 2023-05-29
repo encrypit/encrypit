@@ -22,6 +22,7 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
     return new Response(body, init);
   }
 
+  init.headers['Content-Disposition'] = 'attachment';
   body = await obj.arrayBuffer();
   return new Response(body, init);
 };

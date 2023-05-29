@@ -13,7 +13,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-it('renders home', () => {
+it('renders heading', () => {
   renderWithProviders(<Share />);
   expect(
     screen.getByRole('heading', { level: 1, name: 'File link ready' })
