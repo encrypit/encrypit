@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { API_URL } from 'src/config';
 
-export default function Download() {
+export default function ConfirmDownload() {
   const params = useParams<{ fileKey: string }>();
   const navigate = useNavigate();
 

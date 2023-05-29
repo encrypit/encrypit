@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { API_URL } from 'src/config';
 import { renderWithProviders } from 'test/helpers';
 
-import Download from './Download';
+import ConfirmDownload from './ConfirmDownload';
 
 const mockNavigate = jest.fn();
 const mockedUseParams = jest.mocked(useParams);
@@ -23,33 +23,33 @@ beforeEach(() => {
 describe('invalid param fileKey', () => {
   it('navigates to home', () => {
     mockedUseParams.mockReset().mockReturnValueOnce({ fileKey: '' });
-    renderWithProviders(<Download />);
+    renderWithProviders(<ConfirmDownload />);
     expect(mockNavigate).toBeCalledWith('/', { replace: true });
   });
 });
 
 it('renders heading', () => {
-  renderWithProviders(<Download />);
+  renderWithProviders(<ConfirmDownload />);
   expect(
     screen.getByRole('heading', { level: 1, name: 'Download and delete?' })
   ).toBeInTheDocument();
 });
 
 it('renders warning', () => {
-  renderWithProviders(<Download />);
+  renderWithProviders(<ConfirmDownload />);
   expect(
     screen.getByText(/You're about to download and delete the file with key/)
   ).toBeInTheDocument();
 });
 
 it('renders download link', () => {
-  renderWithProviders(<Download />);
+  renderWithProviders(<ConfirmDownload />);
   expect(
     screen.getByRole('link', { name: 'Yes, download the file' })
   ).toHaveAttribute('href', `${API_URL}/api/files/${params.fileKey}`);
 });
 
 it('renders index link', () => {
-  renderWithProviders(<Download />);
+  renderWithProviders(<ConfirmDownload />);
   expect(screen.getByText('No, not now')).toHaveAttribute('to', '/');
 });

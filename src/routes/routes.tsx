@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import Layout from 'src/components/Layout';
-import Download from 'src/pages/Download';
+import ConfirmDownload from 'src/pages/ConfirmDownload';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
 import NotFound from 'src/pages/NotFound';
 import Share from 'src/pages/Share';
@@ -11,7 +11,7 @@ const routes = (
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<Upload />} />
       <Route path="/share" element={<Share />} />
-      <Route path="/:fileKey" element={<Download />} />
+      <Route path="/:fileKey" element={<ConfirmDownload />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   </Route>

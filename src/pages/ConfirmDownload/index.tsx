@@ -1,12 +1,12 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { lazy, Suspense } from 'react';
 
-const Download = lazy(() => import('./Download'));
+const ConfirmDownload = lazy(() => import('./ConfirmDownload'));
 
-export default function DownloadLoader() {
+export default function ConfirmDownloadLoader() {
   return (
     <Suspense fallback={<CircularProgress />}>
-      <Download />
+      <ConfirmDownload />
     </Suspense>
   );
 }
