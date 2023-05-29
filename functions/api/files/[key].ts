@@ -22,7 +22,10 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
     return new Response(body, init);
   }
 
+  const { readable, writable } = new TransformStream();
+  obj.body.pipeTo(writable);
+
+  body = readable;
   init.headers['Content-Disposition'] = 'attachment';
-  body = await obj.arrayBuffer();
   return new Response(body, init);
 };
