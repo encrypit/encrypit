@@ -1,6 +1,5 @@
-import { red } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import {
@@ -11,15 +10,9 @@ import {
 import routes from 'src/routes';
 import { store } from 'src/store';
 
-const router = createBrowserRouter(createRoutesFromElements(routes));
+import theme from './theme';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: red[900],
-    },
-  },
-});
+const router = createBrowserRouter(createRoutesFromElements(routes));
 
 export default function App() {
   return (
