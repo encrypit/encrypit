@@ -1,5 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { actions, renderWithProviders, store } from 'test/helpers';
+import { useSelector } from 'src/hooks';
+import type { RootState } from 'src/types';
+import { renderWithProviders } from 'test/helpers';
 
 import Share from './Share';
 
@@ -8,6 +10,15 @@ const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(() => mockNavigate),
 }));
+
+const mockDeleteFile = jest.fn();
+
+jest.mock('src/hooks', () => ({
+  useDeleteFileMutation: jest.fn(() => [mockDeleteFile]),
+  useSelector: jest.fn(),
+}));
+
+const mockedUseSelector = jest.mocked(useSelector);
 
 const { clipboard } = navigator;
 const writeText = jest.fn();
@@ -26,14 +37,12 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-it('renders heading', () => {
-  renderWithProviders(<Share />);
-  expect(
-    screen.getByRole('heading', { level: 1, name: 'File link ready' })
-  ).toBeInTheDocument();
-});
-
 describe('without file key', () => {
+  it('does not render heading', () => {
+    renderWithProviders(<Share />);
+    expect(screen.queryByText('File link ready')).not.toBeInTheDocument();
+  });
+
   it('navigates to home', () => {
     renderWithProviders(<Share />);
     expect(mockNavigate).toBeCalledWith('/', { replace: true });
@@ -45,7 +54,16 @@ describe('with file key', () => {
   const link = `${location.origin}/${key}`;
 
   beforeEach(() => {
-    store.dispatch(actions.setFile({ key }));
+    mockedUseSelector.mockImplementation((selector) =>
+      selector({ file: { key: 'abc123' } } as RootState)
+    );
+  });
+
+  it('renders heading', () => {
+    renderWithProviders(<Share />);
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'File link ready' })
+    ).toBeInTheDocument();
   });
 
   it('does not navigate away', () => {
@@ -78,5 +96,12 @@ describe('with file key', () => {
       'href',
       `mailto:?body=${link}`
     );
+  });
+
+  it('deletes file', () => {
+    renderWithProviders(<Share />);
+    fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+    expect(mockDeleteFile).toBeCalledTimes(1);
+    expect(mockDeleteFile).toBeCalledWith(key);
   });
 });

@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography';
 import { useCallback, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'src/hooks';
+import { useDeleteFileMutation, useSelector } from 'src/hooks';
 
 export default function Share() {
   const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
   const link = `${location.origin}/${fileKey}`;
+  const [deleteFile] = useDeleteFileMutation();
 
   useEffect(() => {
     if (!fileKey) {
@@ -23,6 +24,12 @@ export default function Share() {
     () => navigator.clipboard.writeText(link),
     [link]
   );
+
+  const handleDeleteFile = useCallback(() => deleteFile(fileKey!), [fileKey]);
+
+  if (!fileKey) {
+    return null;
+  }
 
   return (
     <>
@@ -38,13 +45,27 @@ export default function Share() {
         {link}
       </Link>
 
-      <Stack direction="row" spacing={1} sx={{ marginTop: 2 }}>
-        <Button onClick={copyLink} variant="outlined">
-          Copy link
-        </Button>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ marginTop: 2 }}
+      >
+        <Stack direction="row" spacing={1}>
+          <Button onClick={copyLink} variant="outlined">
+            Copy link
+          </Button>
 
-        <Button component="a" href={`mailto:?body=${link}`} variant="outlined">
-          Email link
+          <Button
+            component="a"
+            href={`mailto:?body=${link}`}
+            variant="outlined"
+          >
+            Email link
+          </Button>
+        </Stack>
+
+        <Button onClick={handleDeleteFile} variant="contained">
+          Delete file
         </Button>
       </Stack>
     </>

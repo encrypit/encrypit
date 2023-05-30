@@ -13,6 +13,13 @@ export const fileApi = createApi({
   }),
 
   endpoints: (build) => ({
+    deleteFile: build.mutation<void, string>({
+      query: (fileKey: string) => ({
+        url: `/${fileKey}`,
+        method: 'DELETE',
+      }),
+    }),
+
     downloadFile: build.query<DownloadFileResponse, string>({
       query: (fileKey: string) => ({
         url: `/${fileKey}`,
@@ -47,4 +54,8 @@ export const fileApi = createApi({
   }),
 });
 
-export const { useDownloadFileQuery, useUploadFileMutation } = fileApi;
+export const {
+  useDeleteFileMutation,
+  useDownloadFileQuery,
+  useUploadFileMutation,
+} = fileApi;
