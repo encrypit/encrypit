@@ -1,3 +1,4 @@
+import Alert from '@mui/material/Alert';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
@@ -22,6 +23,10 @@ export default function Share() {
       <Typography component="h1" gutterBottom variant="h6">
         File link ready
       </Typography>
+
+      <Alert severity="warning" sx={{ marginBottom: 1 }}>
+        The file will be deleted after it's downloaded.
+      </Alert>
 
       <Link component={RouterLink} to={link}>
         {link}
