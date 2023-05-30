@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { actions, renderWithProviders, store } from 'test/helpers';
 
 import Share from './Share';
@@ -8,6 +8,19 @@ const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(() => mockNavigate),
 }));
+
+const { clipboard } = navigator;
+const writeText = jest.fn();
+
+beforeAll(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (navigator as any).clipboard = { writeText };
+});
+
+afterAll(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (navigator as any).clipboard = clipboard;
+});
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -50,5 +63,20 @@ describe('with file key', () => {
     expect(
       screen.getByText("The file will be deleted after it's downloaded.")
     ).toBeInTheDocument();
+  });
+
+  it('copies link', () => {
+    renderWithProviders(<Share />);
+    fireEvent.click(screen.getByRole('button', { name: 'Copy link' }));
+    expect(writeText).toBeCalledTimes(1);
+    expect(writeText).toBeCalledWith(link);
+  });
+
+  it('emails link', () => {
+    renderWithProviders(<Share />);
+    expect(screen.getByRole('link', { name: 'Email link' })).toHaveAttribute(
+      'href',
+      `mailto:?body=${link}`
+    );
   });
 });

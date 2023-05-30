@@ -1,18 +1,19 @@
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 export default function ConfirmDownload() {
-  const params = useParams<{ fileKey: string }>();
+  const { fileKey } = useParams<{ fileKey: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!params.fileKey) {
+    if (!fileKey) {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [fileKey]);
 
   return (
     <>
@@ -22,28 +23,29 @@ export default function ConfirmDownload() {
 
       <Typography paragraph>
         You're about to download and delete the file with key{' '}
-        <strong>{params.fileKey}</strong>
+        <strong>{fileKey}</strong>
       </Typography>
 
-      <Button
-        component={RouterLink}
-        replace
-        sx={{ marginRight: 1 }}
-        to="/download"
-        variant="contained"
-      >
-        Yes, download the file
-      </Button>
+      <Stack spacing={1} direction="row">
+        <Button
+          component={RouterLink}
+          replace
+          to="/download"
+          variant="contained"
+        >
+          Yes, download the file
+        </Button>
 
-      <Button
-        color="secondary"
-        component={RouterLink}
-        replace
-        to="/"
-        variant="contained"
-      >
-        No, not now
-      </Button>
+        <Button
+          color="secondary"
+          component={RouterLink}
+          replace
+          to="/"
+          variant="contained"
+        >
+          No, not now
+        </Button>
+      </Stack>
     </>
   );
 }
