@@ -2,8 +2,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'src/config';
 import { FILE, HEADERS } from 'src/constants';
-
-import { DownloadFileResponse } from './types';
+import type { DownloadFileResponse } from 'src/types';
+import { blobToBase64 } from 'src/utils';
 
 export const fileApi = createApi({
   reducerPath: 'fileApi',
@@ -16,16 +16,17 @@ export const fileApi = createApi({
     downloadFile: build.query<DownloadFileResponse, string>({
       query: (fileKey: string) => ({
         url: `/${fileKey}`,
-        responseHandler: 'content-type',
+        responseHandler: async (response) => {
+          return blobToBase64(await response.blob());
+        },
       }),
-      transformResponse: (response, meta) => {
-        const file = response as File;
-        const customMetadata = JSON.parse(
-          meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!
-        ) as DownloadFileResponse['customMetadata'];
+
+      transformResponse: (base64: string, meta) => {
         return {
-          file,
-          customMetadata,
+          file: base64,
+          customMetadata: JSON.parse(
+            meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!
+          ) as DownloadFileResponse['customMetadata'],
         };
       },
     }),

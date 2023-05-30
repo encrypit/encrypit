@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react';
 import { useParams } from 'react-router-dom';
-import { API_URL } from 'src/config';
 import { renderWithProviders } from 'test/helpers';
 
 import ConfirmDownload from './ConfirmDownload';
@@ -44,9 +43,10 @@ it('renders warning', () => {
 
 it('renders download link', () => {
   renderWithProviders(<ConfirmDownload />);
-  expect(
-    screen.getByRole('link', { name: 'Yes, download the file' })
-  ).toHaveAttribute('href', `${API_URL}/api/files/${params.fileKey}`);
+  expect(screen.getByText('Yes, download the file')).toHaveAttribute(
+    'to',
+    '/download'
+  );
 });
 
 it('renders index link', () => {

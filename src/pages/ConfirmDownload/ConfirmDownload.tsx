@@ -1,10 +1,8 @@
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { API_URL } from 'src/config';
 
 export default function ConfirmDownload() {
   const params = useParams<{ fileKey: string }>();
@@ -28,10 +26,10 @@ export default function ConfirmDownload() {
       </Typography>
 
       <Button
-        component={Link}
-        download
-        href={`${API_URL}/api/files/${params.fileKey}`}
+        component={RouterLink}
+        replace
         sx={{ marginRight: 1 }}
+        to="/download"
         variant="contained"
       >
         Yes, download the file
