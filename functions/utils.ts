@@ -12,6 +12,7 @@ export function getResponseInit(environment: Env['NODE_ENV']) {
     responseInit.headers = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': '*',
     };
   }
   return responseInit;

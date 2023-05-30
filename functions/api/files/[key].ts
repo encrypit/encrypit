@@ -31,3 +31,35 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(obj.customMetadata);
   return new Response(body, init);
 };
+
+/**
+ * DELETE /api/files/[key]
+ *
+ * @param context - Context.
+ * @returns - Response.
+ */
+export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
+  const body: BodyInit = null;
+  const init = getResponseInit(context.env.NODE_ENV);
+
+  const fileKey = context.params.key as string;
+  const obj = await context.env.BUCKET.head(fileKey);
+
+  if (obj) {
+    await context.env.BUCKET.delete(fileKey);
+    return new Response(body, init);
+  }
+
+  init.status = HTTP_STATUS_CODES.NOT_FOUND;
+  return new Response(body, init);
+};
+
+/**
+ * OPTIONS /api/files/[key]
+ *
+ * @param context - Context.
+ * @returns - Response.
+ */
+export const onRequestOptions: PagesFunction<Env, Params> = async (context) => {
+  return new Response(null, getResponseInit(context.env.NODE_ENV));
+};
