@@ -21,7 +21,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const uuid = crypto.randomUUID();
-  await context.env.BUCKET.put(uuid, await file.arrayBuffer(), {
+  await context.env.EXPIRATION_DAYS_7.put(uuid, await file.arrayBuffer(), {
     customMetadata: {
       lastModified: String(file.lastModified),
       name: file.name,

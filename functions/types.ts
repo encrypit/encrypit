@@ -1,4 +1,4 @@
 export interface Env {
-  BUCKET: R2Bucket;
+  EXPIRATION_DAYS_7: R2Bucket;
   NODE_ENV: 'development' | 'staging' | 'production';
 }

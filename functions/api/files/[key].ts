@@ -15,7 +15,7 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
-  const obj = await context.env.BUCKET.get(fileKey);
+  const obj = await context.env.EXPIRATION_DAYS_7.get(fileKey);
 
   if (!obj) {
     init.status = HTTP_STATUS_CODES.NOT_FOUND;
@@ -43,10 +43,10 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
-  const obj = await context.env.BUCKET.head(fileKey);
+  const obj = await context.env.EXPIRATION_DAYS_7.head(fileKey);
 
   if (obj) {
-    await context.env.BUCKET.delete(fileKey);
+    await context.env.EXPIRATION_DAYS_7.delete(fileKey);
     return new Response(body, init);
   }
 
