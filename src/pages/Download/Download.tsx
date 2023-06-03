@@ -2,7 +2,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'src/hooks';
+import { useDeleteFileMutation, useSelector } from 'src/hooks';
 
 import DownloadFile, { type Props as DownloadFileProps } from './DownloadFile';
 
@@ -14,6 +14,7 @@ export default function Download() {
   const [downloadFile, setDownloadFile] = useState<DownloadFileParameter>();
   const [downloadUrl, setDownloadUrl] = useState('');
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const [deleteFile] = useDeleteFileMutation();
 
   useEffect(() => {
     if (!fileKey) {
@@ -28,11 +29,12 @@ export default function Download() {
   }, [downloadFile]);
 
   useEffect(() => {
-    if (downloadUrl) {
+    if (downloadUrl && fileKey) {
       /* istanbul ignore next */
       linkRef.current?.click();
+      deleteFile(fileKey);
     }
-  }, [downloadUrl]);
+  }, [downloadUrl, fileKey]);
 
   if (!fileKey) {
     return null;

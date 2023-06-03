@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { useDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders } from 'test/helpers';
@@ -11,7 +11,10 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(() => mockNavigate),
 }));
 
+const mockDeleteFile = jest.fn();
+
 jest.mock('src/hooks', () => ({
+  useDeleteFileMutation: jest.fn(() => [mockDeleteFile]),
   useDownloadFileQuery: jest.fn(),
   useSelector: jest.fn(),
 }));
@@ -21,11 +24,13 @@ const mockedUseSelector = jest.mocked(useSelector);
 
 type UseDownloadFileQuery = ReturnType<typeof mockedUseDownloadFileQuery>[0];
 
+const fileKey = 'fileKey';
+
 beforeEach(() => {
   jest.clearAllMocks();
   mockedUseDownloadFileQuery.mockReturnValue({} as UseDownloadFileQuery);
   mockedUseSelector.mockImplementation((selector) =>
-    selector({ file: { key: 'abc123' } } as RootState)
+    selector({ file: { key: fileKey } } as RootState)
   );
 });
 
@@ -86,5 +91,12 @@ describe('on success', () => {
       'href',
       file
     );
+  });
+
+  it('deletes file', () => {
+    renderWithProviders(<Download />);
+    fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
+    expect(mockDeleteFile).toBeCalledTimes(1);
+    expect(mockDeleteFile).toBeCalledWith(fileKey);
   });
 });
