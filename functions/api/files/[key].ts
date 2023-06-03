@@ -1,6 +1,6 @@
 import { HEADERS, HTTP_STATUS_CODES } from '../../../src/constants';
 import type { Env } from '../../types';
-import { getResponseInit } from '../../utils';
+import { getBucket, getResponseInit } from '../../utils';
 
 type Params = 'key';
 
@@ -15,7 +15,8 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
-  const obj = await context.env.EXPIRATION_DAYS_7.get(fileKey);
+  const bucket = getBucket(context);
+  const obj = await bucket.get(fileKey);
 
   if (!obj) {
     init.status = HTTP_STATUS_CODES.NOT_FOUND;
@@ -43,10 +44,11 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
-  const obj = await context.env.EXPIRATION_DAYS_7.head(fileKey);
+  const bucket = getBucket(context);
+  const obj = await bucket.head(fileKey);
 
   if (obj) {
-    await context.env.EXPIRATION_DAYS_7.delete(fileKey);
+    await bucket.delete(fileKey);
     return new Response(body, init);
   }
 

@@ -1,6 +1,6 @@
 import { FILE, HTTP_STATUS_CODES } from '../../../src/constants';
 import type { Env } from '../../types';
-import { getResponseInit } from '../../utils';
+import { getBucket, getResponseInit } from '../../utils';
 
 /**
  * POST /api/files
@@ -20,8 +20,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return new Response(body, init);
   }
 
+  const bucket = getBucket(context);
   const uuid = crypto.randomUUID();
-  await context.env.EXPIRATION_DAYS_7.put(uuid, await file.arrayBuffer(), {
+  await bucket.put(uuid, await file.arrayBuffer(), {
     customMetadata: {
       lastModified: String(file.lastModified),
       name: file.name,

@@ -2,6 +2,10 @@ export const FILE = 'FILE';
 
 export const ONE_MEGABYTE_IN_BYTES = 1048576;
 
+export enum EXPIRATION {
+  DAYS_7 = 'EXPIRATION_DAYS_7',
+}
+
 export enum MAX_SIZE {
   DEFAULT = ONE_MEGABYTE_IN_BYTES * 5,
 }
