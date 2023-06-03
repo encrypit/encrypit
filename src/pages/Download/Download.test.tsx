@@ -46,16 +46,27 @@ describe('no file key', () => {
   });
 });
 
-describe('when loading', () => {
+describe('isLoading', () => {
+  beforeEach(() => {
+    mockedUseDownloadFileQuery.mockReturnValue({
+      isLoading: true,
+    } as UseDownloadFileQuery);
+  });
+
   it('renders heading', () => {
     renderWithProviders(<Download />);
     expect(
       screen.getByRole('heading', { level: 1, name: /Downloading/ })
     ).toBeInTheDocument();
   });
+
+  it('renders progressbar', () => {
+    renderWithProviders(<Download />);
+    expect(screen.getByRole('progressbar')).toBeInTheDocument();
+  });
 });
 
-describe('on error', () => {
+describe('isError', () => {
   it('renders heading', () => {
     mockedUseDownloadFileQuery.mockReturnValue({
       isError: true,
@@ -67,7 +78,7 @@ describe('on error', () => {
   });
 });
 
-describe('on success', () => {
+describe('isSuccess', () => {
   const file = btoa('file');
   const name = 'file.txt';
 

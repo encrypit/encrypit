@@ -7,6 +7,7 @@ export interface Props {
   onDownloadFile: (downloadFile: {
     data?: DownloadFileResponse;
     isError: boolean;
+    isLoading: boolean;
     isSuccess: boolean;
   }) => void;
 }
@@ -18,6 +19,7 @@ export default function DownloadFile(props: Props) {
     props.onDownloadFile({
       data: downloadFile.data,
       isError: downloadFile.isError,
+      isLoading: downloadFile.isLoading,
       isSuccess: downloadFile.isSuccess,
     });
   }, [downloadFile]);

@@ -1,4 +1,6 @@
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
@@ -48,6 +50,12 @@ export default function Download() {
       <Typography component="h1" gutterBottom variant="h6">
         {getHeading(downloadFile)}
       </Typography>
+
+      {downloadFile?.isLoading && (
+        <Box>
+          <CircularProgress />
+        </Box>
+      )}
 
       {downloadUrl && (
         <Button
