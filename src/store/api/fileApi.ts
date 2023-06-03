@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'src/config';
 import { FILE, HEADERS } from 'src/constants';
@@ -33,7 +32,7 @@ export const fileApi = createApi({
           blobToBase64(await response.blob()),
       }),
 
-      transformResponse: (base64: string, meta) => {
+      transformResponse: /* istanbul ignore next */ (base64: string, meta) => {
         return {
           file: base64,
           customMetadata: JSON.parse(
