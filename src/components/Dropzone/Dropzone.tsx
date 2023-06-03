@@ -36,8 +36,7 @@ export default function Dropzone() {
       <input {...getInputProps()} />
 
       <Button color="info" sx={{ color: grey[900] }}>
-        {isDragActive ? 'Drop your file here' : 'Drag and drop your file here'}
-        &hellip;
+        {isDragActive ? 'Drop your file' : 'Drag and drop your file'}
       </Button>
 
       <Typography sx={{ color: grey[500] }}>
