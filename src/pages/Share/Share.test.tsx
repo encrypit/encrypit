@@ -79,7 +79,7 @@ describe('with file key', () => {
   it('renders warning', () => {
     renderWithProviders(<Share />);
     expect(
-      screen.getByText("The file will be deleted after it's downloaded.")
+      screen.getByText('File will be deleted after download.')
     ).toBeInTheDocument();
   });
 

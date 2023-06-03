@@ -38,7 +38,7 @@ export default function Share() {
       </Typography>
 
       <Alert severity="warning" sx={{ marginBottom: 2 }}>
-        The file will be deleted after it's downloaded.
+        File will be deleted after download.
       </Alert>
 
       <Link component={RouterLink} to={link}>
