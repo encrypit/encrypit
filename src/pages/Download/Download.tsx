@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
@@ -49,16 +50,18 @@ export default function Download() {
       </Typography>
 
       {downloadUrl && (
-        <Link
+        <Button
+          component={Link}
           download={
             /* istanbul ignore next */
             downloadFile?.data?.customMetadata.name
           }
           href={downloadUrl}
           ref={linkRef}
+          variant="contained"
         >
           Download file
-        </Link>
+        </Button>
       )}
     </>
   );
