@@ -13,6 +13,9 @@ export const fileApi = createApi({
   }),
 
   endpoints: (build) => ({
+    /**
+     * DELETE /api/files/[key]
+     */
     deleteFile: build.mutation<void, string>({
       query: (fileKey: string) => ({
         url: `/${fileKey}`,
@@ -20,12 +23,14 @@ export const fileApi = createApi({
       }),
     }),
 
+    /**
+     * GET /api/files/[key]
+     */
     downloadFile: build.query<DownloadFileResponse, string>({
       query: (fileKey: string) => ({
         url: `/${fileKey}`,
-        responseHandler: async (response) => {
-          return blobToBase64(await response.blob());
-        },
+        responseHandler: async (response) =>
+          blobToBase64(await response.blob()),
       }),
 
       transformResponse: (base64: string, meta) => {
@@ -38,6 +43,9 @@ export const fileApi = createApi({
       },
     }),
 
+    /**
+     * POST /api/files
+     */
     uploadFile: build.mutation<string, File[]>({
       query: (files) => {
         const [file] = files;
@@ -53,9 +61,3 @@ export const fileApi = createApi({
     }),
   }),
 });
-
-export const {
-  useDeleteFileMutation,
-  useDownloadFileQuery,
-  useUploadFileMutation,
-} = fileApi;

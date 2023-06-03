@@ -27,7 +27,6 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   obj.body.pipeTo(writable);
 
   body = readable;
-  init.headers['Content-Disposition'] = 'attachment';
   init.headers['Access-Control-Expose-Headers'] = HEADERS.CUSTOM_METADATA;
   init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(obj.customMetadata);
   return new Response(body, init);

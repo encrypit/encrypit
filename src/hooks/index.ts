@@ -1,8 +1,11 @@
-export {
+import { fileApi } from '../store/api';
+
+export const {
   useDeleteFileMutation,
   useDownloadFileQuery,
   useUploadFileMutation,
-} from '../store/api';
+} = fileApi;
+
 export * from './useDispatch';
 export * from './useSelector';
 export * from './useSetDocumentTitle';
