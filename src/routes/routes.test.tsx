@@ -18,7 +18,7 @@ it('matches snapshot', () => {
           path="/download"
         />
         <Route
-          element={<ShareLoader />}
+          element={<ShareLinkLoader />}
           path="/share"
         />
         <Route

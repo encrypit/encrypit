@@ -1,12 +1,12 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { lazy, Suspense } from 'react';
 
-const Share = lazy(() => import('./Share'));
+const ShareLink = lazy(() => import('./ShareLink'));
 
-export default function ShareLoader() {
+export default function ShareLinkLoader() {
   return (
     <Suspense fallback={<CircularProgress />}>
-      <Share />
+      <ShareLink />
     </Suspense>
   );
 }

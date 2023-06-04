@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import ShareLoader from '.';
+import ShareLinkLoader from '.';
 
-jest.mock('./Share', () => () => <>Share</>);
+jest.mock('./ShareLink', () => () => <>ShareLink</>);
 
-it('lazy loads Share', async () => {
-  render(<ShareLoader />);
+it('lazy loads ShareLink', async () => {
+  render(<ShareLinkLoader />);
   expect(screen.getByRole('progressbar')).toBeInTheDocument();
   await waitFor(() => {
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   });
-  expect(screen.getByText('Share')).toBeInTheDocument();
+  expect(screen.getByText('ShareLink')).toBeInTheDocument();
 });

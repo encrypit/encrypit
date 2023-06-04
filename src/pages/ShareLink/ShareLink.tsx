@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteFileMutation, useSelector } from 'src/hooks';
 
-export default function Share() {
+export default function ShareLink() {
   const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
   const link = `${location.origin}/${fileKey}`;

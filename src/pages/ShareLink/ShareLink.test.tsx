@@ -3,7 +3,7 @@ import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders } from 'test/helpers';
 
-import Share from './Share';
+import ShareLink from './ShareLink';
 
 const mockNavigate = jest.fn();
 
@@ -39,12 +39,12 @@ beforeEach(() => {
 
 describe('without file key', () => {
   it('does not render heading', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(screen.queryByText('File link ready')).not.toBeInTheDocument();
   });
 
   it('navigates to home', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(mockNavigate).toBeCalledWith('/', { replace: true });
   });
 });
@@ -60,38 +60,38 @@ describe('with file key', () => {
   });
 
   it('renders heading', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(
       screen.getByRole('heading', { level: 1, name: 'File link ready' })
     ).toBeInTheDocument();
   });
 
   it('does not navigate away', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(mockNavigate).not.toBeCalled();
   });
 
   it('renders file link', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(screen.getByText(link)).toHaveAttribute('to', link);
   });
 
   it('renders warning', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(
       screen.getByText('File will be deleted after download.')
     ).toBeInTheDocument();
   });
 
   it('copies link', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Copy link' }));
     expect(writeText).toBeCalledTimes(1);
     expect(writeText).toBeCalledWith(link);
   });
 
   it('emails link', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     expect(screen.getByRole('link', { name: 'Email link' })).toHaveAttribute(
       'href',
       `mailto:?body=${link}`
@@ -99,7 +99,7 @@ describe('with file key', () => {
   });
 
   it('deletes file', () => {
-    renderWithProviders(<Share />);
+    renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(key);

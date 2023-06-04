@@ -4,7 +4,7 @@ import ConfirmDownload from 'src/pages/ConfirmDownload';
 import Download from 'src/pages/Download';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
 import NotFound from 'src/pages/NotFound';
-import Share from 'src/pages/Share';
+import ShareLink from 'src/pages/ShareLink';
 import Upload from 'src/pages/Upload';
 
 const routes = (
@@ -12,7 +12,7 @@ const routes = (
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<Upload />} />
       <Route path="/download" element={<Download />} />
-      <Route path="/share" element={<Share />} />
+      <Route path="/share" element={<ShareLink />} />
       <Route path="/:fileKey" element={<ConfirmDownload />} />
       <Route path="*" element={<NotFound />} />
     </Route>
