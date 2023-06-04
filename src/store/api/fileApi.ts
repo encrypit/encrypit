@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'src/config';
-import { FILE, HEADERS } from 'src/constants';
+import { HEADERS } from 'src/constants';
 import type { DownloadFileResponse } from 'src/types';
 import { blobToBase64 } from 'src/utils';
 
@@ -45,18 +45,13 @@ export const fileApi = createApi({
     /**
      * POST /api/files
      */
-    uploadFile: build.mutation<string, File[]>({
-      query: (files) => {
-        const [file] = files;
-        const body = new FormData();
-        body.append(FILE, file);
-        return {
-          url: '',
-          method: 'POST',
-          body,
-          responseHandler: 'content-type',
-        };
-      },
+    uploadFile: build.mutation<string, FormData>({
+      query: (formData) => ({
+        url: '',
+        method: 'POST',
+        body: formData,
+        responseHandler: 'content-type',
+      }),
     }),
   }),
 });

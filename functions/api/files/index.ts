@@ -22,10 +22,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   const bucket = getBucket(context);
   const uuid = crypto.randomUUID();
+
   await bucket.put(uuid, await file.arrayBuffer(), {
     customMetadata: {
-      lastModified: String(file.lastModified),
-      name: file.name,
       size: String(file.size),
       type: file.type,
     },

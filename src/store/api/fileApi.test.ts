@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
+import { createFormData } from 'src/utils';
 import { fetchMock, mockFiles, wrapper } from 'test/helpers';
 
 import { fileApi } from './fileApi';
@@ -14,10 +15,12 @@ describe('deleteFile', () => {
     const { result } = renderHook(() => fileApi.useDeleteFileMutation(), {
       wrapper,
     });
-    const [deleteFile] = result.current;
+
     await act(() => {
+      const [deleteFile] = result.current;
       deleteFile(fileKey);
     });
+
     expect(fetchMock).toBeCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
       Request {
@@ -117,10 +120,12 @@ describe('uploadFile', () => {
     const { result } = renderHook(() => fileApi.useUploadFileMutation(), {
       wrapper,
     });
-    const [uploadFile] = result.current;
+
     await act(() => {
-      uploadFile(mockFiles());
+      const [uploadFile] = result.current;
+      uploadFile(createFormData(mockFiles(1)[0]));
     });
+
     expect(fetchMock).toBeCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
       Request {

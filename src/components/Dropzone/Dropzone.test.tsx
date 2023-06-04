@@ -14,6 +14,11 @@ jest.mock('src/hooks', () => ({
   useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
 
+jest.mock('src/utils', () => ({
+  ...jest.requireActual('src/utils'),
+  createZipFile: jest.fn().mockResolvedValue(new Blob()),
+}));
+
 it('renders Dropzone', () => {
   renderWithProviders(<Dropzone />);
   expect(

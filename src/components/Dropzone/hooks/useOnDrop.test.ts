@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import { createZipFile } from 'src/utils';
 import { fetchMock, mockFiles, store, wrapper } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
@@ -15,6 +16,13 @@ jest.mock('src/hooks', () => ({
   ...jest.requireActual('src/hooks'),
   useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
+
+jest.mock('src/utils', () => ({
+  ...jest.requireActual('src/utils'),
+  createZipFile: jest.fn().mockResolvedValue(new Blob()),
+}));
+
+const mockedCreateZipFile = jest.mocked(createZipFile);
 
 const event = new Event('drop');
 
@@ -36,11 +44,12 @@ describe('success', () => {
     });
   });
 
-  it('uploads first file', async () => {
+  it('uploads files', async () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles();
     await result.current(files, [], event);
-    expect(mockUploadFile).toBeCalledWith(files);
+    expect(mockedCreateZipFile).toBeCalledWith(files);
+    expect(mockUploadFile).toBeCalledWith(expect.any(FormData));
     expect(store.getState().file.key).toBe(uuid);
   });
 
@@ -48,7 +57,6 @@ describe('success', () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles(1);
     await result.current(files, [], event);
-    expect(mockUploadFile).toBeCalledWith(files);
     expect(mockNavigate).toBeCalledWith('/share', { replace: true });
   });
 });

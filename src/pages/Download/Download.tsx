@@ -10,6 +10,7 @@ import {
   useLazyDownloadFileQuery,
   useSelector,
 } from 'src/hooks';
+import { generateFileName } from 'src/utils';
 
 export default function Download() {
   const fileKey = useSelector((state) => state.file.key);
@@ -60,10 +61,7 @@ export default function Download() {
       {downloadUrl && (
         <Button
           component={Link}
-          download={
-            /* istanbul ignore next */
-            downloadFileResult.data?.customMetadata.name
-          }
+          download={generateFileName()}
           href={downloadUrl}
           ref={linkRef}
           variant="contained"
