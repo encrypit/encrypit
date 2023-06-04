@@ -5,31 +5,33 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDeleteFileMutation, useSelector } from 'src/hooks';
-
-import DownloadFile, { type Props as DownloadFileProps } from './DownloadFile';
-
-type DownloadFileParameter = Parameters<DownloadFileProps['onDownloadFile']>[0];
+import {
+  useDeleteFileMutation,
+  useLazyDownloadFileQuery,
+  useSelector,
+} from 'src/hooks';
 
 export default function Download() {
   const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
-  const [downloadFile, setDownloadFile] = useState<DownloadFileParameter>();
   const [downloadUrl, setDownloadUrl] = useState('');
-  const linkRef = useRef<HTMLAnchorElement>(null);
+  const [downloadFile, downloadFileResult] = useLazyDownloadFileQuery();
   const [deleteFile] = useDeleteFileMutation();
+  const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    if (!fileKey) {
+    if (fileKey) {
+      downloadFile(fileKey);
+    } else {
       navigate('/', { replace: true });
     }
   }, []);
 
   useEffect(() => {
-    if (downloadFile?.data) {
-      setDownloadUrl(downloadFile.data.file);
+    if (downloadFileResult.data) {
+      setDownloadUrl(downloadFileResult.data.file);
     }
-  }, [downloadFile]);
+  }, [downloadFileResult]);
 
   useEffect(() => {
     if (downloadUrl && fileKey) {
@@ -45,13 +47,11 @@ export default function Download() {
 
   return (
     <>
-      <DownloadFile fileKey={fileKey} onDownloadFile={setDownloadFile} />
-
       <Typography component="h1" gutterBottom variant="h6">
-        {getHeading(downloadFile)}
+        {getHeading(downloadFileResult)}
       </Typography>
 
-      {downloadFile?.isLoading && (
+      {downloadFileResult.isLoading && (
         <Box>
           <CircularProgress />
         </Box>
@@ -62,7 +62,7 @@ export default function Download() {
           component={Link}
           download={
             /* istanbul ignore next */
-            downloadFile?.data?.customMetadata.name
+            downloadFileResult.data?.customMetadata.name
           }
           href={downloadUrl}
           ref={linkRef}
@@ -75,11 +75,14 @@ export default function Download() {
   );
 }
 
-function getHeading(downloadFile?: DownloadFileParameter): string {
+function getHeading(downloadFileResult: {
+  isSuccess: boolean;
+  isError: boolean;
+}): string {
   switch (true) {
-    case downloadFile?.isSuccess:
+    case downloadFileResult.isSuccess:
       return 'Download success!';
-    case downloadFile?.isError:
+    case downloadFileResult.isError:
       return 'Download error';
     default:
       return 'Downloading…';

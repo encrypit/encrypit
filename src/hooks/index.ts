@@ -2,8 +2,8 @@ import { fileApi } from '../store/api';
 
 export const {
   useDeleteFileMutation,
-  useDownloadFileQuery,
   useUploadFileMutation,
+  useLazyDownloadFileQuery,
 } = fileApi;
 
 export * from './useDispatch';
