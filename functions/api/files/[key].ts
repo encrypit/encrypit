@@ -1,4 +1,4 @@
-import { HEADERS, HTTP_STATUS_CODES } from '../../../src/constants';
+import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from '../../../src/constants';
 import type { Env } from '../../types';
 import { getBucket, getResponseInit } from '../../utils';
 
@@ -19,6 +19,12 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const obj = await bucket.get(fileKey);
 
   if (!obj) {
+    init.status = HTTP_STATUS_CODES.NOT_FOUND;
+    return new Response(body, init);
+  }
+
+  if (hasExpired(obj.uploaded)) {
+    await bucket.delete(fileKey);
     init.status = HTTP_STATUS_CODES.NOT_FOUND;
     return new Response(body, init);
   }
@@ -64,3 +70,25 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
 export const onRequestOptions: PagesFunction<Env, Params> = async (context) => {
   return new Response(null, getResponseInit(context.env.NODE_ENV));
 };
+
+/**
+ * Checks if file has expired.
+ *
+ * @param uploaded - Uploaded date.
+ * @param expiration - Expiration days.
+ * @returns - Whether file has expired.
+ */
+function hasExpired(uploaded: Date, expiration = EXPIRATION.DAYS_7): boolean {
+  let expirationDays = 0;
+
+  switch (expiration) {
+    case EXPIRATION.DAYS_7:
+    default:
+      expirationDays = 7;
+      break;
+  }
+
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + expirationDays);
+  return uploaded > expirationDate;
+}
