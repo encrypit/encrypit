@@ -79,7 +79,9 @@ describe('with file key', () => {
   it('renders warning', () => {
     renderWithProviders(<ShareLink />);
     expect(
-      screen.getByText('File will be deleted after download.')
+      screen.getByText(
+        'File will be deleted after download or expire after 7 days.'
+      )
     ).toBeInTheDocument();
   });
 

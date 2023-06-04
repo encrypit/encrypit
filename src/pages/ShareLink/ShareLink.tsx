@@ -38,7 +38,7 @@ export default function ShareLink() {
       </Typography>
 
       <Alert severity="warning" sx={{ marginBottom: 2 }}>
-        File will be deleted after download.
+        File will be deleted after download or expire after 7 days.
       </Alert>
 
       <Link component={RouterLink} to={link}>
