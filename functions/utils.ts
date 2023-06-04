@@ -5,14 +5,18 @@ import type { Env } from './types';
  * Gets R2 bucket.
  *
  * @param context - Event context.
- * @param name - Bucket name.
+ * @param expirationDays - Expiration days.
  * @returns - R2 bucket.
  */
 export function getBucket(
   context: EventContext<Env, string, unknown>,
-  name = EXPIRATION.DAYS_7
+  expirationDays = EXPIRATION.DAYS_7
 ): R2Bucket {
-  return context.env[name];
+  switch (expirationDays) {
+    case EXPIRATION.DAYS_7:
+    default:
+      return context.env.EXPIRATION_DAYS_7;
+  }
 }
 
 /**

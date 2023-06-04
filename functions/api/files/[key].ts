@@ -78,17 +78,11 @@ export const onRequestOptions: PagesFunction<Env, Params> = async (context) => {
  * @param expiration - Expiration days.
  * @returns - Whether file has expired.
  */
-function hasExpired(uploaded: Date, expiration = EXPIRATION.DAYS_7): boolean {
-  let expirationDays = 0;
-
-  switch (expiration) {
-    case EXPIRATION.DAYS_7:
-    default:
-      expirationDays = 7;
-      break;
-  }
-
-  const expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + expirationDays);
-  return uploaded > expirationDate;
+function hasExpired(
+  uploaded: Date,
+  expirationDays = EXPIRATION.DAYS_7
+): boolean {
+  const expiration = new Date();
+  expiration.setDate(expiration.getDate() + expirationDays);
+  return uploaded > expiration;
 }
