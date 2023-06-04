@@ -19,7 +19,14 @@ export enum HEADERS {
 }
 
 /**
- * @see {@link https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}
+ * @see {@link https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types}
+ */
+export enum MIME {
+  ZIP = 'application/zip',
+}
+
+/**
+ * @see {@link https://wikipedia.org/wiki/List_of_HTTP_status_codes}
  */
 export enum HTTP_STATUS_CODES {
   LENGTH_REQUIRED = 411,
