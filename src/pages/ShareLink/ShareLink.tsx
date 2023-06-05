@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import DeleteDialog from 'src/components/DeleteDialog';
 import { useDeleteFileMutation, useSelector } from 'src/hooks';
 
 export default function ShareLink() {
@@ -13,6 +14,7 @@ export default function ShareLink() {
   const navigate = useNavigate();
   const link = `${location.origin}/${fileKey}`;
   const [deleteFile] = useDeleteFileMutation();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!fileKey) {
@@ -25,7 +27,12 @@ export default function ShareLink() {
     [link]
   );
 
-  const handleDeleteFile = useCallback(() => deleteFile(fileKey!), [fileKey]);
+  const openDialog = useCallback(() => setIsDialogOpen(true), []);
+  const closeDialog = useCallback(() => setIsDialogOpen(false), []);
+  const handleDeleteFile = useCallback(() => {
+    deleteFile(fileKey!);
+    setIsDialogOpen(false);
+  }, [fileKey]);
 
   if (!fileKey) {
     return null;
@@ -64,9 +71,18 @@ export default function ShareLink() {
           </Button>
         </Stack>
 
-        <Button onClick={handleDeleteFile} variant="contained">
+        <Button onClick={openDialog} variant="contained">
           Delete file
         </Button>
+
+        <DeleteDialog
+          content="This action cannot be undone."
+          id={fileKey}
+          onClose={closeDialog}
+          onDelete={handleDeleteFile}
+          open={isDialogOpen}
+          title="Are you sure you want to delete the file?"
+        />
       </Stack>
     </>
   );

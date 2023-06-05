@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useEffect } from 'react';
+import { type ComponentProps, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -37,7 +37,7 @@ export default function ConfirmDownload() {
         </Button>
 
         <Button
-          color="secondary"
+          color={'grey' as ComponentProps<typeof Button>['color']}
           component={RouterLink}
           replace
           to="/"

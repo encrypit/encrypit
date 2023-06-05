@@ -100,9 +100,28 @@ describe('with file key', () => {
     );
   });
 
+  it('confirms delete file', () => {
+    renderWithProviders(<ShareLink />);
+    fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+    expect(
+      screen.getByText('Are you sure you want to delete the file?')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('This action cannot be undone.')
+    ).toBeInTheDocument();
+  });
+
+  it('cancels delete file', () => {
+    renderWithProviders(<ShareLink />);
+    fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(mockDeleteFile).not.toBeCalled();
+  });
+
   it('deletes file', () => {
     renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(key);
   });

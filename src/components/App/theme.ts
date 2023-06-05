@@ -7,7 +7,7 @@ export default createTheme({
       main: red[900],
     },
     secondary: {
-      main: grey['A100'],
+      main: grey['900'],
     },
   },
 });
