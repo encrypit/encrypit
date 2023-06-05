@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
-import { renderWithProviders } from 'test/helpers';
+import { renderWithProviders, store } from 'test/helpers';
 
 import ShareLink from './ShareLink';
 
@@ -14,6 +14,7 @@ jest.mock('react-router-dom', () => ({
 const mockDeleteFile = jest.fn();
 
 jest.mock('src/hooks', () => ({
+  ...jest.requireActual('src/hooks'),
   useDeleteFileMutation: jest.fn(() => [mockDeleteFile]),
   useSelector: jest.fn(),
 }));
@@ -124,5 +125,6 @@ describe('with file key', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(key);
+    expect(store.getState().file).toEqual({});
   });
 });

@@ -7,9 +7,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import DeleteDialog from 'src/components/DeleteDialog';
-import { useDeleteFileMutation, useSelector } from 'src/hooks';
+import { useDeleteFileMutation, useDispatch, useSelector } from 'src/hooks';
+import { actions } from 'src/store';
 
 export default function ShareLink() {
+  const dispatch = useDispatch();
   const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
   const link = `${location.origin}/${fileKey}`;
@@ -32,6 +34,7 @@ export default function ShareLink() {
   const handleDeleteFile = useCallback(() => {
     deleteFile(fileKey!);
     setIsDialogOpen(false);
+    dispatch(actions.resetFile());
   }, [fileKey]);
 
   if (!fileKey) {
