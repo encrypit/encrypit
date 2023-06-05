@@ -8,17 +8,16 @@ it('renders base style by default', () => {
     {
       "alignItems": "center",
       "backgroundColor": "#fafafa",
-      "borderColor": "#eeeeee",
+      "borderColor": "#e0e0e0",
       "borderRadius": 2,
       "borderStyle": "dashed",
       "borderWidth": 2,
-      "color": "#bdbdbd",
       "cursor": "pointer",
       "display": "flex",
       "flex": 1,
       "flexDirection": "column",
       "outline": "none",
-      "padding": "20px",
+      "padding": "2rem",
       "transition": "border .24s ease-in-out",
     }
   `);

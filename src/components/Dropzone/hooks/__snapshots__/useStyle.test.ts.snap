@@ -4,17 +4,16 @@ exports[`renders style when isFocused=false, isDragAccept=false, isDragReject=fa
 {
   "alignItems": "center",
   "backgroundColor": "#fafafa",
-  "borderColor": "#eeeeee",
+  "borderColor": "#e0e0e0",
   "borderRadius": 2,
   "borderStyle": "dashed",
   "borderWidth": 2,
-  "color": "#bdbdbd",
   "cursor": "pointer",
   "display": "flex",
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "20px",
+  "padding": "2rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -23,17 +22,16 @@ exports[`renders style when isFocused=false, isDragAccept=false, isDragReject=tr
 {
   "alignItems": "center",
   "backgroundColor": "#fafafa",
-  "borderColor": "#ff1744",
+  "borderColor": "#f57f17",
   "borderRadius": 2,
   "borderStyle": "dashed",
   "borderWidth": 2,
-  "color": "#bdbdbd",
   "cursor": "pointer",
   "display": "flex",
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "20px",
+  "padding": "2rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -42,17 +40,16 @@ exports[`renders style when isFocused=false, isDragAccept=true, isDragReject=fal
 {
   "alignItems": "center",
   "backgroundColor": "#fafafa",
-  "borderColor": "#00e676",
+  "borderColor": "#212121",
   "borderRadius": 2,
   "borderStyle": "dashed",
   "borderWidth": 2,
-  "color": "#bdbdbd",
   "cursor": "pointer",
   "display": "flex",
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "20px",
+  "padding": "2rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -61,17 +58,16 @@ exports[`renders style when isFocused=true, isDragAccept=false, isDragReject=fal
 {
   "alignItems": "center",
   "backgroundColor": "#fafafa",
-  "borderColor": "#2196f3",
+  "borderColor": "#b71c1c",
   "borderRadius": 2,
   "borderStyle": "dashed",
   "borderWidth": 2,
-  "color": "#bdbdbd",
   "cursor": "pointer",
   "display": "flex",
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "20px",
+  "padding": "2rem",
   "transition": "border .24s ease-in-out",
 }
 `;

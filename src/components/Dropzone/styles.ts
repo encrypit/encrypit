@@ -1,31 +1,32 @@
+import { grey, red, yellow } from '@mui/material/colors';
+
 /**
  * @see {@link https://react-dropzone.js.org/#section-styling-dropzone}
  */
 export const baseStyle = {
   alignItems: 'center',
-  backgroundColor: '#fafafa',
-  borderColor: '#eeeeee',
+  backgroundColor: grey[50],
+  borderColor: grey[300],
   borderRadius: 2,
   borderStyle: 'dashed',
   borderWidth: 2,
-  color: '#bdbdbd',
   cursor: 'pointer',
   display: 'flex',
   flex: 1,
   flexDirection: 'column',
   outline: 'none',
-  padding: '20px',
+  padding: '2rem',
   transition: 'border .24s ease-in-out',
 } as const;
 
 export const focusedStyle = {
-  borderColor: '#2196f3',
+  borderColor: red[900],
 } as const;
 
 export const acceptStyle = {
-  borderColor: '#00e676',
+  borderColor: grey[900],
 } as const;
 
 export const rejectStyle = {
-  borderColor: '#ff1744',
+  borderColor: yellow[900],
 } as const;
