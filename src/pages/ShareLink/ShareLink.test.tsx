@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders, store } from 'test/helpers';
@@ -117,10 +117,13 @@ describe('with file key', () => {
     expect(mockDeleteFile).not.toBeCalled();
   });
 
-  it('deletes file', () => {
+  it('deletes file', async () => {
+    mockDeleteFile.mockReturnValue({ unwrap: jest.fn() });
     renderWithProviders(<ShareLink />);
-    fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    });
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(key);
     expect(store.getState().file).toEqual({});

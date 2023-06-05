@@ -31,8 +31,8 @@ export default function ShareLink() {
 
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);
-  const handleDeleteFile = useCallback(() => {
-    deleteFile(fileKey!);
+  const handleDeleteFile = useCallback(async () => {
+    await deleteFile(fileKey!).unwrap();
     setIsDialogOpen(false);
     dispatch(actions.resetFile());
   }, [fileKey]);
