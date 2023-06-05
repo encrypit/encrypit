@@ -1,5 +1,5 @@
 import { EXPIRATION } from '../src/constants';
-import type { Env } from './types';
+import type { Context, Env } from './types';
 
 /**
  * Gets R2 bucket.
@@ -9,7 +9,7 @@ import type { Env } from './types';
  * @returns - R2 bucket.
  */
 export function getBucket(
-  context: EventContext<Env, string, unknown>,
+  context: Context,
   expirationDays = EXPIRATION.DAYS_7
 ): R2Bucket {
   switch (expirationDays) {

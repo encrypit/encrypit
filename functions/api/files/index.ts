@@ -1,3 +1,4 @@
+import { generateFileKey } from '../../../shared/id';
 import { FILE, HTTP_STATUS_CODES } from '../../../src/constants';
 import type { Env } from '../../types';
 import { getBucket, getResponseInit } from '../../utils';
@@ -21,9 +22,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const bucket = getBucket(context);
-  const uuid = crypto.randomUUID();
+  const fileKey = await getFileKey(bucket);
 
-  await bucket.put(uuid, await file.arrayBuffer(), {
+  await bucket.put(fileKey, await file.arrayBuffer(), {
     customMetadata: {
       size: String(file.size),
       type: file.type,
@@ -31,6 +32,22 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     httpMetadata: context.request.headers,
   });
 
-  body = uuid;
+  body = fileKey;
   return new Response(body, init);
 };
+
+/**
+ * Gets file key.
+ *
+ * @param bucket - R2 bucket.
+ * @returns - File key.
+ */
+async function getFileKey(bucket: R2Bucket): Promise<string> {
+  const fileKey = generateFileKey();
+  const obj = await bucket.head(fileKey);
+  if (obj) {
+    return getFileKey(bucket);
+  }
+  await bucket.put(fileKey, null);
+  return fileKey;
+}
