@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { HEADERS } from 'shared/constants';
 import { API_URL } from 'src/config';
-import { HEADERS } from 'src/constants';
 import type { DownloadFileResponse } from 'src/types';
 import { blobToBase64 } from 'src/utils';
 

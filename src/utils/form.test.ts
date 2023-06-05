@@ -1,4 +1,4 @@
-import { FILE } from 'src/constants';
+import { FILE } from 'shared/constants';
 
 import { createFormData } from './form';
 

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
 import Typography from '@mui/material/Typography';
 import { useDropzone } from 'react-dropzone';
-import { MAX_FILES, MAX_SIZE, ONE_MEGABYTE_IN_BYTES } from 'src/constants';
+import { MAX_FILES, MAX_SIZE, ONE_MEGABYTE_IN_BYTES } from 'shared/constants';
 
 import { useOnDrop, useStyle } from './hooks';
 

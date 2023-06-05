@@ -1,5 +1,5 @@
 import * as zip from '@zip.js/zip.js';
-import { MIME } from 'src/constants';
+import { MIME } from 'shared/constants';
 import { mockFiles } from 'test/helpers';
 
 import { createZipFile } from './zip';

@@ -1,4 +1,4 @@
-import { FILE } from 'src/constants';
+import { FILE } from 'shared/constants';
 
 export function createFormData(file: Blob): FormData {
   const formData = new FormData();

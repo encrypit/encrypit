@@ -1,6 +1,5 @@
 import { BlobReader, BlobWriter, ZipWriter } from '@zip.js/zip.js';
-
-import { MIME } from '../constants';
+import { MIME } from 'shared/constants';
 
 export async function createZipFile(files: File[]): Promise<Blob> {
   const zipWriter = new ZipWriter(new BlobWriter(MIME.ZIP), {

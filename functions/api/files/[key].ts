@@ -1,6 +1,6 @@
 import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
-import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from 'src/constants';
+import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from 'shared/constants';
 
 type Params = 'key';
 
