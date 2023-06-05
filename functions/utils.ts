@@ -1,4 +1,5 @@
-import { EXPIRATION } from '../src/constants';
+import { EXPIRATION } from 'src/constants';
+
 import type { Context, Env } from './types';
 
 /**

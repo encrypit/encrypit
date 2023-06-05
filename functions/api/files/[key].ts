@@ -1,6 +1,6 @@
-import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from '../../../src/constants';
-import type { Env } from '../../types';
-import { getBucket, getResponseInit } from '../../utils';
+import type { Env } from 'functions/types';
+import { getBucket, getResponseInit } from 'functions/utils';
+import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from 'src/constants';
 
 type Params = 'key';
 

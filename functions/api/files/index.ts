@@ -1,7 +1,7 @@
-import { generateFileKey } from '../../../shared/id';
-import { FILE, HTTP_STATUS_CODES } from '../../../src/constants';
-import type { Env } from '../../types';
-import { getBucket, getResponseInit } from '../../utils';
+import type { Env } from 'functions/types';
+import { getBucket, getResponseInit } from 'functions/utils';
+import { generateFileKey } from 'shared/id';
+import { FILE, HTTP_STATUS_CODES } from 'src/constants';
 
 /**
  * POST /api/files

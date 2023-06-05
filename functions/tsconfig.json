@@ -3,6 +3,11 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["esnext"],
-    "types": ["@cloudflare/workers-types"]
+    "types": ["@cloudflare/workers-types"],
+    "paths": {
+      "functions/*": ["./*"],
+      "shared/*": ["../shared/*"],
+      "src/*": ["../src/*"]
+    }
   }
 }
