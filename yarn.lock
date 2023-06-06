@@ -5846,6 +5846,11 @@ pend@~1.2.0:
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
 
+pepto@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pepto/-/pepto-1.0.0.tgz#34a2862c601c8a5afb134195d0a4dd19353b4b3b"
+  integrity sha512-M9/EHckgzNUXcz0HR+QvyCNONtH8kyowSx4pJ1nrU7X6w6NYw1Y9YwTLey/pfuFtPj9VyukDPbmOJbBaw1FP7g==
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
