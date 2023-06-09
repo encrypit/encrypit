@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
+import { APP_VERSION } from 'src/config';
 import { useDispatch, useUploadFileMutation } from 'src/hooks';
 import { actions } from 'src/store';
 import { createFormData, createZipFile } from 'src/utils';
@@ -25,7 +26,10 @@ export function useOnDrop() {
       }
 
       const zipFile = await createZipFile(acceptedFiles);
-      const formData = createFormData(zipFile);
+      const formData = createFormData({
+        file: zipFile,
+        version: APP_VERSION,
+      });
       const uuid = await uploadFile(formData).unwrap();
       dispatch(actions.setFile({ key: uuid }));
       navigate('/share', { replace: true });

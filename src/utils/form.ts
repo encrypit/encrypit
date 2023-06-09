@@ -1,7 +1,18 @@
-import { FILE } from 'shared/constants';
+import { FORM_DATA } from 'shared/constants';
 
-export function createFormData(file: Blob): FormData {
+interface Data {
+  file: Blob;
+  version: string;
+}
+
+/**
+ * Creates FormData.
+ *
+ * @param data - Data.
+ */
+export function createFormData({ file, version }: Data): FormData {
   const formData = new FormData();
-  formData.append(FILE, file);
+  formData.append(FORM_DATA.FILE, file);
+  formData.append(FORM_DATA.VERSION, version);
   return formData;
 }

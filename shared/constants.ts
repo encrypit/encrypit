@@ -1,4 +1,7 @@
-export const FILE = 'FILE';
+export enum FORM_DATA {
+  FILE = 'FILE',
+  VERSION = 'VERSION',
+}
 
 export const ONE_MEGABYTE_IN_BYTES = 1048576;
 

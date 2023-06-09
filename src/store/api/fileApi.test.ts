@@ -123,7 +123,7 @@ describe('uploadFile', () => {
 
     await act(() => {
       const [uploadFile] = result.current;
-      uploadFile(createFormData(mockFiles(1)[0]));
+      uploadFile(createFormData({ file: mockFiles(1)[0], version: '1.0.0' }));
     });
 
     expect(fetchMock).toBeCalledTimes(1);

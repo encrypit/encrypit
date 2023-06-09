@@ -1,6 +1,6 @@
 import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
-import { FILE, HTTP_STATUS_CODES } from 'shared/constants';
+import { FORM_DATA, HTTP_STATUS_CODES } from 'shared/constants';
 import { generateFileKey } from 'shared/id';
 
 /**
@@ -14,7 +14,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const init = getResponseInit(context.env.NODE_ENV);
 
   const formData = await context.request.formData();
-  const file = formData.get(FILE) as unknown as File;
+  const file = formData.get(FORM_DATA.FILE) as unknown as File;
 
   if (!file.size) {
     init.status = HTTP_STATUS_CODES.LENGTH_REQUIRED;
@@ -28,6 +28,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     customMetadata: {
       size: String(file.size),
       type: file.type,
+      version: formData.get(FORM_DATA.VERSION),
     },
     httpMetadata: context.request.headers,
   });
