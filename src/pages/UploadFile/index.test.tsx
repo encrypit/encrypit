@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import UploadLoader from '.';
+import UploadFileLoader from '.';
 
-jest.mock('./Upload', () => () => <>Upload</>);
+jest.mock('./UploadFile', () => () => <>UploadFile</>);
 
-it('lazy loads Upload', async () => {
-  render(<UploadLoader />);
+it('lazy loads UploadFile', async () => {
+  render(<UploadFileLoader />);
   expect(screen.getByRole('progressbar')).toBeInTheDocument();
   await waitFor(() => {
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   });
-  expect(screen.getByText('Upload')).toBeInTheDocument();
+  expect(screen.getByText('UploadFile')).toBeInTheDocument();
 });

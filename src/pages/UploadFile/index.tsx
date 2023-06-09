@@ -1,12 +1,12 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { lazy, Suspense } from 'react';
 
-const Upload = lazy(() => import('./Upload'));
+const UploadFile = lazy(() => import('./UploadFile'));
 
-export default function UploadLoader() {
+export default function UploadFileLoader() {
   return (
     <Suspense fallback={<CircularProgress />}>
-      <Upload />
+      <UploadFile />
     </Suspense>
   );
 }
