@@ -3,7 +3,7 @@ import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders } from 'test/helpers';
 
-import Download from './Download';
+import DownloadFile from './DownloadFile';
 
 const mockNavigate = jest.fn();
 
@@ -48,12 +48,12 @@ describe('no file key', () => {
   });
 
   it('navigates to home', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(mockNavigate).toBeCalledWith('/', { replace: true });
   });
 
   it('does not download file', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(downloadFile).not.toBeCalled();
   });
 });
@@ -68,19 +68,19 @@ describe('isLoading', () => {
   });
 
   it('renders heading', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(
       screen.getByRole('heading', { level: 1, name: /Downloading/ })
     ).toBeInTheDocument();
   });
 
   it('renders progressbar', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
   it('downloads file', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(downloadFile).toBeCalledTimes(1);
     expect(downloadFile).toBeCalledWith(fileKey);
   });
@@ -93,7 +93,7 @@ describe('isError', () => {
       { isError: true },
       lastPromiseInfo,
     ]);
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(
       screen.getByRole('heading', { level: 1, name: 'Download error' })
     ).toBeInTheDocument();
@@ -113,14 +113,14 @@ describe('isSuccess', () => {
   });
 
   it('renders heading', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(
       screen.getByRole('heading', { level: 1, name: 'Download success!' })
     ).toBeInTheDocument();
   });
 
   it('renders download link', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(screen.getByRole('link', { name: 'Download file' })).toHaveAttribute(
       'href',
       file
@@ -128,13 +128,13 @@ describe('isSuccess', () => {
   });
 
   it('downloads file', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     expect(downloadFile).toBeCalledTimes(1);
     expect(downloadFile).toBeCalledWith(fileKey);
   });
 
   it('deletes file on download', () => {
-    renderWithProviders(<Download />);
+    renderWithProviders(<DownloadFile />);
     fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(fileKey);

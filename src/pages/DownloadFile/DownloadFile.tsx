@@ -12,7 +12,7 @@ import {
 } from 'src/hooks';
 import { generateFileName } from 'src/utils';
 
-export default function Download() {
+export default function DownloadFile() {
   const fileKey = useSelector((state) => state.file.key);
   const navigate = useNavigate();
   const [downloadUrl, setDownloadUrl] = useState('');

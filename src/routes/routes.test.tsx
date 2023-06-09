@@ -14,7 +14,7 @@ it('matches snapshot', () => {
           index={true}
         />
         <Route
-          element={<DownloadLoader />}
+          element={<DownloadFileLoader />}
           path="/download"
         />
         <Route
