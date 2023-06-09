@@ -14,3 +14,8 @@ it('renders Dropzone', () => {
   renderWithProviders(<UploadFile />);
   expect(screen.getByText('Drag and drop your file')).toBeInTheDocument();
 });
+
+it('renders upload button', () => {
+  renderWithProviders(<UploadFile />);
+  expect(screen.getByRole('button', { name: 'Upload' })).toBeInTheDocument();
+});
