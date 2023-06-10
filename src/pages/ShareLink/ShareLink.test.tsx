@@ -27,11 +27,13 @@ const writeText = jest.fn();
 beforeAll(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (navigator as any).clipboard = { writeText };
+  jest.spyOn(console, 'error').mockImplementation();
 });
 
 afterAll(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (navigator as any).clipboard = clipboard;
+  jest.restoreAllMocks();
 });
 
 beforeEach(() => {

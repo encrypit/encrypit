@@ -14,6 +14,14 @@ jest.mock('react-router-dom', () => ({
 
 const params = { fileKey: 'abc123' };
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 beforeEach(() => {
   jest.clearAllMocks();
   mockedUseParams.mockReturnValueOnce(params);

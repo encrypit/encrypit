@@ -26,6 +26,14 @@ const fileKey = 'fileKey';
 const downloadFile = jest.fn();
 const lastPromiseInfo = { lastArg: '' };
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 beforeEach(() => {
   jest.clearAllMocks();
   mockedLazyUseDownloadFileQuery.mockReturnValue([
