@@ -136,6 +136,11 @@ describe('isSuccess', () => {
     );
   });
 
+  it('renders home link', () => {
+    renderWithProviders(<DownloadFile />);
+    expect(screen.getByText('Upload file')).toHaveAttribute('to', '/');
+  });
+
   it('downloads file', () => {
     renderWithProviders(<DownloadFile />);
     expect(downloadFile).toBeCalledTimes(1);

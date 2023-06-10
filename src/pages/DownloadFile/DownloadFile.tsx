@@ -2,9 +2,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   useDeleteFileMutation,
   useLazyDownloadFileQuery,
@@ -66,15 +68,21 @@ export default function DownloadFile() {
       )}
 
       {downloadUrl && (
-        <Button
-          component={Link}
-          download={generateFileName()}
-          href={downloadUrl}
-          ref={linkRef}
-          variant="contained"
-        >
-          Download file
-        </Button>
+        <Stack direction="row" justifyContent="space-between">
+          <Button
+            component={Link}
+            download={generateFileName()}
+            href={downloadUrl}
+            ref={linkRef}
+            variant="contained"
+          >
+            Download file
+          </Button>
+
+          <Button component={RouterLink} to="/" variant="outlined">
+            Upload file
+          </Button>
+        </Stack>
       )}
     </>
   );
