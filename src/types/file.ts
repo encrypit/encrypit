@@ -5,6 +5,7 @@ export interface FileData {
     size: number;
     type: string;
     data: string; // Base64
+    id: string; // UUID
   }[];
   key: string;
 }

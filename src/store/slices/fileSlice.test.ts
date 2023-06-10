@@ -9,6 +9,7 @@ const files = [
     size: 0,
     type: 'application/octet-stream',
     data: 'data:application/octet-stream;base64,',
+    id: crypto.randomUUID(),
   },
 ];
 const key = 'abc123';

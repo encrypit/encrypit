@@ -28,6 +28,7 @@ export function useOnDrop() {
           size: file.size,
           type: file.type,
           data: await blobToBase64(file),
+          id: crypto.randomUUID(),
         }))
       );
 

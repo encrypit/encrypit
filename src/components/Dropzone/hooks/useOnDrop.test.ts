@@ -14,10 +14,14 @@ it('returns onDrop callback', () => {
 describe('success', () => {
   beforeAll(() => {
     jest.useFakeTimers().setSystemTime(new Date('2020-04-20'));
+    jest
+      .spyOn(crypto, 'randomUUID')
+      .mockReturnValue('a7177311-3b7a-4593-942a-36b23c5afd30');
   });
 
   afterAll(() => {
     jest.useRealTimers();
+    jest.restoreAllMocks();
   });
 
   it.each([1, 2])('sets %d files in store', async (count) => {
