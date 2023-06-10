@@ -5,27 +5,31 @@ import { useNavigate } from 'react-router-dom';
 import Dropzone from 'src/components/Dropzone';
 import { useDispatch, useSelector, useUploadFileMutation } from 'src/hooks';
 import { actions } from 'src/store';
-import { base64ToBlob, createFormData } from 'src/utils';
+import { base64ToFile, createFormData, createZipFile } from 'src/utils';
 
 export default function UploadFile() {
   const dispatch = useDispatch();
-  const file = useSelector((state) => state.file.file);
+  const files = useSelector((state) => state.file.files) || [];
   const navigate = useNavigate();
   const [uploadFile] = useUploadFileMutation();
 
   const handleClick = useCallback(async () => {
     /* istanbul ignore next */
-    if (!file) {
+    if (!files.length) {
       return;
     }
 
-    const formData = createFormData({
-      file: await base64ToBlob(file),
-    });
+    const convertedFiles = await Promise.all(
+      files.map(({ data, name, type }) => base64ToFile(data, name, { type }))
+    );
+    const file = await createZipFile(convertedFiles);
+    const formData = createFormData({ file });
 
-    dispatch(actions.setFileKey(await uploadFile(formData).unwrap()));
+    const fileKey = await uploadFile(formData).unwrap();
+    dispatch(actions.setFileKey(fileKey));
+
     navigate('/share', { replace: true });
-  }, [file]);
+  }, [files]);
 
   return (
     <>
@@ -36,9 +40,9 @@ export default function UploadFile() {
       <Dropzone />
 
       <Button
-        disabled={!file}
+        disabled={!files.length}
         onClick={handleClick}
-        sx={{ marginTop: 3 }}
+        sx={{ marginTop: 2 }}
         variant="contained"
       >
         Upload

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`success sets 1 files in store 1`] = `
+{
+  "files": [
+    {
+      "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
+      "name": "ping.json",
+      "type": "application/json",
+    },
+  ],
+  "key": "",
+}
+`;
+
+exports[`success sets 2 files in store 1`] = `
+{
+  "files": [
+    {
+      "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
+      "name": "ping.json",
+      "type": "application/json",
+    },
+    {
+      "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
+      "name": "ping.json",
+      "type": "application/json",
+    },
+  ],
+  "key": "",
+}
+`;

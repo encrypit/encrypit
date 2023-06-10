@@ -1,6 +1,7 @@
 import { act, fireEvent, screen } from '@testing-library/react';
 import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
+import { createZipFile } from 'src/utils';
 import { renderWithProviders, store } from 'test/helpers';
 
 import UploadFile from './UploadFile';
@@ -20,6 +21,13 @@ jest.mock('src/hooks', () => ({
 }));
 
 const mockedUseSelector = jest.mocked(useSelector);
+
+jest.mock('src/utils', () => ({
+  ...jest.requireActual('src/utils'),
+  createZipFile: jest.fn().mockResolvedValue(new Blob()),
+}));
+
+const mockedCreateZipFile = jest.mocked(createZipFile);
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -59,13 +67,15 @@ describe('without file', () => {
 });
 
 describe('with file', () => {
-  const file = 'data:application/octet-stream;base64,';
+  const files = [
+    { name: '', type: '', data: 'data:application/octet-stream;base64,' },
+  ];
   const key = 'key';
 
   beforeEach(() => {
     const state = {
       file: {
-        file,
+        files,
       },
     };
     mockedUseSelector.mockImplementationOnce((callback) =>
@@ -86,8 +96,9 @@ describe('with file', () => {
     await act(() => {
       fireEvent.click(screen.getByText('Upload'));
     });
+    expect(mockedCreateZipFile).toBeCalledTimes(1);
     expect(mockUploadFile).toBeCalledTimes(1);
-    expect(store.getState().file).toEqual({ key });
+    expect(store.getState().file).toEqual({ files: [], key });
   });
 
   it('navigates to /share', async () => {

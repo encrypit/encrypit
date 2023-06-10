@@ -2,7 +2,10 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { FileData } from 'src/types';
 
-export const initialState: FileData = {};
+export const initialState: FileData = {
+  files: [],
+  key: '',
+};
 
 export const fileSlice = createSlice({
   name: 'file',
@@ -15,9 +18,13 @@ export const fileSlice = createSlice({
       Object.assign(state, action.payload);
     },
 
+    addFiles: (state, action: PayloadAction<FileData['files']>) => {
+      state.files.push(...action.payload);
+    },
+
     setFileKey: (state, action: PayloadAction<string>) => {
       state.key = action.payload;
-      state.file = undefined;
+      state.files = [];
     },
   },
 });

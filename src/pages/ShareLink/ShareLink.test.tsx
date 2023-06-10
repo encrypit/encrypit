@@ -126,6 +126,11 @@ describe('with file key', () => {
     });
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(key);
-    expect(store.getState().file).toEqual({});
+    expect(store.getState().file).toMatchInlineSnapshot(`
+      {
+        "files": [],
+        "key": "",
+      }
+    `);
   });
 });

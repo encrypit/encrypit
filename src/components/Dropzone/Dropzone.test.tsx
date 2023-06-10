@@ -54,9 +54,12 @@ describe('drop', () => {
       fireEvent.drop(screen.getByRole('presentation'), mockData());
     });
     await waitFor(() => {
-      expect(store.getState().file).toEqual({
-        file: 'data:application/octet-stream;base64,',
-      });
+      expect(store.getState().file).toMatchInlineSnapshot(`
+        {
+          "files": [],
+          "key": "",
+        }
+      `);
     });
   });
 
@@ -66,7 +69,12 @@ describe('drop', () => {
       fireEvent.drop(screen.getByRole('presentation'), mockData(mockFiles(2)));
     });
     await waitFor(() => {
-      expect(store.getState().file).toEqual({});
+      expect(store.getState().file).toMatchInlineSnapshot(`
+        {
+          "files": [],
+          "key": "",
+        }
+      `);
     });
   });
 });

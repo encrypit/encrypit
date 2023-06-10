@@ -1,4 +1,4 @@
-import { base64ToBlob, blobToBase64 } from './data';
+import { base64ToBlob, base64ToFile, blobToBase64 } from './data';
 
 describe('blobToBase64', () => {
   it('converts Blob to Base64', async () => {
@@ -15,5 +15,16 @@ describe('base64ToBlob', () => {
     const base64 = 'data:application/octet-stream;base64,dGV4dA==';
     const blob = await base64ToBlob(base64);
     expect(blob.constructor.name).toBe('Blob');
+  });
+});
+
+describe('base64ToFile', () => {
+  it('converts Base64 to File', async () => {
+    const base64 = 'data:application/octet-stream;base64,dGV4dA==';
+    const name = 'filename';
+    const type = 'application/octet-stream';
+    const file = await base64ToFile(base64, name, { type });
+    expect(file).toBeInstanceOf(File);
+    expect(file).toMatchObject({ name, type });
   });
 });

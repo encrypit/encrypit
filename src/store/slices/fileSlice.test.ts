@@ -2,14 +2,20 @@ import { fileSlice, initialState } from './fileSlice';
 
 const { actions, reducer } = fileSlice;
 
-const file = 'data:application/octet-stream;base64,';
+const files = [
+  {
+    name: 'filename',
+    type: 'application/octet-stream',
+    data: 'data:application/octet-stream;base64,',
+  },
+];
 const key = 'abc123';
 
 describe('resetFile', () => {
   it('sets initialState', () => {
     const state = {
       ...initialState,
-      file,
+      files,
       key,
     };
     expect(reducer(state, actions.resetFile())).toBe(initialState);
@@ -19,14 +25,23 @@ describe('resetFile', () => {
 describe('setFile', () => {
   it('sets file and key', () => {
     const payload = {
-      file,
+      files,
       key,
     };
     expect(reducer(initialState, actions.setFile(payload))).toEqual({
-      ...initialState,
-      file,
+      files,
       key,
     });
+  });
+});
+
+describe('addFiles', () => {
+  it('adds files', () => {
+    const payload = Array(2).fill('data:application/octet-stream;base64,');
+    expect(reducer(initialState, actions.addFiles(payload)).files).toEqual([
+      ...initialState.files,
+      ...payload,
+    ]);
   });
 });
 

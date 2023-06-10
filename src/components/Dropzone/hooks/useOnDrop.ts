@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { useDispatch } from 'src/hooks';
 import { actions } from 'src/store';
-import { blobToBase64, createZipFile } from 'src/utils';
+import { blobToBase64 } from 'src/utils';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 
@@ -21,12 +21,15 @@ export function useOnDrop() {
         return;
       }
 
-      const zipFile = await createZipFile(acceptedFiles);
-      dispatch(
-        actions.setFile({
-          file: await blobToBase64(zipFile),
-        })
+      const files = await Promise.all(
+        acceptedFiles.map(async (file) => ({
+          name: file.name,
+          type: file.type,
+          data: await blobToBase64(file),
+        }))
       );
+
+      dispatch(actions.addFiles(files));
     },
     []
   );

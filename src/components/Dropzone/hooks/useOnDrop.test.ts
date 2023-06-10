@@ -1,21 +1,9 @@
 import { renderHook } from '@testing-library/react';
-import { createZipFile } from 'src/utils';
 import { mockFiles, store, wrapper } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
 
-jest.mock('src/utils', () => ({
-  ...jest.requireActual('src/utils'),
-  createZipFile: jest.fn().mockResolvedValue(new Blob()),
-}));
-
-const mockedCreateZipFile = jest.mocked(createZipFile);
-
 const event = new Event('drop');
-
-beforeEach(() => {
-  jest.clearAllMocks();
-});
 
 it('returns onDrop callback', () => {
   const { result } = renderHook(() => useOnDrop(), { wrapper });
@@ -23,14 +11,11 @@ it('returns onDrop callback', () => {
 });
 
 describe('success', () => {
-  it('sets file in store', async () => {
+  it.each([1, 2])('sets %d files in store', async (count) => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
-    const files = mockFiles();
+    const files = mockFiles(count);
     await result.current(files, [], event);
-    expect(mockedCreateZipFile).toBeCalledWith(files);
-    expect(store.getState().file.file).toBe(
-      'data:application/octet-stream;base64,'
-    );
+    expect(store.getState().file).toMatchSnapshot();
   });
 });
 
@@ -38,8 +23,12 @@ describe('error', () => {
   it('does not upload if there is no file', async () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     await result.current([], [], event);
-    expect(mockedCreateZipFile).not.toBeCalled();
-    expect(store.getState().file).toEqual({});
+    expect(store.getState().file).toMatchInlineSnapshot(`
+      {
+        "files": [],
+        "key": "",
+      }
+    `);
   });
 
   it('does not upload if there are file rejections', async () => {
@@ -50,7 +39,11 @@ describe('error', () => {
       file,
     }));
     await result.current(files, fileRejections, event);
-    expect(mockedCreateZipFile).not.toBeCalled();
-    expect(store.getState().file).toEqual({});
+    expect(store.getState().file).toMatchInlineSnapshot(`
+      {
+        "files": [],
+        "key": "",
+      }
+    `);
   });
 });
