@@ -17,6 +17,7 @@ export const fileSlice = createSlice({
 
     setFileKey: (state, action: PayloadAction<string>) => {
       state.key = action.payload;
+      state.file = undefined;
     },
   },
 });

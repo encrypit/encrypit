@@ -23,13 +23,7 @@ export default function UploadFile() {
       file: await base64ToBlob(file),
     });
 
-    dispatch(
-      actions.setFile({
-        file: undefined,
-        key: await uploadFile(formData).unwrap(),
-      })
-    );
-
+    dispatch(actions.setFileKey(await uploadFile(formData).unwrap()));
     navigate('/share', { replace: true });
   }, [file]);
 
