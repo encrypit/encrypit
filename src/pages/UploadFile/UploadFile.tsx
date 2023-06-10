@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dropzone from 'src/components/Dropzone';
+import Previews from 'src/components/Previews';
 import { useDispatch, useSelector, useUploadFileMutation } from 'src/hooks';
 import { actions } from 'src/store';
 import { base64ToFile, createFormData, createZipFile } from 'src/utils';
@@ -34,12 +35,14 @@ export default function UploadFile() {
   }, [files]);
 
   return (
-    <>
+    <section>
       <Typography component="h1" gutterBottom variant="h6">
         New file
       </Typography>
 
       <Dropzone />
+
+      <Previews />
 
       <Button
         disabled={!files.length}
@@ -49,6 +52,6 @@ export default function UploadFile() {
       >
         Upload
       </Button>
-    </>
+    </section>
   );
 }

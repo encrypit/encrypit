@@ -50,7 +50,7 @@ it('renders upload button', () => {
   expect(screen.getByRole('button', { name: 'Upload' })).toBeInTheDocument();
 });
 
-describe('without file', () => {
+describe('without files', () => {
   beforeEach(() => {
     const state = {
       file: {},
@@ -66,9 +66,15 @@ describe('without file', () => {
   });
 });
 
-describe('with file', () => {
+describe('with files', () => {
+  const name = 'filename';
   const files = [
-    { name: '', type: '', data: 'data:application/octet-stream;base64,' },
+    {
+      name,
+      type: '',
+      data: 'data:application/octet-stream;base64,',
+      id: crypto.randomUUID(),
+    },
   ];
   const key = 'key';
 
@@ -78,9 +84,11 @@ describe('with file', () => {
         files,
       },
     };
-    mockedUseSelector.mockImplementationOnce((callback) =>
-      callback(state as unknown as RootState)
-    );
+    mockedUseSelector
+      .mockReset()
+      .mockImplementation((callback) =>
+        callback(state as unknown as RootState)
+      );
     mockUploadFile.mockReturnValueOnce({
       unwrap: jest.fn().mockResolvedValueOnce(key),
     });
@@ -99,6 +107,14 @@ describe('with file', () => {
     expect(mockedCreateZipFile).toBeCalledTimes(1);
     expect(mockUploadFile).toBeCalledTimes(1);
     expect(store.getState().file).toEqual({ files: [], key });
+  });
+
+  it('renders preview', async () => {
+    renderWithProviders(<UploadFile />);
+    await act(() => {
+      fireEvent.click(screen.getByText('Upload'));
+    });
+    expect(screen.getByText(name)).toBeInTheDocument();
   });
 
   it('navigates to /share', async () => {
