@@ -2,7 +2,7 @@ import { fileSlice, initialState } from './fileSlice';
 
 const { actions, reducer } = fileSlice;
 
-const file = new File([''], '');
+const file = 'data:application/octet-stream;base64,';
 const key = 'abc123';
 
 describe('resetFile', () => {
@@ -17,7 +17,7 @@ describe('resetFile', () => {
 });
 
 describe('setFile', () => {
-  it('sets file', () => {
+  it('sets file and key', () => {
     const payload = {
       file,
       key,
@@ -26,6 +26,16 @@ describe('setFile', () => {
       ...initialState,
       file,
       key,
+    });
+  });
+});
+
+describe('setFileKey', () => {
+  it('sets file key', () => {
+    const payload = 'fileKey';
+    expect(reducer(initialState, actions.setFileKey(payload))).toEqual({
+      ...initialState,
+      key: payload,
     });
   });
 });

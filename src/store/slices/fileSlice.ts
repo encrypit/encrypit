@@ -9,13 +9,14 @@ export const fileSlice = createSlice({
   initialState,
 
   reducers: {
-    resetFile: () => {
-      return initialState;
-    },
+    resetFile: () => initialState,
 
     setFile: (state, action: PayloadAction<FileData>) => {
-      const file = action.payload;
-      Object.assign(state, file);
+      Object.assign(state, action.payload);
+    },
+
+    setFileKey: (state, action: PayloadAction<string>) => {
+      state.key = action.payload;
     },
   },
 });
