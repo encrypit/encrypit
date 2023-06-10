@@ -79,7 +79,7 @@ export default function DownloadFile() {
             Download file
           </Button>
 
-          <Button component={RouterLink} to="/" variant="outlined">
+          <Button component={RouterLink} replace to="/" variant="outlined">
             Upload file
           </Button>
         </Stack>

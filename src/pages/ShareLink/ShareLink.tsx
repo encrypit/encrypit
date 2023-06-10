@@ -52,7 +52,7 @@ export default function ShareLink() {
         <em>Or it will expire after 7 days.</em>)
       </Alert>
 
-      <Link component={RouterLink} to={link}>
+      <Link component={RouterLink} replace to={link}>
         {link}
       </Link>
 
