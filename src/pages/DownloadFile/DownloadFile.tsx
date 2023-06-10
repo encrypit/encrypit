@@ -58,6 +58,13 @@ export default function DownloadFile() {
         </Box>
       )}
 
+      {downloadFileResult.isSuccess && (
+        <Typography paragraph>
+          File has been deleted from the server. Please close this page after
+          the download has finished.
+        </Typography>
+      )}
+
       {downloadUrl && (
         <Button
           component={Link}

@@ -119,6 +119,15 @@ describe('isSuccess', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders paragraph', () => {
+    renderWithProviders(<DownloadFile />);
+    expect(
+      screen.getByText(
+        'File has been deleted from the server. Please close this page after the download has finished.'
+      )
+    ).toBeInTheDocument();
+  });
+
   it('renders download link', () => {
     renderWithProviders(<DownloadFile />);
     expect(screen.getByRole('link', { name: 'Download file' })).toHaveAttribute(
