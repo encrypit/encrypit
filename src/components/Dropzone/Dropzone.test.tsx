@@ -1,17 +1,10 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { mockData, mockFiles, renderWithProviders, store } from 'test/helpers';
 
 import Dropzone from './Dropzone';
 
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(jest.fn),
-}));
-
-const mockUploadFile = jest.fn();
-
-jest.mock('src/hooks', () => ({
-  ...jest.requireActual('src/hooks'),
-  useUploadFileMutation: jest.fn(() => [mockUploadFile]),
 }));
 
 jest.mock('src/utils', () => ({
@@ -51,13 +44,8 @@ it('drags file to Dropzone', async () => {
 });
 
 describe('drop', () => {
-  const uuid = 'uuid';
-
   beforeEach(() => {
     jest.clearAllMocks();
-    mockUploadFile.mockReturnValueOnce({
-      unwrap: jest.fn().mockResolvedValueOnce(uuid),
-    });
   });
 
   it('drops file to Dropzone', async () => {
@@ -65,7 +53,11 @@ describe('drop', () => {
     await act(() => {
       fireEvent.drop(screen.getByRole('presentation'), mockData());
     });
-    expect(store.getState().file.key).toBe(uuid);
+    await waitFor(() => {
+      expect(store.getState().file).toEqual({
+        file: 'data:application/octet-stream;base64,',
+      });
+    });
   });
 
   it('rejects if there are too many files', async () => {
@@ -73,6 +65,8 @@ describe('drop', () => {
     await act(() => {
       fireEvent.drop(screen.getByRole('presentation'), mockData(mockFiles(2)));
     });
-    expect(store.getState().file.key).toBe(undefined);
+    await waitFor(() => {
+      expect(store.getState().file).toEqual({});
+    });
   });
 });

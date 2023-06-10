@@ -1,21 +1,8 @@
 import { renderHook } from '@testing-library/react';
 import { createZipFile } from 'src/utils';
-import { fetchMock, mockFiles, store, wrapper } from 'test/helpers';
+import { mockFiles, store, wrapper } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
-
-const mockNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  useNavigate: jest.fn(() => mockNavigate),
-}));
-
-const mockUploadFile = jest.fn();
-
-jest.mock('src/hooks', () => ({
-  ...jest.requireActual('src/hooks'),
-  useUploadFileMutation: jest.fn(() => [mockUploadFile]),
-}));
 
 jest.mock('src/utils', () => ({
   ...jest.requireActual('src/utils'),
@@ -36,28 +23,14 @@ it('returns onDrop callback', () => {
 });
 
 describe('success', () => {
-  const uuid = 'uuid';
-
-  beforeEach(() => {
-    mockUploadFile.mockReturnValueOnce({
-      unwrap: jest.fn().mockResolvedValueOnce(uuid),
-    });
-  });
-
-  it('uploads files', async () => {
+  it('sets file in store', async () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles();
     await result.current(files, [], event);
     expect(mockedCreateZipFile).toBeCalledWith(files);
-    expect(mockUploadFile).toBeCalledWith(expect.any(FormData));
-    expect(store.getState().file.key).toBe(uuid);
-  });
-
-  it('navigates to /share', async () => {
-    const { result } = renderHook(() => useOnDrop(), { wrapper });
-    const files = mockFiles(1);
-    await result.current(files, [], event);
-    expect(mockNavigate).toBeCalledWith('/share', { replace: true });
+    expect(store.getState().file.file).toBe(
+      'data:application/octet-stream;base64,'
+    );
   });
 });
 
@@ -65,7 +38,8 @@ describe('error', () => {
   it('does not upload if there is no file', async () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     await result.current([], [], event);
-    expect(fetchMock).not.toBeCalled();
+    expect(mockedCreateZipFile).not.toBeCalled();
+    expect(store.getState().file).toEqual({});
   });
 
   it('does not upload if there are file rejections', async () => {
@@ -76,6 +50,7 @@ describe('error', () => {
       file,
     }));
     await result.current(files, fileRejections, event);
-    expect(fetchMock).not.toBeCalled();
+    expect(mockedCreateZipFile).not.toBeCalled();
+    expect(store.getState().file).toEqual({});
   });
 });

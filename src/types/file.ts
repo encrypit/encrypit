@@ -1,5 +1,5 @@
 export interface FileData {
-  file?: File;
+  file?: string; // base64
   key?: string;
 }
 
