@@ -20,7 +20,9 @@ export default function UploadFile() {
     }
 
     const convertedFiles = await Promise.all(
-      files.map(({ data, name, type }) => base64ToFile(data, name, { type }))
+      files.map(({ data, name, ...options }) =>
+        base64ToFile(data, name, options)
+      )
     );
     const file = await createZipFile(convertedFiles);
     const formData = createFormData({ file });

@@ -6,6 +6,7 @@ exports[`success sets 1 files in store 1`] = `
     {
       "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
       "name": "ping.json",
+      "size": 13,
       "type": "application/json",
     },
   ],
@@ -19,11 +20,13 @@ exports[`success sets 2 files in store 1`] = `
     {
       "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
       "name": "ping.json",
+      "size": 13,
       "type": "application/json",
     },
     {
       "data": "data:application/json;base64,eyJwaW5nIjp0cnVlfQ==",
       "name": "ping.json",
+      "size": 13,
       "type": "application/json",
     },
   ],

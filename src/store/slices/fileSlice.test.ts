@@ -4,7 +4,9 @@ const { actions, reducer } = fileSlice;
 
 const files = [
   {
+    lastModified: 1589947200000,
     name: 'filename',
+    size: 0,
     type: 'application/octet-stream',
     data: 'data:application/octet-stream;base64,',
   },

@@ -1,10 +1,8 @@
 import { generateFileName } from './filename';
 
 describe('generateFileName', () => {
-  const date = new Date('2020-04-20');
-
   beforeAll(() => {
-    jest.useFakeTimers().setSystemTime(date);
+    jest.useFakeTimers().setSystemTime(new Date('2020-04-20'));
   });
 
   afterAll(() => {

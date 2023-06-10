@@ -1,6 +1,8 @@
 export interface FileData {
   files: {
+    lastModified: number;
     name: string;
+    size: number;
     type: string;
     data: string; // Base64
   }[];

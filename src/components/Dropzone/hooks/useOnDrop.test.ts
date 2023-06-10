@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import type { FileData } from 'src/types';
 import { mockFiles, store, wrapper } from 'test/helpers';
 
 import { useOnDrop } from './useOnDrop';
@@ -11,11 +12,23 @@ it('returns onDrop callback', () => {
 });
 
 describe('success', () => {
+  beforeAll(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2020-04-20'));
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
   it.each([1, 2])('sets %d files in store', async (count) => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles(count);
     await result.current(files, [], event);
-    expect(store.getState().file).toMatchSnapshot();
+    const file: FileData = JSON.parse(JSON.stringify(store.getState().file));
+    file.files.forEach(
+      (file: Partial<FileData['files'][0]>) => delete file['lastModified']
+    );
+    expect(file).toMatchSnapshot();
   });
 });
 

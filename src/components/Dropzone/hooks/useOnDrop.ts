@@ -23,7 +23,9 @@ export function useOnDrop() {
 
       const files = await Promise.all(
         acceptedFiles.map(async (file) => ({
+          lastModified: file.lastModified,
           name: file.name,
+          size: file.size,
           type: file.type,
           data: await blobToBase64(file),
         }))
