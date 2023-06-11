@@ -1,5 +1,6 @@
 export enum FORM_DATA {
   FILE = 'FILE',
+  PASSWORD_SHA512 = 'PASSWORD_SHA512',
   VERSION = 'VERSION',
 }
 

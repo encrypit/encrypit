@@ -1,10 +1,14 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { createZipFile } from 'src/utils';
 import { renderWithProviders, store } from 'test/helpers';
 
 import UploadFile from './UploadFile';
+
+jest.mock('nanoid', () => ({
+  customAlphabet: jest.fn(() => jest.fn(() => 'password')),
+}));
 
 const mockNavigate = jest.fn();
 
@@ -77,6 +81,7 @@ describe('with files', () => {
     },
   ];
   const key = 'key';
+  const password = 'password';
 
   beforeEach(() => {
     const state = {
@@ -101,26 +106,31 @@ describe('with files', () => {
 
   it('uploads the file on click', async () => {
     renderWithProviders(<UploadFile />);
-    await act(() => {
-      fireEvent.click(screen.getByText('Upload'));
+    fireEvent.click(screen.getByText('Upload'));
+    await waitFor(() => {
+      expect(store.getState().file).toEqual({
+        files: [],
+        key: `${key}#${password}`,
+      });
     });
     expect(mockedCreateZipFile).toBeCalledTimes(1);
     expect(mockUploadFile).toBeCalledTimes(1);
-    expect(store.getState().file).toEqual({ files: [], key });
   });
 
   it('renders preview', async () => {
     renderWithProviders(<UploadFile />);
-    await act(() => {
-      fireEvent.click(screen.getByText('Upload'));
+    fireEvent.click(screen.getByText('Upload'));
+    await waitFor(() => {
+      expect(store.getState().file.key).toBeTruthy();
     });
     expect(screen.getByText(name)).toBeInTheDocument();
   });
 
   it('navigates to /share', async () => {
     renderWithProviders(<UploadFile />);
-    await act(() => {
-      fireEvent.click(screen.getByText('Upload'));
+    fireEvent.click(screen.getByText('Upload'));
+    await waitFor(() => {
+      expect(store.getState().file.key).toBeTruthy();
     });
     expect(mockNavigate).toBeCalledWith('/share', { replace: true });
   });

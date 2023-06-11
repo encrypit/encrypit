@@ -1,3 +1,5 @@
+import type { CustomMetadata } from 'shared/types';
+
 export interface FileData {
   files: {
     lastModified: number;
@@ -12,8 +14,5 @@ export interface FileData {
 
 export interface DownloadFileResponse {
   file: string; // Base64
-  customMetadata: {
-    size: string;
-    type: string;
-  };
+  customMetadata: CustomMetadata;
 }

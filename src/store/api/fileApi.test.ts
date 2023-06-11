@@ -121,9 +121,15 @@ describe('uploadFile', () => {
       wrapper,
     });
 
-    await act(() => {
+    const formData = await createFormData({
+      file: mockFiles(1)[0],
+      password: 'password',
+      version: '1.0.0',
+    });
+
+    await act(async () => {
       const [uploadFile] = result.current;
-      uploadFile(createFormData({ file: mockFiles(1)[0], version: '1.0.0' }));
+      uploadFile(formData);
     });
 
     expect(fetchMock).toBeCalledTimes(1);

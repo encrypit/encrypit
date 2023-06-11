@@ -2,6 +2,7 @@ import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
 import { FORM_DATA, HTTP_STATUS_CODES } from 'shared/constants';
 import { generateFileKey } from 'shared/id';
+import type { CustomMetadata } from 'shared/types';
 
 /**
  * POST /api/files
@@ -24,12 +25,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const bucket = getBucket(context);
   const fileKey = await getFileKey(bucket);
 
+  const customMetadata: CustomMetadata = {
+    size: String(file.size),
+    type: file.type,
+    version: formData.get(FORM_DATA.VERSION),
+    passwordSHA512: formData.get(FORM_DATA.PASSWORD_SHA512),
+  };
+
   await bucket.put(fileKey, await file.arrayBuffer(), {
-    customMetadata: {
-      size: String(file.size),
-      type: file.type,
-      version: formData.get(FORM_DATA.VERSION),
-    },
+    customMetadata: customMetadata as unknown as R2PutOptions['customMetadata'],
     httpMetadata: context.request.headers,
   });
 

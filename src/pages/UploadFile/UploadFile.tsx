@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { generateFilePassword } from 'shared/id';
 import Dropzone from 'src/components/Dropzone';
 import Previews from 'src/components/Previews';
 import { useDispatch, useSelector, useUploadFileMutation } from 'src/hooks';
@@ -26,10 +27,16 @@ export default function UploadFile() {
       )
     );
     const file = await createZipFile(convertedFiles);
-    const formData = createFormData({ file });
 
-    const fileKey = await uploadFile(formData).unwrap();
-    dispatch(actions.setFileKey(fileKey));
+    const password = generateFilePassword();
+    const formData = await createFormData({
+      file,
+      password,
+    });
+
+    const response = uploadFile(formData);
+    const fileKey = await response.unwrap();
+    dispatch(actions.setFileKey(`${fileKey}#${password}`));
 
     navigate('/share', { replace: true });
   }, [files]);
