@@ -1,4 +1,5 @@
 import { customAlphabet, nanoid } from 'nanoid';
+import { FILE } from 'shared/constants';
 
 /**
  * Generates file key.
@@ -6,15 +7,10 @@ import { customAlphabet, nanoid } from 'nanoid';
  * @returns - File key.
  */
 export function generateFileKey(): string {
-  return nanoid(7);
+  return nanoid(FILE.KEY_LENGTH);
 }
 
-// https://stackoverflow.com/a/26119120
-const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-const password = customAlphabet(
-  `0123456789${alphabet}${alphabet.toUpperCase()}?/:@-._~!$&'()*+,;=`,
-  9
-);
+const password = customAlphabet(FILE.PASSWORD_ALPHABET, FILE.PASSWORD_LENGTH);
 
 /**
  * Generates file password.
