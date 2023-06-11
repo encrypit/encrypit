@@ -35,8 +35,8 @@ export default function UploadFile() {
     });
 
     const response = uploadFile(formData);
-    const fileKey = await response.unwrap();
-    dispatch(actions.setFileKey(`${fileKey}#${password}`));
+    const key = await response.unwrap();
+    dispatch(actions.setFileKeyOrPassword({ key, password }));
 
     navigate('/share', { replace: true });
   }, [files]);

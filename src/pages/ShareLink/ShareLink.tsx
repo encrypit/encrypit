@@ -12,17 +12,17 @@ import { actions } from 'src/store';
 
 export default function ShareLink() {
   const dispatch = useDispatch();
-  const fileKey = useSelector((state) => state.file.key);
+  const file = useSelector((state) => state.file);
   const navigate = useNavigate();
-  const link = `${location.origin}/${fileKey}`;
+  const link = `${location.origin}/${file.key}#${file.password}`;
   const [deleteFile] = useDeleteFileMutation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
-    if (!fileKey) {
+    if (!file.key) {
       navigate('/', { replace: true });
     }
-  }, [fileKey]);
+  }, [file.key]);
 
   const copyLink = useCallback(
     () => navigator.clipboard.writeText(link),
@@ -32,12 +32,12 @@ export default function ShareLink() {
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);
   const handleDeleteFile = useCallback(async () => {
-    await deleteFile(fileKey!).unwrap();
+    await deleteFile(file.key!).unwrap();
     setIsDialogOpen(false);
     dispatch(actions.resetFile());
-  }, [fileKey]);
+  }, [file.key]);
 
-  if (!fileKey) {
+  if (!file.key) {
     return null;
   }
 
@@ -81,7 +81,7 @@ export default function ShareLink() {
 
         <DeleteDialog
           content="This action cannot be undone."
-          id={fileKey}
+          id={file.key}
           onClose={closeDialog}
           onDelete={handleDeleteFile}
           open={isDialogOpen}

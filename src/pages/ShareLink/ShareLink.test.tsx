@@ -41,6 +41,14 @@ beforeEach(() => {
 });
 
 describe('without file key', () => {
+  beforeEach(() => {
+    mockedUseSelector.mockImplementation((selector) =>
+      selector({
+        file: {},
+      } as RootState)
+    );
+  });
+
   it('does not render heading', () => {
     renderWithProviders(<ShareLink />);
     expect(screen.queryByText('File link ready')).not.toBeInTheDocument();
@@ -52,13 +60,19 @@ describe('without file key', () => {
   });
 });
 
-describe('with file key', () => {
-  const key = 'abc123';
-  const link = `${location.origin}/${key}`;
+describe('with file key and password', () => {
+  const key = 'key';
+  const password = 'password';
+  const link = `${location.origin}/${key}#${password}`;
 
   beforeEach(() => {
     mockedUseSelector.mockImplementation((selector) =>
-      selector({ file: { key: 'abc123' } } as RootState)
+      selector({
+        file: {
+          key,
+          password,
+        },
+      } as RootState)
     );
   });
 
@@ -132,6 +146,7 @@ describe('with file key', () => {
       {
         "files": [],
         "key": "",
+        "password": "",
       }
     `);
   });

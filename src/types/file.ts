@@ -10,6 +10,7 @@ export interface FileData {
     id: string; // UUID
   }[];
   key: string;
+  password: string;
 }
 
 export interface DownloadFileResponse {

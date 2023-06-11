@@ -44,6 +44,7 @@ describe('error', () => {
       {
         "files": [],
         "key": "",
+        "password": "",
       }
     `);
   });
@@ -60,6 +61,7 @@ describe('error', () => {
       {
         "files": [],
         "key": "",
+        "password": "",
       }
     `);
   });

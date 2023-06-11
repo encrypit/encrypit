@@ -5,6 +5,7 @@ import type { FileData } from 'src/types';
 export const initialState: FileData = {
   files: [],
   key: '',
+  password: '',
 };
 
 export const fileSlice = createSlice({
@@ -22,8 +23,17 @@ export const fileSlice = createSlice({
       state.files.push(...action.payload);
     },
 
-    setFileKey: (state, action: PayloadAction<string>) => {
-      state.key = action.payload;
+    setFileKeyOrPassword: (
+      state,
+      action: PayloadAction<{ key?: string; password?: string }>
+    ) => {
+      const { key, password } = action.payload;
+      if (key) {
+        state.key = key;
+      }
+      if (password) {
+        state.password = password;
+      }
       state.files = [];
     },
   },

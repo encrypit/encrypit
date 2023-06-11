@@ -16,7 +16,7 @@ export default function ConfirmDownload() {
     if (!fileKey) {
       navigate('/', { replace: true });
     } else {
-      dispatch(actions.setFileKey(fileKey));
+      dispatch(actions.setFileKeyOrPassword({ key: fileKey }));
     }
   }, [fileKey]);
 

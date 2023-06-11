@@ -12,7 +12,8 @@ const files = [
     id: crypto.randomUUID(),
   },
 ];
-const key = 'abc123';
+const key = 'key';
+const password = 'password';
 
 describe('resetFile', () => {
   it('sets initialState', () => {
@@ -26,14 +27,16 @@ describe('resetFile', () => {
 });
 
 describe('setFile', () => {
-  it('sets file and key', () => {
+  it('sets file, key, and password', () => {
     const payload = {
       files,
       key,
+      password,
     };
     expect(reducer(initialState, actions.setFile(payload))).toEqual({
       files,
       key,
+      password,
     });
   });
 });
@@ -48,12 +51,41 @@ describe('addFiles', () => {
   });
 });
 
-describe('setFileKey', () => {
+describe('setFileKeyOrPassword', () => {
   it('sets file key', () => {
-    const payload = 'fileKey';
-    expect(reducer(initialState, actions.setFileKey(payload))).toEqual({
+    const payload = {
+      key: 'fileKey',
+    };
+    expect(
+      reducer(initialState, actions.setFileKeyOrPassword(payload))
+    ).toEqual({
       ...initialState,
-      key: payload,
+      ...payload,
+    });
+  });
+
+  it('sets password', () => {
+    const payload = {
+      password: 'filePassword',
+    };
+    expect(
+      reducer(initialState, actions.setFileKeyOrPassword(payload))
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('sets file key and password', () => {
+    const payload = {
+      key: 'fileKey',
+      password: 'filePassword',
+    };
+    expect(
+      reducer(initialState, actions.setFileKeyOrPassword(payload))
+    ).toEqual({
+      ...initialState,
+      ...payload,
     });
   });
 });

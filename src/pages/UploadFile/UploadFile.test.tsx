@@ -110,7 +110,8 @@ describe('with files', () => {
     await waitFor(() => {
       expect(store.getState().file).toEqual({
         files: [],
-        key: `${key}#${password}`,
+        key,
+        password,
       });
     });
     expect(mockedCreateZipFile).toBeCalledTimes(1);

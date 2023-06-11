@@ -12,6 +12,7 @@ exports[`success sets 1 files in store 1`] = `
     },
   ],
   "key": "",
+  "password": "",
 }
 `;
 
@@ -34,5 +35,6 @@ exports[`success sets 2 files in store 1`] = `
     },
   ],
   "key": "",
+  "password": "",
 }
 `;

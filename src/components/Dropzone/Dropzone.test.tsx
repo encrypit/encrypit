@@ -58,6 +58,7 @@ describe('drop', () => {
         {
           "files": [],
           "key": "",
+          "password": "",
         }
       `);
     });
@@ -73,6 +74,7 @@ describe('drop', () => {
         {
           "files": [],
           "key": "",
+          "password": "",
         }
       `);
     });
