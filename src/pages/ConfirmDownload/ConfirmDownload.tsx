@@ -4,14 +4,19 @@ import Typography from '@mui/material/Typography';
 import { type ComponentProps, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'src/hooks';
+import { actions } from 'src/store';
 
 export default function ConfirmDownload() {
+  const dispatch = useDispatch();
   const { fileKey } = useParams<{ fileKey: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!fileKey) {
       navigate('/', { replace: true });
+    } else {
+      dispatch(actions.setFileKey(fileKey));
     }
   }, [fileKey]);
 
