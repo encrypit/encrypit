@@ -1,14 +1,13 @@
-import { digest } from 'pepto';
 import { FORM_DATA } from 'shared/constants';
 import { APP_VERSION } from 'src/config';
+
+import { hashPassword } from './hash';
 
 interface Data {
   file: Blob;
   password: string;
   version?: string;
 }
-
-const algorithm = 'SHA-512';
 
 /**
  * Creates FormData.
@@ -25,7 +24,7 @@ export async function createFormData({
 
   formData.append(FORM_DATA.FILE, file);
   formData.append(FORM_DATA.VERSION, version);
-  formData.append(FORM_DATA.PASSWORD_SHA512, await digest(algorithm, password));
+  formData.append(FORM_DATA.PASSWORD_SHA512, await hashPassword(password));
 
   return formData;
 }
