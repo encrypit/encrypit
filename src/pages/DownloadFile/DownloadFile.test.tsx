@@ -1,5 +1,4 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { digest } from 'pepto';
 import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders } from 'test/helpers';
@@ -101,7 +100,8 @@ describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
     await waitFor(async () => {
       expect(mockDownloadFile).toBeCalledWith({
         key: file.key,
-        passwordSHA512: await digest('SHA-512', file.password),
+        passwordSHA512:
+          'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86',
       });
     });
   });
@@ -199,7 +199,8 @@ describe('isSuccess', () => {
     await waitFor(async () => {
       expect(mockDownloadFile).toBeCalledWith({
         key: file.key,
-        passwordSHA512: await digest('SHA-512', file.password),
+        passwordSHA512:
+          'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86',
       });
     });
   });

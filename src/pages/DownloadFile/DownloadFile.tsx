@@ -4,7 +4,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { digest } from 'pepto';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
@@ -13,7 +12,7 @@ import {
   useLazyDownloadFileQuery,
   useSelector,
 } from 'src/hooks';
-import { generateFileName } from 'src/utils';
+import { generateFileName, hashPassword } from 'src/utils';
 
 import DownloadFileError from './DownloadFileError';
 
@@ -27,7 +26,7 @@ export default function DownloadFile() {
 
   useEffect(() => {
     if (file.key && file.password) {
-      digest('SHA-512', file.password).then((passwordSHA512) => {
+      hashPassword(file.password).then((passwordSHA512) => {
         downloadFile({
           key: file.key,
           passwordSHA512,
