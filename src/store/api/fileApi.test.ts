@@ -64,59 +64,79 @@ describe('deleteFile', () => {
 });
 
 describe('downloadFile', () => {
-  beforeEach(() => {
-    const blob = new Blob(['blob'], { type: 'text/plain' });
-    fetchMock.mockResponseOnce(blob as unknown as string);
+  describe('success', () => {
+    beforeEach(() => {
+      const blob = new Blob(['blob'], { type: 'text/plain' });
+      fetchMock.mockResponseOnce(blob as unknown as string);
+    });
+
+    it('downloads file given key', async () => {
+      await act(() => {
+        renderHook(
+          () => fileApi.useDownloadFileQuery({ key, passwordSHA512 }),
+          { wrapper }
+        );
+      });
+      expect(fetchMock).toBeCalledTimes(1);
+      expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
+        Request {
+          "agent": undefined,
+          "compress": true,
+          "counter": 0,
+          "follow": 20,
+          "size": 0,
+          "timeout": 0,
+          Symbol(Body internals): {
+            "body": null,
+            "disturbed": false,
+            "error": null,
+          },
+          Symbol(Request internals): {
+            "headers": Headers {
+              Symbol(map): {
+                "X-Password-Sha512": [
+                  "passwordSHA512",
+                ],
+              },
+            },
+            "method": "GET",
+            "parsedURL": Url {
+              "auth": null,
+              "hash": null,
+              "host": "localhost",
+              "hostname": "localhost",
+              "href": "http://localhost/api/files/fileKey",
+              "path": "/api/files/fileKey",
+              "pathname": "/api/files/fileKey",
+              "port": null,
+              "protocol": "http:",
+              "query": null,
+              "search": null,
+              "slashes": true,
+            },
+            "redirect": "follow",
+            "signal": AbortSignal {},
+          },
+        }
+      `);
+    });
   });
 
-  it('downloads file given key', async () => {
-    await act(() => {
-      renderHook(() => fileApi.useDownloadFileQuery({ key, passwordSHA512 }), {
-        wrapper,
-      });
+  describe('error', () => {
+    beforeEach(() => {
+      fetchMock.mockRejectOnce(new Error());
     });
-    expect(fetchMock).toBeCalledTimes(1);
-    expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
-      Request {
-        "agent": undefined,
-        "compress": true,
-        "counter": 0,
-        "follow": 20,
-        "size": 0,
-        "timeout": 0,
-        Symbol(Body internals): {
-          "body": null,
-          "disturbed": false,
-          "error": null,
-        },
-        Symbol(Request internals): {
-          "headers": Headers {
-            Symbol(map): {
-              "X-Password-SHA-512": [
-                "passwordSHA512",
-              ],
-            },
-          },
-          "method": "GET",
-          "parsedURL": Url {
-            "auth": null,
-            "hash": null,
-            "host": "localhost",
-            "hostname": "localhost",
-            "href": "http://localhost/api/files/fileKey",
-            "path": "/api/files/fileKey",
-            "pathname": "/api/files/fileKey",
-            "port": null,
-            "protocol": "http:",
-            "query": null,
-            "search": null,
-            "slashes": true,
-          },
-          "redirect": "follow",
-          "signal": AbortSignal {},
-        },
-      }
-    `);
+
+    it('responds with null', async () => {
+      await act(() => {
+        const { result } = renderHook(
+          () => fileApi.useDownloadFileQuery({ key, passwordSHA512 }),
+          { wrapper }
+        );
+        expect(result.current).toBe(null);
+      });
+      expect(fetchMock).toBeCalledTimes(1);
+    });
   });
 });
 

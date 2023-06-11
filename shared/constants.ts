@@ -20,7 +20,7 @@ export enum MAX_FILES {
 
 export enum HEADERS {
   CUSTOM_METADATA = 'X-Custom-Metadata',
-  PASSWORD_SHA512 = 'X-Password-SHA-512',
+  PASSWORD_SHA512 = 'X-Password-Sha512',
 }
 
 export enum FILE {
@@ -45,6 +45,7 @@ export enum MIME {
  * @see {@link https://wikipedia.org/wiki/List_of_HTTP_status_codes}
  */
 export enum HTTP_STATUS_CODES {
-  LENGTH_REQUIRED = 411,
+  FORBIDDEN = 403,
   NOT_FOUND = 404,
+  LENGTH_REQUIRED = 411,
 }

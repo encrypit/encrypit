@@ -70,15 +70,15 @@ describe('no file key', () => {
   });
 });
 
-describe('isLoading', () => {
+describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
   beforeEach(() => {
-    mockedLazyUseDownloadFileQuery
-      .mockReset()
-      .mockReturnValue([
-        mockDownloadFile,
-        { isLoading: true },
-        lastPromiseInfo,
-      ]);
+    mockedLazyUseDownloadFileQuery.mockReset().mockReturnValue([
+      mockDownloadFile,
+      {
+        [queryStatus]: true,
+      },
+      lastPromiseInfo,
+    ]);
     mockedUseSelector.mockImplementation((selector) =>
       selector({ file } as RootState)
     );
@@ -122,6 +122,25 @@ describe('isError', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Download error' })
     ).toBeInTheDocument();
+  });
+
+  it('renders heading', () => {
+    renderWithProviders(<DownloadFile />);
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Download error' })
+    ).toBeInTheDocument();
+  });
+
+  it('navigates to /invalid when status is 403', () => {
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([
+        mockDownloadFile,
+        { isError: true, error: { status: 403 } },
+        lastPromiseInfo,
+      ]);
+    renderWithProviders(<DownloadFile />);
+    expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
   });
 });
 

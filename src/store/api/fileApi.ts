@@ -38,14 +38,14 @@ export const fileApi = createApi({
           blobToBase64(await response.blob()),
       }),
 
-      transformResponse: /* istanbul ignore next */ (base64: string, meta) => {
-        return {
-          file: base64,
-          customMetadata: JSON.parse(
-            meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!
-          ) as DownloadFileResponse['customMetadata'],
-        };
-      },
+      transformResponse: /* istanbul ignore next */ (base64: string, meta) => ({
+        file: base64,
+        customMetadata: JSON.parse(
+          meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!
+        ) as DownloadFileResponse['customMetadata'],
+      }),
+
+      transformErrorResponse: ({ status }) => ({ status }),
     }),
 
     /**

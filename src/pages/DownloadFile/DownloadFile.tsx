@@ -15,6 +15,8 @@ import {
 } from 'src/hooks';
 import { generateFileName } from 'src/utils';
 
+import DownloadFileError from './DownloadFileError';
+
 export default function DownloadFile() {
   const file = useSelector((state) => state.file);
   const navigate = useNavigate();
@@ -54,13 +56,21 @@ export default function DownloadFile() {
     return null;
   }
 
+  if (downloadFileResult.isError) {
+    return (
+      <DownloadFileError
+        status={(downloadFileResult.error as { status: number })?.status}
+      />
+    );
+  }
+
   return (
     <>
       <Typography component="h1" gutterBottom variant="h6">
         {getHeading(downloadFileResult)}
       </Typography>
 
-      {downloadFileResult.isLoading && (
+      {(downloadFileResult.isFetching || downloadFileResult.isLoading) && (
         <Box>
           <CircularProgress />
         </Box>
@@ -95,14 +105,15 @@ export default function DownloadFile() {
 }
 
 function getHeading(downloadFileResult: {
+  isFetching: boolean;
+  isLoading: boolean;
   isSuccess: boolean;
-  isError: boolean;
 }): string {
   switch (true) {
     case downloadFileResult.isSuccess:
       return 'Download success!';
-    case downloadFileResult.isError:
-      return 'Download error';
+    case downloadFileResult.isFetching:
+    case downloadFileResult.isLoading:
     default:
       return 'Downloading…';
   }

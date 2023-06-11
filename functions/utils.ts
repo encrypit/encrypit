@@ -1,4 +1,5 @@
 import { EXPIRATION } from 'shared/constants';
+import type { CustomMetadata } from 'shared/types';
 
 import type { Context, Env } from './types';
 
@@ -18,6 +19,16 @@ export function getBucket(
     default:
       return context.env.EXPIRATION_DAYS_7;
   }
+}
+
+/**
+ * Gets object custom metadata.
+ *
+ * @param context - R2 object.
+ * @returns - Custom metadata.
+ */
+export function getCustomMetadata(obj: R2ObjectBody) {
+  return obj.customMetadata as unknown as CustomMetadata;
 }
 
 /**

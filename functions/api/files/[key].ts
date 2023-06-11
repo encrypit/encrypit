@@ -1,5 +1,5 @@
 import type { Env } from 'functions/types';
-import { getBucket, getResponseInit } from 'functions/utils';
+import { getBucket, getCustomMetadata, getResponseInit } from 'functions/utils';
 import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from 'shared/constants';
 
 type Params = 'key';
@@ -23,6 +23,14 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
     return new Response(body, init);
   }
 
+  const passwordSHA512 = context.request.headers.get(HEADERS.PASSWORD_SHA512);
+  const customMetadata = getCustomMetadata(obj);
+
+  if (!passwordSHA512 || passwordSHA512 !== customMetadata.passwordSHA512) {
+    init.status = HTTP_STATUS_CODES.FORBIDDEN;
+    return new Response(body, init);
+  }
+
   if (hasExpired(obj.uploaded)) {
     await bucket.delete(fileKey);
     init.status = HTTP_STATUS_CODES.NOT_FOUND;
@@ -34,7 +42,8 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
 
   body = readable;
   init.headers['Access-Control-Expose-Headers'] = HEADERS.CUSTOM_METADATA;
-  init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(obj.customMetadata);
+  delete customMetadata.passwordSHA512;
+  init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(customMetadata);
   return new Response(body, init);
 };
 
