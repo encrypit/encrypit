@@ -1,16 +1,19 @@
-import { screen } from '@testing-library/react';
-import { useParams } from 'react-router-dom';
+import { screen, waitFor } from '@testing-library/react';
+import { type Location, useLocation, useParams } from 'react-router-dom';
 import { renderWithProviders, store } from 'test/helpers';
 
 import ConfirmDownload from './ConfirmDownload';
 
 const mockNavigate = jest.fn();
-const mockedUseParams = jest.mocked(useParams);
 
 jest.mock('react-router-dom', () => ({
+  useLocation: jest.fn(),
   useNavigate: jest.fn(() => mockNavigate),
   useParams: jest.fn(),
 }));
+
+const mockedUseLocation = jest.mocked(useLocation);
+const mockedUseParams = jest.mocked(useParams);
 
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation();
@@ -25,18 +28,39 @@ beforeEach(() => {
 });
 
 describe('without file key', () => {
-  it('navigates to home', () => {
+  beforeEach(() => {
+    mockedUseLocation.mockReturnValueOnce({ hash: '#' } as Location);
     mockedUseParams.mockReturnValueOnce({ fileKey: '' });
+  });
+
+  it('navigates to home', async () => {
     renderWithProviders(<ConfirmDownload />);
-    expect(mockNavigate).toBeCalledWith('/', { replace: true });
+    await waitFor(() => {
+      expect(mockNavigate).toBeCalledWith('/', { replace: true });
+    });
   });
 });
 
-describe('with file key', () => {
+describe('with file key but no password', () => {
+  beforeEach(() => {
+    mockedUseLocation.mockReturnValueOnce({ hash: '#' } as Location);
+    mockedUseParams.mockReturnValueOnce({ fileKey: 'abc123' });
+  });
+
+  it('navigates to home', async () => {
+    renderWithProviders(<ConfirmDownload />);
+    await waitFor(() => {
+      expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+    });
+  });
+});
+
+describe('with file key and password', () => {
   const params = { fileKey: 'abc123' };
+  const location = { hash: '#123456789' };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    mockedUseLocation.mockReset().mockReturnValueOnce(location as Location);
     mockedUseParams.mockReturnValueOnce(params);
   });
 
@@ -67,8 +91,10 @@ describe('with file key', () => {
     expect(screen.getByText('No, not now')).toHaveAttribute('to', '/');
   });
 
-  it('stores file key', () => {
+  it('stores file key', async () => {
     renderWithProviders(<ConfirmDownload />);
-    expect(store.getState().file.key).toBe(params.fileKey);
+    await waitFor(() => {
+      expect(store.getState().file.key).toBe(params.fileKey);
+    });
   });
 });

@@ -3,6 +3,7 @@ import Layout from 'src/components/Layout';
 import ConfirmDownload from 'src/pages/ConfirmDownload';
 import DownloadFile from 'src/pages/DownloadFile';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
+import InvalidLink from 'src/pages/InvalidLink';
 import NotFound from 'src/pages/NotFound';
 import ShareLink from 'src/pages/ShareLink';
 import UploadFile from 'src/pages/UploadFile';
@@ -12,6 +13,7 @@ const routes = (
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<UploadFile />} />
       <Route path="/download" element={<DownloadFile />} />
+      <Route path="/invalid" element={<InvalidLink />} />
       <Route path="/share" element={<ShareLink />} />
       <Route path="/:fileKey" element={<ConfirmDownload />} />
       <Route path="*" element={<NotFound />} />

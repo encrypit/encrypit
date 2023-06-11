@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { digest } from 'pepto';
 import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { renderWithProviders } from 'test/helpers';
@@ -21,10 +22,18 @@ jest.mock('src/hooks', () => ({
 
 const mockedLazyUseDownloadFileQuery = jest.mocked(useLazyDownloadFileQuery);
 const mockedUseSelector = jest.mocked(useSelector);
+const mockDownloadFile = jest.fn();
 
-const fileKey = 'fileKey';
-const downloadFile = jest.fn();
-const lastPromiseInfo = { lastArg: '' };
+const file = {
+  key: 'key',
+  password: 'password',
+};
+const lastPromiseInfo = {
+  lastArg: {
+    key: '',
+    passwordSHA512: '',
+  },
+};
 
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation();
@@ -36,18 +45,13 @@ afterAll(() => {
 
 beforeEach(() => {
   jest.clearAllMocks();
-  mockedLazyUseDownloadFileQuery.mockReturnValue([
-    downloadFile,
-    {},
-    lastPromiseInfo,
-  ]);
-  mockedUseSelector.mockImplementation((selector) =>
-    selector({ file: { key: fileKey } } as RootState)
-  );
 });
 
 describe('no file key', () => {
   beforeEach(() => {
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([mockDownloadFile, {}, lastPromiseInfo]);
     mockedUseSelector
       .mockReset()
       .mockImplementation((selector) =>
@@ -62,17 +66,22 @@ describe('no file key', () => {
 
   it('does not download file', () => {
     renderWithProviders(<DownloadFile />);
-    expect(downloadFile).not.toBeCalled();
+    expect(mockDownloadFile).not.toBeCalled();
   });
 });
 
 describe('isLoading', () => {
   beforeEach(() => {
-    mockedLazyUseDownloadFileQuery.mockReturnValue([
-      downloadFile,
-      { isLoading: true },
-      lastPromiseInfo,
-    ]);
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([
+        mockDownloadFile,
+        { isLoading: true },
+        lastPromiseInfo,
+      ]);
+    mockedUseSelector.mockImplementation((selector) =>
+      selector({ file } as RootState)
+    );
   });
 
   it('renders heading', () => {
@@ -87,20 +96,28 @@ describe('isLoading', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
-  it('downloads file', () => {
+  it('downloads file', async () => {
     renderWithProviders(<DownloadFile />);
-    expect(downloadFile).toBeCalledTimes(1);
-    expect(downloadFile).toBeCalledWith(fileKey);
+    await waitFor(async () => {
+      expect(mockDownloadFile).toBeCalledWith({
+        key: file.key,
+        passwordSHA512: await digest('SHA-512', file.password),
+      });
+    });
   });
 });
 
 describe('isError', () => {
+  beforeEach(() => {
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([mockDownloadFile, { isError: true }, lastPromiseInfo]);
+    mockedUseSelector.mockImplementation((selector) =>
+      selector({ file } as RootState)
+    );
+  });
+
   it('renders heading', () => {
-    mockedLazyUseDownloadFileQuery.mockReturnValue([
-      downloadFile,
-      { isError: true },
-      lastPromiseInfo,
-    ]);
     renderWithProviders(<DownloadFile />);
     expect(
       screen.getByRole('heading', { level: 1, name: 'Download error' })
@@ -109,15 +126,24 @@ describe('isError', () => {
 });
 
 describe('isSuccess', () => {
-  const file = btoa('file');
-  const name = 'file.txt';
+  const data = {
+    file: btoa('file'),
+    customMetadata: {
+      name: 'file.txt',
+    },
+  };
 
   beforeEach(() => {
-    mockedLazyUseDownloadFileQuery.mockReturnValue([
-      downloadFile,
-      { isSuccess: true, data: { file, customMetadata: { name } } },
-      lastPromiseInfo,
-    ]);
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([
+        mockDownloadFile,
+        { isSuccess: true, data },
+        lastPromiseInfo,
+      ]);
+    mockedUseSelector.mockImplementation((selector) =>
+      selector({ file } as RootState)
+    );
   });
 
   it('renders heading', () => {
@@ -140,7 +166,7 @@ describe('isSuccess', () => {
     renderWithProviders(<DownloadFile />);
     expect(screen.getByRole('link', { name: 'Download file' })).toHaveAttribute(
       'href',
-      file
+      data.file
     );
   });
 
@@ -149,16 +175,20 @@ describe('isSuccess', () => {
     expect(screen.getByText('Upload file')).toHaveAttribute('to', '/');
   });
 
-  it('downloads file', () => {
+  it('downloads file', async () => {
     renderWithProviders(<DownloadFile />);
-    expect(downloadFile).toBeCalledTimes(1);
-    expect(downloadFile).toBeCalledWith(fileKey);
+    await waitFor(async () => {
+      expect(mockDownloadFile).toBeCalledWith({
+        key: file.key,
+        passwordSHA512: await digest('SHA-512', file.password),
+      });
+    });
   });
 
   it('deletes file on download', () => {
     renderWithProviders(<DownloadFile />);
     fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
     expect(mockDeleteFile).toBeCalledTimes(1);
-    expect(mockDeleteFile).toBeCalledWith(fileKey);
+    expect(mockDeleteFile).toBeCalledWith(file.key);
   });
 });

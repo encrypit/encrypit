@@ -4,7 +4,8 @@ import { fetchMock, mockFiles, wrapper } from 'test/helpers';
 
 import { fileApi } from './fileApi';
 
-const fileKey = 'fileKey';
+const key = 'fileKey';
+const passwordSHA512 = 'passwordSHA512';
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -18,7 +19,7 @@ describe('deleteFile', () => {
 
     await act(() => {
       const [deleteFile] = result.current;
-      deleteFile(fileKey);
+      deleteFile(key);
     });
 
     expect(fetchMock).toBeCalledTimes(1);
@@ -70,7 +71,7 @@ describe('downloadFile', () => {
 
   it('downloads file given key', async () => {
     await act(() => {
-      renderHook(() => fileApi.useDownloadFileQuery(fileKey), {
+      renderHook(() => fileApi.useDownloadFileQuery({ key, passwordSHA512 }), {
         wrapper,
       });
     });
@@ -90,7 +91,11 @@ describe('downloadFile', () => {
         },
         Symbol(Request internals): {
           "headers": Headers {
-            Symbol(map): {},
+            Symbol(map): {
+              "X-Password-SHA-512": [
+                "passwordSHA512",
+              ],
+            },
           },
           "method": "GET",
           "parsedURL": Url {

@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { digest } from 'pepto';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
@@ -15,7 +16,7 @@ import {
 import { generateFileName } from 'src/utils';
 
 export default function DownloadFile() {
-  const fileKey = useSelector((state) => state.file.key);
+  const file = useSelector((state) => state.file);
   const navigate = useNavigate();
   const [downloadUrl, setDownloadUrl] = useState('');
   const [downloadFile, downloadFileResult] = useLazyDownloadFileQuery();
@@ -23,12 +24,17 @@ export default function DownloadFile() {
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    if (fileKey) {
-      downloadFile(fileKey);
+    if (file.key && file.password) {
+      digest('SHA-512', file.password).then((passwordSHA512) => {
+        downloadFile({
+          key: file.key,
+          passwordSHA512,
+        });
+      });
     } else {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [file.key, file.password]);
 
   useEffect(() => {
     if (downloadFileResult.data) {
@@ -37,14 +43,14 @@ export default function DownloadFile() {
   }, [downloadFileResult]);
 
   useEffect(() => {
-    if (downloadUrl && fileKey) {
+    if (downloadUrl && file.key) {
       /* istanbul ignore next */
       linkRef.current?.click();
-      deleteFile(fileKey);
+      deleteFile(file.key);
     }
-  }, [downloadUrl, fileKey]);
+  }, [downloadUrl, file.key]);
 
-  if (!fileKey) {
+  if (!file.key) {
     return null;
   }
 

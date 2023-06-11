@@ -2,23 +2,27 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { type ComponentProps, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { FILE_PASSWORD_REGEX } from 'shared/constants';
 import { useDispatch } from 'src/hooks';
 import { actions } from 'src/store';
 
 export default function ConfirmDownload() {
   const dispatch = useDispatch();
+  const password = useLocation().hash.slice(1);
   const { fileKey } = useParams<{ fileKey: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!fileKey) {
       navigate('/', { replace: true });
+    } else if (!FILE_PASSWORD_REGEX.test(password)) {
+      navigate('/invalid', { replace: true });
     } else {
-      dispatch(actions.setFileKeyOrPassword({ key: fileKey }));
+      dispatch(actions.setFileKeyOrPassword({ key: fileKey, password }));
     }
-  }, [fileKey]);
+  }, [fileKey, password]);
 
   return (
     <>

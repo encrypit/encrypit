@@ -25,9 +25,15 @@ export const fileApi = createApi({
     /**
      * GET /api/files/[key]
      */
-    downloadFile: build.query<DownloadFileResponse, string>({
-      query: (fileKey: string) => ({
-        url: `/${fileKey}`,
+    downloadFile: build.query<
+      DownloadFileResponse,
+      { key: string; passwordSHA512: string }
+    >({
+      query: ({ key, passwordSHA512 }) => ({
+        url: `/${key}`,
+        headers: {
+          [HEADERS.PASSWORD_SHA512]: passwordSHA512,
+        },
         responseHandler: async (response) =>
           blobToBase64(await response.blob()),
       }),
