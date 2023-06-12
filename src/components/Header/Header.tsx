@@ -17,6 +17,7 @@ export default function Header() {
             <Link
               color="inherit"
               component={RouterLink}
+              replace
               to="/"
               underline="hover"
               variant="h6"

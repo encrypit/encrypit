@@ -5,24 +5,33 @@ import { type ComponentProps, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { FILE_PASSWORD_REGEX } from 'shared/constants';
-import { useDispatch } from 'src/hooks';
+import { useDispatch, useSelector } from 'src/hooks';
 import { actions } from 'src/store';
 
 export default function ConfirmDownload() {
   const dispatch = useDispatch();
-  const password = useLocation().hash.slice(1);
+  const file = useSelector((state) => state.file);
   const { fileKey } = useParams<{ fileKey: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const password = location.hash.slice(1);
 
   useEffect(() => {
     if (!fileKey) {
       navigate('/', { replace: true });
-    } else if (!FILE_PASSWORD_REGEX.test(password)) {
-      navigate('/invalid', { replace: true });
-    } else {
-      dispatch(actions.setFileKeyOrPassword({ key: fileKey, password }));
+      return;
     }
-  }, [fileKey, password]);
+
+    if (!file.password && !FILE_PASSWORD_REGEX.test(password)) {
+      navigate('/invalid', { replace: true });
+      return;
+    }
+
+    if (password) {
+      dispatch(actions.setFileKeyOrPassword({ key: fileKey, password }));
+      navigate(location.pathname, { replace: true });
+    }
+  }, []);
 
   return (
     <>
