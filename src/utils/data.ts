@@ -38,7 +38,13 @@ export async function blobToBase64(blob: Blob): Promise<string> {
  */
 export async function base64ToBlob(base64: string): Promise<Blob> {
   const response = await fetch(base64);
-  return response.blob();
+  let blob = await response.blob();
+  const mimeType = getMimeType(base64);
+  if (mimeType) {
+    // https://stackoverflow.com/a/50875615
+    blob = blob.slice(0, blob.size, mimeType);
+  }
+  return blob;
 }
 
 /**
@@ -57,4 +63,16 @@ export async function base64ToFile(
   const response = await fetch(base64);
   const blob = await response.blob();
   return new File([blob], filename, options);
+}
+
+const mimeRegex = /^data:(.+);base64,/;
+
+/**
+ * Gets MIME type from Base64.
+ *
+ * @param base64 - Base64.
+ * @returns - MIME type.
+ */
+function getMimeType(base64: string) {
+  return base64.match(mimeRegex)?.slice(1, 2).pop();
 }

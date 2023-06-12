@@ -1,6 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
+import { unzip } from 'src/utils';
 import { renderWithProviders } from 'test/helpers';
 
 import DownloadFile from './DownloadFile';
@@ -22,6 +23,13 @@ jest.mock('src/hooks', () => ({
 const mockedLazyUseDownloadFileQuery = jest.mocked(useLazyDownloadFileQuery);
 const mockedUseSelector = jest.mocked(useSelector);
 const mockDownloadFile = jest.fn();
+
+jest.mock('src/utils', () => ({
+  ...jest.requireActual('src/utils'),
+  unzip: jest.fn((blob) => blob),
+}));
+
+const mockedUnzip = jest.mocked(unzip);
 
 const file = {
   key: 'key',
@@ -146,13 +154,21 @@ describe('isError', () => {
 
 describe('isSuccess', () => {
   const data = {
-    file: btoa('file'),
+    file: 'data:text/plain;base64,dGV4dA==',
+    password: 'password',
     customMetadata: {
       name: 'file.txt',
     },
   };
 
   beforeEach(() => {
+    fetchMock.mockImplementationOnce(
+      (base64: unknown) =>
+        ({
+          blob: () => new Blob([atob((base64 as string).split(',')[1])]),
+        } as unknown as Promise<Response>)
+    );
+
     mockedLazyUseDownloadFileQuery
       .mockReset()
       .mockReturnValue([
@@ -160,6 +176,7 @@ describe('isSuccess', () => {
         { isSuccess: true, data },
         lastPromiseInfo,
       ]);
+
     mockedUseSelector.mockImplementation((selector) =>
       selector({ file } as RootState)
     );
@@ -181,17 +198,38 @@ describe('isSuccess', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders download link', () => {
+  it('unzips file', async () => {
     renderWithProviders(<DownloadFile />);
-    expect(screen.getByRole('link', { name: 'Download file' })).toHaveAttribute(
-      'href',
-      data.file
-    );
+    await waitFor(() => {
+      expect(mockedUnzip).toBeCalledTimes(1);
+      expect(mockedUnzip).toBeCalledWith(expect.anything(), data.password);
+      expect(mockedUnzip.mock.calls[0][0].constructor.name).toBe('Blob');
+    });
   });
 
-  it('renders home link', () => {
+  it('navigates to /invalid if unzip fails', async () => {
+    mockedUnzip.mockRejectedValueOnce(new Error());
     renderWithProviders(<DownloadFile />);
-    expect(screen.getByText('Upload file')).toHaveAttribute('to', '/');
+    await waitFor(() => {
+      expect(mockNavigate).toBeCalledTimes(1);
+      expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+    });
+  });
+
+  it('renders download link', async () => {
+    renderWithProviders(<DownloadFile />);
+    await waitFor(() => {
+      expect(
+        screen.getByRole('link', { name: 'Download file' })
+      ).toHaveAttribute('href', data.file);
+    });
+  });
+
+  it('renders home link', async () => {
+    renderWithProviders(<DownloadFile />);
+    await waitFor(() => {
+      expect(screen.getByText('Upload file')).toHaveAttribute('to', '/');
+    });
   });
 
   it('downloads file', async () => {
@@ -205,9 +243,11 @@ describe('isSuccess', () => {
     });
   });
 
-  it('deletes file on download', () => {
+  it('deletes file on download', async () => {
     renderWithProviders(<DownloadFile />);
-    fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
+    });
     expect(mockDeleteFile).toBeCalledTimes(1);
     expect(mockDeleteFile).toBeCalledWith(file.key);
   });

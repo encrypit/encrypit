@@ -26,9 +26,10 @@ export default function UploadFile() {
         base64ToFile(data, name, options)
       )
     );
-    const file = await createZipFile(convertedFiles);
 
     const password = generateFilePassword();
+    const file = await createZipFile(convertedFiles, password);
+
     const formData = await createFormData({
       file,
       password,
@@ -36,8 +37,8 @@ export default function UploadFile() {
 
     const response = uploadFile(formData);
     const key = await response.unwrap();
-    dispatch(actions.setFileKeyOrPassword({ key, password }));
 
+    dispatch(actions.setFileKeyOrPassword({ key, password }));
     navigate('/share', { replace: true });
   }, [files]);
 

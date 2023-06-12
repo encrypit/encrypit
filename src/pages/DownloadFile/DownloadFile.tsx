@@ -12,7 +12,13 @@ import {
   useLazyDownloadFileQuery,
   useSelector,
 } from 'src/hooks';
-import { generateFileName, hashPassword } from 'src/utils';
+import {
+  base64ToBlob,
+  blobToBase64,
+  generateFileName,
+  hashPassword,
+  unzip,
+} from 'src/utils';
 
 import DownloadFileError from './DownloadFileError';
 
@@ -39,7 +45,11 @@ export default function DownloadFile() {
 
   useEffect(() => {
     if (downloadFileResult.data) {
-      setDownloadUrl(downloadFileResult.data.file);
+      base64ToBlob(downloadFileResult.data.file)
+        .then((blob) => unzip(blob, file.password))
+        .then((blob) => blobToBase64(blob))
+        .then((base64) => setDownloadUrl(base64))
+        .catch(() => navigate('/invalid', { replace: true }));
     }
   }, [downloadFileResult]);
 
