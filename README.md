@@ -1,9 +1,24 @@
-# encrypit
+<div align="center">
+  <a href="https://encrypit.com/">
+    <img src="public/logo192.png" alt="Encrypit">
+  </a>
+  <p><strong>Create boards, columns, and items.</strong></p>
+  <p>
+    <a href="https://github.com/encrypit/encrypit/releases">
+      <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/encrypit/encrypit">
+    </a>
+    <a href="https://github.com/encrypit/encrypit/actions/workflows/build.yml">
+      <img src="https://github.com/encrypit/encrypit/actions/workflows/build.yml/badge.svg" alt="Encrypit build status badge">
+    </a>
+    <a href="https://codecov.io/gh/encrypit/encrypit"> 
+      <img src="https://codecov.io/gh/encrypit/encrypit/branch/master/graph/badge.svg?token=MV6HXPJZJO"> 
+    </a>
+  </p>
+</div>
 
-[![build](https://github.com/encrypit/encrypit/actions/workflows/build.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/build.yml)
-[![cypress](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml)
+## Try It
 
-Securely encrypt and decrypt files.
+Go to [encrypit.com](https://encrypit.com/) to securely encrypt and decrypt files.
 
 This project is built with:
 
