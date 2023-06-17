@@ -8,6 +8,8 @@ import NotFound from 'src/pages/NotFound';
 import ShareLink from 'src/pages/ShareLink';
 import UploadFile from 'src/pages/UploadFile';
 
+import { fileKeyLoader } from './loaders';
+
 const routes = (
   <Route path="/" element={<Layout />}>
     <Route errorElement={<ErrorBoundary />}>
@@ -15,7 +17,12 @@ const routes = (
       <Route path="/download" element={<DownloadFile />} />
       <Route path="/invalid" element={<InvalidLink />} />
       <Route path="/share" element={<ShareLink />} />
-      <Route path="/:fileKey" element={<ConfirmDownload />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route
+        path="/:fileKey"
+        element={<ConfirmDownload />}
+        loader={fileKeyLoader}
+      />
       <Route path="*" element={<NotFound />} />
     </Route>
   </Route>

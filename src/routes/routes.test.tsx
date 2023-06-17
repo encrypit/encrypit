@@ -26,7 +26,12 @@ it('matches snapshot', () => {
           path="/share"
         />
         <Route
+          element={<NotFoundLoader />}
+          path="/404"
+        />
+        <Route
           element={<ConfirmDownloadLoader />}
+          loader={[Function]}
           path="/:fileKey"
         />
         <Route
