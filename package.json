@@ -27,7 +27,7 @@
     "@mui/material": "^5.13.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.2.7",
-    "@types/react-dom": "^18.2.4",
+    "@types/react-dom": "^18.2.5",
     "@zip.js/zip.js": "^2.7.14",
     "nanoid": "^4.0.2",
     "pepto": "^1.0.0",
