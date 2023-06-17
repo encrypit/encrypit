@@ -24,11 +24,17 @@ export enum HEADERS {
 }
 
 export enum FILE {
+  // https://github.com/ai/nanoid#api
+  KEY_ALPHABET = 'A-Za-z0-9_-',
   KEY_LENGTH = 7,
   // https://stackoverflow.com/a/26119120
   PASSWORD_ALPHABET = '-abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ?/@_~!$&*+=',
   PASSWORD_LENGTH = 9,
 }
+
+export const FILE_KEY_REGEX = new RegExp(
+  `^[${FILE.KEY_ALPHABET}]{${FILE.KEY_LENGTH}}$`
+);
 
 export const FILE_PASSWORD_REGEX = new RegExp(
   `^[${FILE.PASSWORD_ALPHABET}]{${FILE.PASSWORD_LENGTH}}$`
