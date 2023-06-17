@@ -3,7 +3,7 @@
 [![build](https://github.com/encrypit/encrypit/actions/workflows/build.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/build.yml)
 [![cypress](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml/badge.svg)](https://github.com/encrypit/encrypit/actions/workflows/cypress.yml)
 
-Encrypit.
+Securely encrypt and decrypt files.
 
 This project is built with:
 
@@ -85,6 +85,10 @@ It correctly bundles in production mode and optimizes the build for the best per
 The build is minified and the filenames include the hashes.
 
 Your app is ready to be deployed!
+
+## Assets
+
+[Logo](https://excalidraw.com/#json=0kNWq9d1BePagMI-_WJow,4W5vCTYSSJFF_mJC9NHtzA)
 
 ## License
 
