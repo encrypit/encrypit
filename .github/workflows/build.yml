@@ -35,3 +35,6 @@ jobs:
 
       - name: Build app
         run: yarn build
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3
