@@ -38,7 +38,9 @@ export function getCustomMetadata(obj: R2ObjectBody) {
  * @returns - Response init.
  */
 export function getResponseInit(environment: Env['NODE_ENV']) {
-  const responseInit: ResponseInit = {};
+  const responseInit: ResponseInit = {
+    headers: {},
+  };
   if (environment === 'development') {
     responseInit.headers = {
       'Access-Control-Allow-Origin': '*',
