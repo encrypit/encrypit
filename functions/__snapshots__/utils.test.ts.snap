@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getResponseInit returns response object for environment "development" 1`] = `
+{
+  "headers": {
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "*",
+    "Access-Control-Allow-Origin": "*",
+  },
+}
+`;
+
+exports[`getResponseInit returns response object for environment "preview" 1`] = `
+{
+  "headers": {},
+}
+`;
+
+exports[`getResponseInit returns response object for environment "production" 1`] = `
+{
+  "headers": {},
+}
+`;
