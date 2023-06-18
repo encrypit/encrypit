@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
-import { useDispatch } from 'src/hooks';
+import { MAX_FILES } from 'shared/constants';
+import { useDispatch, useSelector } from 'src/hooks';
 import { actions } from 'src/store';
 import { blobToBase64 } from 'src/utils';
 
@@ -8,6 +9,7 @@ type OnDrop = Required<DropzoneOptions>['onDrop'];
 
 export function useOnDrop() {
   const dispatch = useDispatch();
+  const filesCount = useSelector((state) => state.file.files.length);
 
   const onDrop: OnDrop = useCallback(
     async (
@@ -17,7 +19,11 @@ export function useOnDrop() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       event: DropEvent
     ) => {
-      if (fileRejections.length || !acceptedFiles.length) {
+      if (
+        fileRejections.length ||
+        !acceptedFiles.length ||
+        filesCount >= MAX_FILES.DEFAULT
+      ) {
         return;
       }
 
@@ -34,7 +40,7 @@ export function useOnDrop() {
 
       dispatch(actions.addFiles(files));
     },
-    []
+    [filesCount]
   );
 
   return onDrop;

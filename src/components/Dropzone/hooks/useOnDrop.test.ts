@@ -1,4 +1,5 @@
-import { renderHook } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
+import { MAX_FILES } from 'shared/constants';
 import type { FileData } from 'src/types';
 import { mockFiles, store, wrapper } from 'test/helpers';
 
@@ -6,9 +7,11 @@ import { useOnDrop } from './useOnDrop';
 
 const event = new Event('drop');
 
-it('returns onDrop callback', () => {
+it('returns onDrop callback', async () => {
   const { result } = renderHook(() => useOnDrop(), { wrapper });
-  expect(result.current).toBeInstanceOf(Function);
+  await act(async () => {
+    expect(result.current).toBeInstanceOf(Function);
+  });
 });
 
 describe('success', () => {
@@ -27,7 +30,9 @@ describe('success', () => {
   it.each([1, 2])('sets %d files in store', async (count) => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
     const files = mockFiles(count);
-    await result.current(files, [], event);
+    await act(async () => {
+      await result.current(files, [], event);
+    });
     const file: FileData = JSON.parse(JSON.stringify(store.getState().file));
     file.files.forEach(
       (file: Partial<FileData['files'][0]>) => delete file['lastModified']
@@ -39,7 +44,9 @@ describe('success', () => {
 describe('error', () => {
   it('does not upload if there is no file', async () => {
     const { result } = renderHook(() => useOnDrop(), { wrapper });
-    await result.current([], [], event);
+    await act(async () => {
+      await result.current([], [], event);
+    });
     expect(store.getState().file).toMatchInlineSnapshot(`
       {
         "files": [],
@@ -56,7 +63,9 @@ describe('error', () => {
       errors: [{ code: 'too-many-files', message: 'Too many files' }],
       file,
     }));
-    await result.current(files, fileRejections, event);
+    await act(async () => {
+      await result.current(files, fileRejections, event);
+    });
     expect(store.getState().file).toMatchInlineSnapshot(`
       {
         "files": [],
@@ -64,5 +73,18 @@ describe('error', () => {
         "password": "",
       }
     `);
+  });
+
+  it('does not upload more than the max number of files', async () => {
+    const { result } = renderHook(() => useOnDrop(), { wrapper });
+    const files = mockFiles(MAX_FILES.DEFAULT);
+    await act(async () => {
+      await result.current(files, [], event);
+      expect(store.getState().file.files).toHaveLength(MAX_FILES.DEFAULT);
+    });
+    await act(async () => {
+      await result.current(files, [], event);
+      expect(store.getState().file.files).toHaveLength(MAX_FILES.DEFAULT);
+    });
   });
 });
