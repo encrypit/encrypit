@@ -24,7 +24,7 @@ export const focusedStyle = {
 } as const;
 
 export const acceptStyle = {
-  borderColor: grey[900],
+  borderColor: red[900],
 } as const;
 
 export const rejectStyle = {

@@ -40,7 +40,7 @@ exports[`renders style when isFocused=false, isDragAccept=true, isDragReject=fal
 {
   "alignItems": "center",
   "backgroundColor": "#fafafa",
-  "borderColor": "#212121",
+  "borderColor": "#b71c1c",
   "borderRadius": 2,
   "borderStyle": "dashed",
   "borderWidth": 2,
