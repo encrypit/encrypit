@@ -133,21 +133,25 @@ describe('with file key and password', () => {
     expect(mockDeleteFile).not.toBeCalled();
   });
 
-  it('deletes file', async () => {
-    mockDeleteFile.mockReturnValue({ unwrap: jest.fn() });
-    renderWithProviders(<ShareLink />);
-    await waitFor(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
-      fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
-    });
-    expect(mockDeleteFile).toBeCalledTimes(1);
-    expect(mockDeleteFile).toBeCalledWith(key);
-    expect(store.getState().file).toMatchInlineSnapshot(`
+  describe.each([200, 404])('when delete status is %d', (status) => {
+    it('closes modal and resets store', async () => {
+      const unwrap = jest.fn().mockRejectedValueOnce({ status });
+      mockDeleteFile.mockReturnValue({ unwrap });
+      renderWithProviders(<ShareLink />);
+      await waitFor(() => {
+        fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+      });
+      expect(mockDeleteFile).toBeCalledTimes(1);
+      expect(mockDeleteFile).toBeCalledWith(key);
+      expect(unwrap).toBeCalledTimes(1);
+      expect(store.getState().file).toMatchInlineSnapshot(`
       {
         "files": [],
         "key": "",
         "password": "",
       }
     `);
+    });
   });
 });
