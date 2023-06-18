@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/encrypit/encrypit/compare/v1.0.2...v1.0.3) (2023-06-18)
+
+
+### Bug Fixes
+
+* **pages:** disable the button when uploading in UploadFile ([9b9ade3](https://github.com/encrypit/encrypit/commit/9b9ade3e49ffe45edf0b268fe35e8478a28283ef))
+
 ## [1.0.2](https://github.com/encrypit/encrypit/compare/v1.0.1...v1.0.2) (2023-06-18)
 
 
