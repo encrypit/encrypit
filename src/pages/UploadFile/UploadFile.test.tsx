@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { useSelector } from 'src/hooks';
+import { useSelector, useUploadFileMutation } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { createZipFile } from 'src/utils';
 import { renderWithProviders, store } from 'test/helpers';
@@ -21,10 +21,11 @@ const mockUploadFile = jest.fn();
 jest.mock('src/hooks', () => ({
   ...jest.requireActual('src/hooks'),
   useSelector: jest.fn(),
-  useUploadFileMutation: jest.fn(() => [mockUploadFile]),
+  useUploadFileMutation: jest.fn(() => [mockUploadFile, {}]),
 }));
 
 const mockedUseSelector = jest.mocked(useSelector);
+const mockedUseUploadFileMutation = jest.mocked(useUploadFileMutation);
 
 jest.mock('src/utils', () => ({
   ...jest.requireActual('src/utils'),
@@ -52,6 +53,16 @@ it('renders Dropzone', () => {
 it('renders upload button', () => {
   renderWithProviders(<UploadFile />);
   expect(screen.getByRole('button', { name: 'Upload' })).toBeInTheDocument();
+});
+
+it('disables the upload button when loading', () => {
+  mockedUseUploadFileMutation.mockReturnValueOnce([
+    mockUploadFile,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    { isLoading: true } as any,
+  ]);
+  renderWithProviders(<UploadFile />);
+  expect(screen.getByRole('button', { name: 'Upload' })).toBeDisabled();
 });
 
 describe('without files', () => {

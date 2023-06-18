@@ -13,7 +13,7 @@ export default function UploadFile() {
   const dispatch = useDispatch();
   const files = useSelector((state) => state.file.files) || [];
   const navigate = useNavigate();
-  const [uploadFile] = useUploadFileMutation();
+  const [uploadFile, uploadFileResult] = useUploadFileMutation();
 
   const handleClick = useCallback(async () => {
     /* istanbul ignore next */
@@ -53,7 +53,7 @@ export default function UploadFile() {
       <Previews />
 
       <Button
-        disabled={!files.length}
+        disabled={!files.length || uploadFileResult.isLoading}
         onClick={handleClick}
         sx={{ marginTop: 2 }}
         variant="contained"
