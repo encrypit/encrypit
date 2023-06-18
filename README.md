@@ -2,7 +2,7 @@
   <a href="https://encrypit.com/">
     <img src="public/logo192.png" alt="Encrypit">
   </a>
-  <p><strong>Create boards, columns, and items.</strong></p>
+  <p><strong>Securely encrypt and decrypt files.</strong></p>
   <p>
     <a href="https://github.com/encrypit/encrypit/releases">
       <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/encrypit/encrypit">
