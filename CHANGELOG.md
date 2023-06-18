@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/encrypit/encrypit/compare/v1.0.3...v1.0.4) (2023-06-18)
+
+
+### Bug Fixes
+
+* **components:** make acceptStyle color the same as focusStyle in Dropzone ([131ab3c](https://github.com/encrypit/encrypit/commit/131ab3cd57df15c47557a326d0b08ab219ef0cfe))
+
 ## [1.0.3](https://github.com/encrypit/encrypit/compare/v1.0.2...v1.0.3) (2023-06-18)
 
 
