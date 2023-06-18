@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/encrypit/encrypit/compare/v1.0.5...v1.0.6) (2023-06-18)
+
+
+### Bug Fixes
+
+* **Dropzone:** don't allow more than 1 file to be added to useOnDrop ([04c3f5d](https://github.com/encrypit/encrypit/commit/04c3f5d4ca1f31a2143fe81d93dbb0adc1d35aea))
+
 ## [1.0.5](https://github.com/encrypit/encrypit/compare/v1.0.4...v1.0.5) (2023-06-18)
 
 
