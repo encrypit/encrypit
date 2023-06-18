@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/encrypit/encrypit/compare/v1.0.4...v1.0.5) (2023-06-18)
+
+
+### Bug Fixes
+
+* **config:** create `.env.production` so that version is picked up ([c971177](https://github.com/encrypit/encrypit/commit/c97117726266875216f31f2298c68646d209cda5))
+
 ## [1.0.4](https://github.com/encrypit/encrypit/compare/v1.0.3...v1.0.4) (2023-06-18)
 
 
