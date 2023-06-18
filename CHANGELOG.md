@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/encrypit/encrypit/compare/v1.0.0...v1.0.1) (2023-06-18)
+
+
+### Bug Fixes
+
+* **pages:** update copy for file not found in DownloadFileError ([290b0ac](https://github.com/encrypit/encrypit/commit/290b0acdb13b5ee707e51528267a4f3daf407264))
+
 ## 1.0.0 (2023-06-17)
 
 
