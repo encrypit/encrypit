@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/encrypit/encrypit/compare/v1.0.1...v1.0.2) (2023-06-18)
+
+
+### Bug Fixes
+
+* **pages:** navigate to home when delete status is 404 in ShareLink ([527bee8](https://github.com/encrypit/encrypit/commit/527bee8393b8117d402ee1abb0404f2b0306b210))
+
 ## [1.0.1](https://github.com/encrypit/encrypit/compare/v1.0.0...v1.0.1) (2023-06-18)
 
 
