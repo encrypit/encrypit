@@ -20,14 +20,27 @@ it('renders heading', () => {
   ).toBeInTheDocument();
 });
 
-it('renders paragraph', () => {
-  renderWithProviders(<DownloadFileError />);
-  expect(
-    screen.getByText('File failed to download. Please try again.')
-  ).toBeInTheDocument();
+describe('status 403', () => {
+  it('navigates to /invalid', () => {
+    renderWithProviders(<DownloadFileError status={403} />);
+    expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+  });
 });
 
-it('navigates to /invalid when status is 403', () => {
-  renderWithProviders(<DownloadFileError status={403} />);
-  expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+describe('status 404', () => {
+  it('renders paragraph', () => {
+    renderWithProviders(<DownloadFileError status={404} />);
+    expect(
+      screen.getByText('File has been deleted or does not exist.')
+    ).toBeInTheDocument();
+  });
+});
+
+describe.each([undefined, 400, 500])('status %p', (status) => {
+  it('renders paragraph', () => {
+    renderWithProviders(<DownloadFileError status={status} />);
+    expect(
+      screen.getByText('File failed to download. Please try again.')
+    ).toBeInTheDocument();
+  });
 });
