@@ -28,7 +28,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
-    "@zip.js/zip.js": "^2.7.16",
+    "@zip.js/zip.js": "^2.7.17",
     "nanoid": "^4.0.2",
     "pepto": "^1.0.2",
     "react": "^18.2.0",
