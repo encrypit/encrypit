@@ -1,9 +1,9 @@
+import { blobToBase64 } from 'file64';
 import { useCallback } from 'react';
 import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
 import { MAX_FILES } from 'shared/constants';
 import { useDispatch, useSelector } from 'src/hooks';
 import { actions } from 'src/store';
-import { blobToBase64 } from 'src/utils';
 
 type OnDrop = Required<DropzoneOptions>['onDrop'];
 

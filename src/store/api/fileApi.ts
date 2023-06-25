@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { blobToBase64 } from 'file64';
 import { HEADERS } from 'shared/constants';
 import { API_URL } from 'src/config';
 import type { DownloadFileResponse } from 'src/types';
-import { blobToBase64 } from 'src/utils';
 
 export const fileApi = createApi({
   reducerPath: 'fileApi',

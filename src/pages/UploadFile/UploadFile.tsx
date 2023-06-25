@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { base64ToFile } from 'file64';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generateFilePassword } from 'shared/id';
@@ -7,7 +8,7 @@ import Dropzone from 'src/components/Dropzone';
 import Previews from 'src/components/Previews';
 import { useDispatch, useSelector, useUploadFileMutation } from 'src/hooks';
 import { actions } from 'src/store';
-import { base64ToFile, createFormData, createZipFile } from 'src/utils';
+import { createFormData, createZipFile } from 'src/utils';
 
 export default function UploadFile() {
   const dispatch = useDispatch();
