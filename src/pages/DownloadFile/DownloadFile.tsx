@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { base64ToBlob, blobToBase64 } from 'file64';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
@@ -12,13 +13,7 @@ import {
   useLazyDownloadFileQuery,
   useSelector,
 } from 'src/hooks';
-import {
-  base64ToBlob,
-  blobToBase64,
-  generateFileName,
-  hashPassword,
-  unzip,
-} from 'src/utils';
+import { generateFileName, hashPassword, unzip } from 'src/utils';
 
 import DownloadFileError from './DownloadFileError';
 
