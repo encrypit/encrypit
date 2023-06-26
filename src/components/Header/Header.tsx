@@ -27,11 +27,12 @@ export default function Header() {
           </Box>
 
           <Link
-            aria-label="Open GitHub repository"
+            aria-label="GitHub"
             color="inherit"
             component={IconButton}
             href="https://github.com/encrypit/encrypit"
             target="_blank"
+            title="GitHub"
             rel="noopener noreferrer"
           >
             <GitHubIcon />

@@ -18,7 +18,7 @@ it('renders heading link', () => {
 
 it('renders GitHub link', () => {
   renderWithProviders(<Header />);
-  expect(screen.getByLabelText('Open GitHub repository')).toHaveAttribute(
+  expect(screen.getByLabelText('GitHub')).toHaveAttribute(
     'href',
     'https://github.com/encrypit/encrypit'
   );
