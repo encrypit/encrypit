@@ -20,9 +20,11 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          # https://github.com/cypress-io/github-action/issues/879#issuecomment-1519045733
-          start: yarn vite --host
-          wait-on: 'http://localhost:5173'
+          start: |
+            # https://github.com/cypress-io/github-action/issues/879#issuecomment-1519045733
+            yarn vite --host
+            yarn server
+          wait-on: 'http://localhost:5173, http://localhost:8788'
 
       - name: Record failed screenshots
         if: failure()
