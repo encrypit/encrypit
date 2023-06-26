@@ -94,7 +94,7 @@ export default function ShareLink() {
           onClose={closeDialog}
           onDelete={handleDeleteFile}
           open={isDialogOpen}
-          title="Are you sure you want to delete the file?"
+          title="Are you sure you want to delete this file?"
         />
       </Stack>
     </>

@@ -119,7 +119,7 @@ describe('with file key and password', () => {
     renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
     expect(
-      screen.getByText('Are you sure you want to delete the file?')
+      screen.getByText('Are you sure you want to delete this file?')
     ).toBeInTheDocument();
     expect(
       screen.getByText('This action cannot be undone.')
