@@ -50,7 +50,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.2",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@typescript-eslint/parser": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "cypress": "^12.15.0",
     "cypress-cucumber-steps": "^2.4.0",
