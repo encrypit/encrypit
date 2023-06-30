@@ -10,6 +10,7 @@ import {
 import routes from 'src/routes';
 import { store } from 'src/store';
 
+import Snackbar from '../Snackbar';
 import theme from './theme';
 
 const router = createBrowserRouter(createRoutesFromElements(routes));
@@ -21,6 +22,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <RouterProvider router={router} />
+          <Snackbar />
         </Provider>
       </ThemeProvider>
     </StrictMode>
