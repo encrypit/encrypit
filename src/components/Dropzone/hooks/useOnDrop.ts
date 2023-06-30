@@ -20,6 +20,10 @@ export function useOnDrop() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       event: DropEvent
     ) => {
+      if (!acceptedFiles.length) {
+        return;
+      }
+
       if (fileRejections.length) {
         snackbar({
           message: fileRejections[0].errors[0].message,
@@ -28,7 +32,11 @@ export function useOnDrop() {
         return;
       }
 
-      if (!acceptedFiles.length || filesCount >= MAX_FILES.DEFAULT) {
+      if (filesCount >= MAX_FILES.DEFAULT) {
+        snackbar({
+          message: 'Too many files',
+          open: true,
+        });
         return;
       }
 
