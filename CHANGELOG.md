@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.8](https://github.com/encrypit/encrypit/compare/v1.0.7...v1.0.8) (2023-06-30)
+
+
+### Bug Fixes
+
+* **Dropzone:** show file rejection message in useOnDrop ([3d8d34b](https://github.com/encrypit/encrypit/commit/3d8d34b154386cb129b0f1b261858e44f594cd13))
+* **Dropzone:** show snackbar error for "Too many files" in useOnDrop ([60bf968](https://github.com/encrypit/encrypit/commit/60bf968ab8cb2e7d0f6d4e2846e85b1d973e724a))
+
 ## [1.0.7](https://github.com/encrypit/encrypit/compare/v1.0.6...v1.0.7) (2023-06-30)
 
 
