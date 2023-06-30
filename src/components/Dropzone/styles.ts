@@ -15,7 +15,7 @@ export const baseStyle = {
   flex: 1,
   flexDirection: 'column',
   outline: 'none',
-  padding: '2rem',
+  padding: '5rem 1rem',
   transition: 'border .24s ease-in-out',
 } as const;
 
