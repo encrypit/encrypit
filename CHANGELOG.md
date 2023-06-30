@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/encrypit/encrypit/compare/v1.0.6...v1.0.7) (2023-06-30)
+
+
+### Bug Fixes
+
+* **Dropzone:** increase dropzone surface area ([e71660b](https://github.com/encrypit/encrypit/commit/e71660bf70d8b8d356fb3759dc3d5664aa6e2b0d))
+
 ## [1.0.6](https://github.com/encrypit/encrypit/compare/v1.0.5...v1.0.6) (2023-06-18)
 
 
