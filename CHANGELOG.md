@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/encrypit/encrypit/compare/v1.1.0...v1.1.1) (2023-07-02)
+
+
+### Bug Fixes
+
+* **Privacy:** correct heading level accessibility ([d3508dc](https://github.com/encrypit/encrypit/commit/d3508dc24d9e6677eaa26e1abcf9769a01c3a39b))
+
 ## [1.1.0](https://github.com/encrypit/encrypit/compare/v1.0.9...v1.1.0) (2023-07-02)
 
 
