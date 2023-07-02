@@ -6,11 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import { generateFilePassword } from 'shared/id';
 import Dropzone from 'src/components/Dropzone';
 import Previews from 'src/components/Previews';
-import { useDispatch, useSelector, useUploadFileMutation } from 'src/hooks';
+import { APP_NAME } from 'src/config';
+import {
+  useDispatch,
+  useSelector,
+  useSetDocumentTitle,
+  useUploadFileMutation,
+} from 'src/hooks';
 import { actions } from 'src/store';
 import { createFormData, createZipFile } from 'src/utils';
 
 export default function UploadFile() {
+  useSetDocumentTitle(APP_NAME);
   const dispatch = useDispatch();
   const files = useSelector((state) => state.file.files) || [];
   const navigate = useNavigate();

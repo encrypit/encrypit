@@ -8,7 +8,7 @@ export default function NotFound() {
 
   return (
     <>
-      <Typography component="h1" paragraph variant="h4">
+      <Typography component="h1" gutterBottom variant="h4">
         Not Found
       </Typography>
 
