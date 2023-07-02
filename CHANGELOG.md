@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/encrypit/encrypit/compare/v1.0.9...v1.1.0) (2023-07-02)
+
+
+### Features
+
+* **Header:** render link to privacy ([493e889](https://github.com/encrypit/encrypit/commit/493e88916d9405dc7d88609cb830bb04e362c66c))
+* **pages:** create Privacy ([08c100f](https://github.com/encrypit/encrypit/commit/08c100fb3289e196ea233acfaccf86c04f22b7d6))
+* **routes:** render Privacy on "/privacy" ([cec7a93](https://github.com/encrypit/encrypit/commit/cec7a935db4be46b0c8c872eebc8da7b330b354f))
+
 ## [1.0.9](https://github.com/encrypit/encrypit/compare/v1.0.8...v1.0.9) (2023-07-02)
 
 
