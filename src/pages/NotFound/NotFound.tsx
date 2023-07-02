@@ -13,7 +13,7 @@ export default function NotFound() {
       </Typography>
 
       <Typography paragraph>
-        Go{' '}
+        Return to{' '}
         <Link component={RouterLink} to="/">
           home
         </Link>
