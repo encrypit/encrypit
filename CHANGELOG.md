@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/encrypit/encrypit/compare/v1.0.8...v1.0.9) (2023-07-02)
+
+
+### Bug Fixes
+
+* **pages:** capitalize APP_NAME and set document title in home ([4e143a1](https://github.com/encrypit/encrypit/commit/4e143a1eb812d424d8af83ce339e089286958eee))
+
 ## [1.0.8](https://github.com/encrypit/encrypit/compare/v1.0.7...v1.0.8) (2023-06-30)
 
 
