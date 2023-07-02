@@ -14,6 +14,10 @@ it('matches snapshot', () => {
           index={true}
         />
         <Route
+          element={<NotFoundLoader />}
+          path="/404"
+        />
+        <Route
           element={<DownloadFileLoader />}
           path="/download"
         />
@@ -22,12 +26,12 @@ it('matches snapshot', () => {
           path="/invalid"
         />
         <Route
-          element={<ShareLinkLoader />}
-          path="/share"
+          element={<PrivacyLoader />}
+          path="/privacy"
         />
         <Route
-          element={<NotFoundLoader />}
-          path="/404"
+          element={<ShareLinkLoader />}
+          path="/share"
         />
         <Route
           element={<ConfirmDownloadLoader />}

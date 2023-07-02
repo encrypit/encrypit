@@ -5,4 +5,5 @@ Feature: Home
       And I see heading "New file"
       And I see button "Drag and drop your file"
       And I see text "1 file max and 5 MB limit"
+      And I see label "Privacy"
       And I see label "GitHub"

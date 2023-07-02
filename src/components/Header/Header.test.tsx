@@ -16,6 +16,11 @@ it('renders heading link', () => {
   );
 });
 
+it('renders privacy link', () => {
+  renderWithProviders(<Header />);
+  expect(screen.getByLabelText('Privacy')).toHaveAttribute('href', '/privacy');
+});
+
 it('renders GitHub link', () => {
   renderWithProviders(<Header />);
   expect(screen.getByLabelText('GitHub')).toHaveAttribute(
