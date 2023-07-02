@@ -6,3 +6,4 @@ Feature: 404
       And I see text "Go home"
     When I click on link "home"
     Then I see URL "/"
+      And I see document title "Encrypit"
