@@ -7,6 +7,7 @@ import InvalidLink from 'src/pages/InvalidLink';
 import NotFound from 'src/pages/NotFound';
 import Privacy from 'src/pages/Privacy';
 import ShareLink from 'src/pages/ShareLink';
+import Support from 'src/pages/Support';
 import UploadFile from 'src/pages/UploadFile';
 
 import { fileKeyLoader } from './loaders';
@@ -20,6 +21,7 @@ const routes = (
       <Route path="/invalid" element={<InvalidLink />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/share" element={<ShareLink />} />
+      <Route path="/support" element={<Support />} />
       <Route
         path="/:fileKey"
         element={<ConfirmDownload />}
