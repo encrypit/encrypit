@@ -17,7 +17,7 @@ it('renders base style by default', () => {
       "flex": 1,
       "flexDirection": "column",
       "outline": "none",
-      "padding": "5rem 1rem",
+      "padding": "6rem 1rem",
       "transition": "border .24s ease-in-out",
     }
   `);
