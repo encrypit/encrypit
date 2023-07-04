@@ -3,6 +3,7 @@ import Layout from 'src/components/Layout';
 import ConfirmDownload from 'src/pages/ConfirmDownload';
 import DownloadFile from 'src/pages/DownloadFile';
 import ErrorBoundary from 'src/pages/ErrorBoundary';
+import FAQ from 'src/pages/FAQ';
 import InvalidLink from 'src/pages/InvalidLink';
 import NotFound from 'src/pages/NotFound';
 import Privacy from 'src/pages/Privacy';
@@ -17,6 +18,7 @@ const routes = (
     <Route errorElement={<ErrorBoundary />}>
       <Route index element={<UploadFile />} />
       <Route path="/404" element={<NotFound />} />
+      <Route path="/faq" element={<FAQ />} />
       <Route path="/download" element={<DownloadFile />} />
       <Route path="/invalid" element={<InvalidLink />} />
       <Route path="/privacy" element={<Privacy />} />

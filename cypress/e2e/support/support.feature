@@ -11,7 +11,10 @@ Feature: Support
       And I see link "Ko-fi"
       And I see link "Liberapay"
       And I see link "Teespring"
-    When I click on link "Privacy Policy"
+    When I click on link "FAQ"
+    Then I see URL "/faq"
+    When I go back
+      And I click on link "Privacy Policy"
     Then I see URL "/privacy"
     When I click on label "Support"
     Then I see URL "/support"

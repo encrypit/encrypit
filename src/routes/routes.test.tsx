@@ -18,6 +18,10 @@ it('matches snapshot', () => {
           path="/404"
         />
         <Route
+          element={<FAQLoader />}
+          path="/faq"
+        />
+        <Route
           element={<DownloadFileLoader />}
           path="/download"
         />
