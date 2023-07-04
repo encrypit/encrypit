@@ -1,4 +1,5 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
+import HelpIcon from '@mui/icons-material/Help';
 import SecurityIcon from '@mui/icons-material/Security';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -26,6 +27,16 @@ export default function Header() {
               Encrypit
             </Link>
           </Box>
+
+          <IconButton
+            aria-label="Support"
+            color="inherit"
+            component={RouterLink}
+            title="Support"
+            to="/support"
+          >
+            <HelpIcon />
+          </IconButton>
 
           <IconButton
             aria-label="Privacy"
