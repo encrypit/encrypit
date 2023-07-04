@@ -22,9 +22,11 @@ Go to [encrypit.com](https://encrypit.com/) to securely encrypt and decrypt file
 
 This project is built with:
 
+- [Cloudflare Pages](https://pages.cloudflare.com/)
 - [MUI](https://mui.com/)
 - [Vite](https://vitejs.dev/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
+- [react-dropzone](https://react-dropzone.js.org/)
+- [zip.js](https://gildas-lormeau.github.io/zip.js/)
 
 ## Prerequisites
 
