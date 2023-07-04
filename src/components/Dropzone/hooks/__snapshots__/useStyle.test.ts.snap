@@ -13,7 +13,7 @@ exports[`renders style when isFocused=false, isDragAccept=false, isDragReject=fa
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "5rem 1rem",
+  "padding": "6rem 1rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -31,7 +31,7 @@ exports[`renders style when isFocused=false, isDragAccept=false, isDragReject=tr
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "5rem 1rem",
+  "padding": "6rem 1rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -49,7 +49,7 @@ exports[`renders style when isFocused=false, isDragAccept=true, isDragReject=fal
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "5rem 1rem",
+  "padding": "6rem 1rem",
   "transition": "border .24s ease-in-out",
 }
 `;
@@ -67,7 +67,7 @@ exports[`renders style when isFocused=true, isDragAccept=false, isDragReject=fal
   "flex": 1,
   "flexDirection": "column",
   "outline": "none",
-  "padding": "5rem 1rem",
+  "padding": "6rem 1rem",
   "transition": "border .24s ease-in-out",
 }
 `;
