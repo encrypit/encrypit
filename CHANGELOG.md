@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/encrypit/encrypit/compare/v1.2.0...v1.2.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* **components:** set Header and Layout Container max-width to md ([b9e8573](https://github.com/encrypit/encrypit/commit/b9e857360242bf0fd9a6c398b85c0e2462e61393))
+* **Dropzone:** increase padding from 5rem to 6rem ([cebeca5](https://github.com/encrypit/encrypit/commit/cebeca505a51eec6c2a7413a6ac06e2c848dc98a))
+
 ## [1.2.0](https://github.com/encrypit/encrypit/compare/v1.1.1...v1.2.0) (2023-07-04)
 
 
