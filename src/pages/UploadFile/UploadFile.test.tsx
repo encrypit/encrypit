@@ -41,7 +41,7 @@ beforeEach(() => {
 it('renders heading', () => {
   renderWithProviders(<UploadFile />);
   expect(
-    screen.getByRole('heading', { level: 1, name: 'New file' })
+    screen.getByRole('heading', { level: 1, name: 'Encrypt file' })
   ).toBeInTheDocument();
 });
 
