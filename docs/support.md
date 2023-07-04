@@ -10,7 +10,7 @@ In order for us to reproduce your issue, please include:
 - type of device or computer,
 - and the operating system name and version.
 
-Remember to check the [Privacy Policy](/privacy) first.
+Remember to check our [Privacy Policy](/privacy) first.
 
 Want to support the maintainer?
 

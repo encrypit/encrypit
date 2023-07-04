@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   resolve: {
     alias: {
+      docs: resolve(__dirname, 'docs'),
       shared: resolve(__dirname, 'shared'),
       src: resolve(__dirname, 'src'),
       test: resolve(__dirname, 'test'),
