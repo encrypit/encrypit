@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0](https://github.com/encrypit/encrypit/compare/v1.1.1...v1.2.0) (2023-07-04)
+
+
+### Features
+
+* **Header:** add support link ([ef0df77](https://github.com/encrypit/encrypit/commit/ef0df77d0923f05001d19f57c130050572ea9270))
+* **routes:** add route "/support" ([836de90](https://github.com/encrypit/encrypit/commit/836de9021baff987a87f05e9be0f2121ee4309f9))
+* **Support:** create Support page ([c829738](https://github.com/encrypit/encrypit/commit/c829738ff7952879ee0ad7fd50ea4f6f15357434))
+* **UploadFile:** change copy from "New file" to "Encrypt file" ([6d61d89](https://github.com/encrypit/encrypit/commit/6d61d89fdc6230148f4721f5b923081ada628b63))
+
 ## [1.1.1](https://github.com/encrypit/encrypit/compare/v1.1.0...v1.1.1) (2023-07-02)
 
 
