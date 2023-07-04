@@ -16,15 +16,11 @@ it('renders heading link', () => {
   );
 });
 
-it('renders privacy link', () => {
+it.each([
+  ['Support', '/support'],
+  ['Privacy', '/privacy'],
+  ['GitHub', 'https://github.com/encrypit/encrypit'],
+])('renders %p link', (label, link) => {
   renderWithProviders(<Header />);
-  expect(screen.getByLabelText('Privacy')).toHaveAttribute('href', '/privacy');
-});
-
-it('renders GitHub link', () => {
-  renderWithProviders(<Header />);
-  expect(screen.getByLabelText('GitHub')).toHaveAttribute(
-    'href',
-    'https://github.com/encrypit/encrypit'
-  );
+  expect(screen.getByLabelText(label)).toHaveAttribute('href', link);
 });

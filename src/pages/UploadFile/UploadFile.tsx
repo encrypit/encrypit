@@ -53,7 +53,7 @@ export default function UploadFile() {
   return (
     <section>
       <Typography component="h1" gutterBottom variant="h6">
-        New file
+        Encrypt file
       </Typography>
 
       <Dropzone />
