@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/encrypit/encrypit/compare/v1.2.1...v1.3.0) (2023-07-04)
+
+
+### Features
+
+* **docs:** add FAQ link to support ([9e13f49](https://github.com/encrypit/encrypit/commit/9e13f49b6df4d65e205a082c681e074a0a2a416b))
+* **docs:** create faq.md ([448ac57](https://github.com/encrypit/encrypit/commit/448ac57df8265134ff6d3873f9aa381ac83e061a))
+* **pages:** create FAQ ([efed916](https://github.com/encrypit/encrypit/commit/efed916a96908e06b6093a72320c0bc9cde6dff5))
+* **routes:** add "/faq" ([0bece48](https://github.com/encrypit/encrypit/commit/0bece48bb6a9331e237c2a1f340d1fdc4c8f9a89))
+
 ## [1.2.1](https://github.com/encrypit/encrypit/compare/v1.2.0...v1.2.1) (2023-07-04)
 
 
