@@ -2256,10 +2256,10 @@
   dependencies:
     "@swc/core" "^1.3.61"
 
-"@zip.js/zip.js@^2.7.18":
-  version "2.7.18"
-  resolved "https://registry.yarnpkg.com/@zip.js/zip.js/-/zip.js-2.7.18.tgz#85a396a61e7cfc2a32623ef02c63dfda563a4a53"
-  integrity sha512-N/sNJABwvt39G5WNlwkrLwQGAYks4oll6b3eEZkUipw2+7w2UzSL4ykb+86mBA7gnd8KwJ+76Jaew19NcpS/ng==
+"@zip.js/zip.js@^2.7.20":
+  version "2.7.20"
+  resolved "https://registry.yarnpkg.com/@zip.js/zip.js/-/zip.js-2.7.20.tgz#82f72ccd3289237c9c07b96f5fd7cf3ef760d7bc"
+  integrity sha512-rh5cby/bBOYC+hcK9qElDzbiIDeL3nhHPUTIE6/FQZR8mhY7azpthPdYbSNMOYBfv0AM188RNJ2yjtXsUfbAuQ==
 
 JSONStream@^1.0.4:
   version "1.3.5"
