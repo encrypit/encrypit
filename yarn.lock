@@ -4065,10 +4065,10 @@ file-uri-to-path@1.0.0:
   resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
   integrity sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
 
-file64@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/file64/-/file64-1.0.1.tgz#8c3987c51862167ec8fbd1cb2b2bdaf8609d21ab"
-  integrity sha512-DiGS9O5g3ePvUQ46okrfOyi/C0W4pKK9d2laPchSdF8gsEC8wscB4agtlHN/ZvrS86k3JMoG3cWsol51lXaI9w==
+file64@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/file64/-/file64-1.0.2.tgz#d3dde9bab142ccf0049e0bd407a2576e94894825"
+  integrity sha512-cDQefGBdb8OO7Pb2nXiRcZlVjwgzoG0uuJ/H2fxNdz3vbOZctp0iPJoHDQ4VZrirqGYc9n/p9+ZqptLZrcSGRA==
 
 fill-range@^7.0.1:
   version "7.0.1"
