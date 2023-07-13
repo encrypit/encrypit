@@ -26,7 +26,7 @@ export default function ShareLink() {
 
   const copyLink = useCallback(
     () => navigator.clipboard.writeText(link),
-    [link]
+    [link],
   );
 
   const openDialog = useCallback(() => setIsDialogOpen(true), []);

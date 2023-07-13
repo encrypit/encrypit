@@ -28,7 +28,7 @@ it('closes snackbar when close button is clicked', async () => {
 
 it('auto hides snackbar', async () => {
   store.dispatch(
-    actions.setSnackbar({ autoHideDuration: 0, message, open: true })
+    actions.setSnackbar({ autoHideDuration: 0, message, open: true }),
   );
   renderWithProviders(<Snackbar />);
   expect(screen.getByText(message)).toBeInTheDocument();

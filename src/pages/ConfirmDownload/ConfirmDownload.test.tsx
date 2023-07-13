@@ -35,7 +35,7 @@ afterAll(() => {
 beforeEach(() => {
   jest.clearAllMocks();
   mockedUseSelector.mockImplementationOnce((callback) =>
-    callback({ file: {} } as unknown as RootState)
+    callback({ file: {} } as unknown as RootState),
   );
 });
 
@@ -66,7 +66,7 @@ describe('when params has fileKey but location hash does not have password', () 
     mockedUseSelector
       .mockReset()
       .mockImplementationOnce((callback) =>
-        callback({ file: {} } as unknown as RootState)
+        callback({ file: {} } as unknown as RootState),
       );
   });
 
@@ -91,14 +91,14 @@ describe('when params has fileKey and locaton hash has password', () => {
   it('renders heading', () => {
     renderWithProviders(<ConfirmDownload />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Download and delete?' })
+      screen.getByRole('heading', { level: 1, name: 'Download and delete?' }),
     ).toBeInTheDocument();
   });
 
   it('renders warning', () => {
     renderWithProviders(<ConfirmDownload />);
     expect(
-      screen.getByText(/You're about to download and delete the file with key/)
+      screen.getByText(/You're about to download and delete the file with key/),
     ).toBeInTheDocument();
   });
 
@@ -106,7 +106,7 @@ describe('when params has fileKey and locaton hash has password', () => {
     renderWithProviders(<ConfirmDownload />);
     expect(screen.getByText('Yes, download the file')).toHaveAttribute(
       'to',
-      '/download'
+      '/download',
     );
   });
 

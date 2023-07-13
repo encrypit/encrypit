@@ -62,7 +62,7 @@ describe('no file key', () => {
     mockedUseSelector
       .mockReset()
       .mockImplementation((selector) =>
-        selector({ file: { key: '' } } as RootState)
+        selector({ file: { key: '' } } as RootState),
       );
   });
 
@@ -87,14 +87,14 @@ describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
       lastPromiseInfo,
     ]);
     mockedUseSelector.mockImplementation((selector) =>
-      selector({ file } as RootState)
+      selector({ file } as RootState),
     );
   });
 
   it('renders heading', () => {
     renderWithProviders(<DownloadFile />);
     expect(
-      screen.getByRole('heading', { level: 1, name: /Downloading/ })
+      screen.getByRole('heading', { level: 1, name: /Downloading/ }),
     ).toBeInTheDocument();
   });
 
@@ -121,21 +121,21 @@ describe('isError', () => {
       .mockReset()
       .mockReturnValue([mockDownloadFile, { isError: true }, lastPromiseInfo]);
     mockedUseSelector.mockImplementation((selector) =>
-      selector({ file } as RootState)
+      selector({ file } as RootState),
     );
   });
 
   it('renders heading', () => {
     renderWithProviders(<DownloadFile />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Download error' })
+      screen.getByRole('heading', { level: 1, name: 'Download error' }),
     ).toBeInTheDocument();
   });
 
   it('renders heading', () => {
     renderWithProviders(<DownloadFile />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Download error' })
+      screen.getByRole('heading', { level: 1, name: 'Download error' }),
     ).toBeInTheDocument();
   });
 
@@ -166,7 +166,7 @@ describe('isSuccess', () => {
       (base64: unknown) =>
         ({
           blob: () => new Blob([atob((base64 as string).split(',')[1])]),
-        } as unknown as Promise<Response>)
+        }) as unknown as Promise<Response>,
     );
 
     mockedLazyUseDownloadFileQuery
@@ -178,14 +178,14 @@ describe('isSuccess', () => {
       ]);
 
     mockedUseSelector.mockImplementation((selector) =>
-      selector({ file } as RootState)
+      selector({ file } as RootState),
     );
   });
 
   it('renders heading', () => {
     renderWithProviders(<DownloadFile />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Download success!' })
+      screen.getByRole('heading', { level: 1, name: 'Download success!' }),
     ).toBeInTheDocument();
   });
 
@@ -193,8 +193,8 @@ describe('isSuccess', () => {
     renderWithProviders(<DownloadFile />);
     expect(
       screen.getByText(
-        'File has been deleted from the server. Please close this page after the download has finished.'
-      )
+        'File has been deleted from the server. Please close this page after the download has finished.',
+      ),
     ).toBeInTheDocument();
   });
 
@@ -220,7 +220,7 @@ describe('isSuccess', () => {
     renderWithProviders(<DownloadFile />);
     await waitFor(() => {
       expect(
-        screen.getByRole('link', { name: 'Download file' })
+        screen.getByRole('link', { name: 'Download file' }),
       ).toHaveAttribute('href', data.file);
     });
   });

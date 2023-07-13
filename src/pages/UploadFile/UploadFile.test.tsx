@@ -41,7 +41,7 @@ beforeEach(() => {
 it('renders heading', () => {
   renderWithProviders(<UploadFile />);
   expect(
-    screen.getByRole('heading', { level: 1, name: 'Encrypt file' })
+    screen.getByRole('heading', { level: 1, name: 'Encrypt file' }),
   ).toBeInTheDocument();
 });
 
@@ -71,7 +71,7 @@ describe('without files', () => {
       file: {},
     };
     mockedUseSelector.mockImplementationOnce((callback) =>
-      callback(state as unknown as RootState)
+      callback(state as unknown as RootState),
     );
   });
 
@@ -103,7 +103,7 @@ describe('with files', () => {
     mockedUseSelector
       .mockReset()
       .mockImplementation((callback) =>
-        callback(state as unknown as RootState)
+        callback(state as unknown as RootState),
       );
     mockUploadFile.mockReturnValueOnce({
       unwrap: jest.fn().mockResolvedValueOnce(key),

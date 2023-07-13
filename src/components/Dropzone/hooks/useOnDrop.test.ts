@@ -37,7 +37,7 @@ describe('success', () => {
     });
     const file: FileData = JSON.parse(JSON.stringify(store.getState().file));
     file.files.forEach(
-      (file: Partial<FileData['files'][0]>) => delete file['lastModified']
+      (file: Partial<FileData['files'][0]>) => delete file['lastModified'],
     );
     expect(file).toMatchSnapshot();
   });

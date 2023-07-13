@@ -89,7 +89,7 @@ export const onRequestOptions: PagesFunction<Env, Params> = async (context) => {
  */
 function hasExpired(
   uploaded: Date,
-  expirationDays = EXPIRATION.DAYS_7
+  expirationDays = EXPIRATION.DAYS_7,
 ): boolean {
   const expiration = new Date();
   expiration.setDate(expiration.getDate() + expirationDays);

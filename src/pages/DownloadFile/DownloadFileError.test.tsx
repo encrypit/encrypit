@@ -16,7 +16,7 @@ beforeEach(() => {
 it('renders heading', () => {
   renderWithProviders(<DownloadFileError />);
   expect(
-    screen.getByRole('heading', { level: 1, name: 'Download error' })
+    screen.getByRole('heading', { level: 1, name: 'Download error' }),
   ).toBeInTheDocument();
 });
 
@@ -31,7 +31,7 @@ describe('status 404', () => {
   it('renders paragraph', () => {
     renderWithProviders(<DownloadFileError status={404} />);
     expect(
-      screen.getByText('File has been deleted or does not exist.')
+      screen.getByText('File has been deleted or does not exist.'),
     ).toBeInTheDocument();
   });
 });
@@ -40,7 +40,7 @@ describe.each([undefined, 400, 500])('status %p', (status) => {
   it('renders paragraph', () => {
     renderWithProviders(<DownloadFileError status={status} />);
     expect(
-      screen.getByText('File failed to download. Please try again.')
+      screen.getByText('File failed to download. Please try again.'),
     ).toBeInTheDocument();
   });
 });

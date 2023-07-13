@@ -12,7 +12,7 @@ import type { Context, Env } from './types';
  */
 export function getBucket(
   context: Context,
-  expirationDays = EXPIRATION.DAYS_7
+  expirationDays = EXPIRATION.DAYS_7,
 ): R2Bucket {
   switch (expirationDays) {
     case EXPIRATION.DAYS_7:

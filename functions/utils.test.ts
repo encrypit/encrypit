@@ -7,6 +7,6 @@ describe('getResponseInit', () => {
     'returns response object for environment %p',
     (environment) => {
       expect(getResponseInit(environment)).toMatchSnapshot();
-    }
+    },
   );
 });

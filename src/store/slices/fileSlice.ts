@@ -25,7 +25,7 @@ export const fileSlice = createSlice({
 
     setFileKeyOrPassword: (
       state,
-      action: PayloadAction<{ key?: string; password?: string }>
+      action: PayloadAction<{ key?: string; password?: string }>,
     ) => {
       const { key, password } = action.payload;
       if (key) {

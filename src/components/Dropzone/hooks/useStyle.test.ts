@@ -33,5 +33,5 @@ it.each([
   (props) => {
     const { result } = renderHook(() => useStyle(props));
     expect(result.current).toMatchSnapshot();
-  }
+  },
 );

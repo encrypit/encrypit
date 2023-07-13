@@ -20,7 +20,7 @@ describe('without files', () => {
       file: {},
     };
     mockedUseSelector.mockImplementationOnce((callback) =>
-      callback(state as unknown as RootState)
+      callback(state as unknown as RootState),
     );
   });
 
@@ -47,7 +47,7 @@ describe('with files', () => {
       },
     };
     mockedUseSelector.mockImplementationOnce((callback) =>
-      callback(state as unknown as RootState)
+      callback(state as unknown as RootState),
     );
   });
 

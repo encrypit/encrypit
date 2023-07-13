@@ -31,8 +31,8 @@ export default function UploadFile() {
 
     const convertedFiles = await Promise.all(
       files.map(({ data, name, ...options }) =>
-        base64ToFile(data, name, options)
-      )
+        base64ToFile(data, name, options),
+      ),
     );
 
     const password = generateFilePassword();

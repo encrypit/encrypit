@@ -74,7 +74,7 @@ describe('downloadFile', () => {
       await act(() => {
         renderHook(
           () => fileApi.useDownloadFileQuery({ key, passwordSHA512 }),
-          { wrapper }
+          { wrapper },
         );
       });
       expect(fetchMock).toBeCalledTimes(1);
@@ -131,7 +131,7 @@ describe('downloadFile', () => {
       await act(() => {
         const { result } = renderHook(
           () => fileApi.useDownloadFileQuery({ key, passwordSHA512 }),
-          { wrapper }
+          { wrapper },
         );
         expect(result.current).toBe(null);
       });

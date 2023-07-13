@@ -14,6 +14,6 @@ export function useStyle({
       ...(isDragAccept && acceptStyle),
       ...(isDragReject && rejectStyle),
     }),
-    [isFocused, isDragAccept, isDragReject]
+    [isFocused, isDragAccept, isDragReject],
   );
 }

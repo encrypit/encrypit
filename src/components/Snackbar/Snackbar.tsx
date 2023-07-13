@@ -12,7 +12,7 @@ export default function GlobalSnackbar() {
   const handleClose = useCallback(
     (event: Event | SyntheticEvent, reason?: string) =>
       reason !== 'clickaway' && dispatch(actions.resetSnackbar()),
-    [dispatch, actions]
+    [dispatch, actions],
   );
 
   const action = (

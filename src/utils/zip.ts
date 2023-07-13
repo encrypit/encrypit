@@ -22,7 +22,7 @@ async function zip(files: File[], password?: string): Promise<Blob> {
   });
 
   await Promise.all(
-    files.map((file) => zipWriter.add(file.name, new BlobReader(file)))
+    files.map((file) => zipWriter.add(file.name, new BlobReader(file))),
   );
 
   return zipWriter.close();
@@ -37,7 +37,7 @@ async function zip(files: File[], password?: string): Promise<Blob> {
  */
 export async function createZipFile(
   files: File[],
-  password: string
+  password: string,
 ): Promise<Blob> {
   const blob = await zip(files);
   const file = new File([blob], 'Archive.zip', { type: MIME.ZIP });
@@ -74,8 +74,8 @@ export async function unzip(file: Blob, password: string): Promise<Blob> {
 async function stretchPassword(password: string): Promise<string> {
   const hashes = await Promise.all(
     (['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'] as const).map((algorithm) =>
-      digest(algorithm, password)
-    )
+      digest(algorithm, password),
+    ),
   );
 
   return [password, btoa(password)].concat(hashes).join(':');

@@ -17,7 +17,7 @@ it.each(['1234567', 'abcdefg', 'ABCDEFG', 'Abc456-', '0bc_789'])(
   (fileKey) => {
     fileKeyLoader({ params: { fileKey } } as unknown as LoaderFunctionArgs);
     expect(mockedRedirect).not.toBeCalled();
-  }
+  },
 );
 
 it.each(['123456', '12345678', '123456#'])(
@@ -26,5 +26,5 @@ it.each(['123456', '12345678', '123456#'])(
     fileKeyLoader({ params: { fileKey } } as unknown as LoaderFunctionArgs);
     expect(mockedRedirect).toBeCalledTimes(1);
     expect(mockedRedirect).toBeCalledWith('/404');
-  }
+  },
 );

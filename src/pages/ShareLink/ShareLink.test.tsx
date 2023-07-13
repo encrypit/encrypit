@@ -45,7 +45,7 @@ describe('without file key', () => {
     mockedUseSelector.mockImplementation((selector) =>
       selector({
         file: {},
-      } as RootState)
+      } as RootState),
     );
   });
 
@@ -72,14 +72,14 @@ describe('with file key and password', () => {
           key,
           password,
         },
-      } as RootState)
+      } as RootState),
     );
   });
 
   it('renders heading', () => {
     renderWithProviders(<ShareLink />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'File link ready' })
+      screen.getByRole('heading', { level: 1, name: 'File link ready' }),
     ).toBeInTheDocument();
   });
 
@@ -96,7 +96,7 @@ describe('with file key and password', () => {
   it('renders warning', () => {
     renderWithProviders(<ShareLink />);
     expect(
-      screen.getByText(/File will be deleted after download/)
+      screen.getByText(/File will be deleted after download/),
     ).toBeInTheDocument();
   });
 
@@ -111,7 +111,7 @@ describe('with file key and password', () => {
     renderWithProviders(<ShareLink />);
     expect(screen.getByRole('link', { name: 'Email link' })).toHaveAttribute(
       'href',
-      `mailto:?body=${link}`
+      `mailto:?body=${link}`,
     );
   });
 
@@ -119,10 +119,10 @@ describe('with file key and password', () => {
     renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
     expect(
-      screen.getByText('Are you sure you want to delete this file?')
+      screen.getByText('Are you sure you want to delete this file?'),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('This action cannot be undone.')
+      screen.getByText('This action cannot be undone.'),
     ).toBeInTheDocument();
   });
 

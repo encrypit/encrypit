@@ -12,7 +12,7 @@ it('renders heading link', () => {
   renderWithProviders(<Header />);
   expect(screen.getByRole('link', { name: 'Encrypit' })).toHaveAttribute(
     'href',
-    '/'
+    '/',
   );
 });
 

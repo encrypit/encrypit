@@ -57,7 +57,7 @@ describe('setFileKeyOrPassword', () => {
       key: 'fileKey',
     };
     expect(
-      reducer(initialState, actions.setFileKeyOrPassword(payload))
+      reducer(initialState, actions.setFileKeyOrPassword(payload)),
     ).toEqual({
       ...initialState,
       ...payload,
@@ -69,7 +69,7 @@ describe('setFileKeyOrPassword', () => {
       password: 'filePassword',
     };
     expect(
-      reducer(initialState, actions.setFileKeyOrPassword(payload))
+      reducer(initialState, actions.setFileKeyOrPassword(payload)),
     ).toEqual({
       ...initialState,
       ...payload,
@@ -82,7 +82,7 @@ describe('setFileKeyOrPassword', () => {
       password: 'filePassword',
     };
     expect(
-      reducer(initialState, actions.setFileKeyOrPassword(payload))
+      reducer(initialState, actions.setFileKeyOrPassword(payload)),
     ).toEqual({
       ...initialState,
       ...payload,

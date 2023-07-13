@@ -8,7 +8,7 @@ const mockedZip = jest.mocked(zip);
 
 beforeAll(() => {
   (['BlobReader', 'BlobWriter', 'ZipReader', 'ZipWriter'] as const).forEach(
-    (method) => jest.spyOn(zip, method)
+    (method) => jest.spyOn(zip, method),
   );
 });
 

@@ -18,7 +18,7 @@ export function useOnDrop() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       fileRejections: FileRejection[],
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      event: DropEvent
+      event: DropEvent,
     ) => {
       if (!acceptedFiles.length) {
         return;
@@ -48,12 +48,12 @@ export function useOnDrop() {
           type: file.type,
           data: await blobToBase64(file),
           id: crypto.randomUUID(),
-        }))
+        })),
       );
 
       dispatch(actions.addFiles(files));
     },
-    [filesCount]
+    [filesCount],
   );
 
   return onDrop;

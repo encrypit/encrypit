@@ -41,7 +41,7 @@ export const fileApi = createApi({
       transformResponse: /* istanbul ignore next */ (base64: string, meta) => ({
         file: base64,
         customMetadata: JSON.parse(
-          meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!
+          meta!.response!.headers.get(HEADERS.CUSTOM_METADATA)!,
         ) as DownloadFileResponse['customMetadata'],
       }),
 

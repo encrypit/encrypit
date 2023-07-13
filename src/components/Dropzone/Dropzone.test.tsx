@@ -15,7 +15,7 @@ jest.mock('src/utils', () => ({
 it('renders Dropzone', () => {
   renderWithProviders(<Dropzone />);
   expect(
-    screen.getByRole('button', { name: 'Drag and drop your file' })
+    screen.getByRole('button', { name: 'Drag and drop your file' }),
   ).toBeInTheDocument();
   expect(screen.getByText('1 file max and 5 MB limit')).toBeInTheDocument();
 });
@@ -29,7 +29,7 @@ it.each(['click', 'focus', 'blur'] as const)(
       fireEvent[eventName](rootElement);
     });
     expect(screen.getByText('Drag and drop your file')).toBeInTheDocument();
-  }
+  },
 );
 
 it('drags file to Dropzone', async () => {
@@ -39,7 +39,7 @@ it('drags file to Dropzone', async () => {
     fireEvent.dragEnter(rootElement, mockData());
   });
   expect(
-    screen.getByRole('button', { name: 'Drop your file' })
+    screen.getByRole('button', { name: 'Drop your file' }),
   ).toBeInTheDocument();
 });
 
