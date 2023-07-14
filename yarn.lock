@@ -6332,10 +6332,10 @@ pend@~1.2.0:
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
 
-pepto@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/pepto/-/pepto-1.0.2.tgz#7de87aee2584c4ad1b42470e9137b37c16b21d7d"
-  integrity sha512-o6SLwdy7ggDpc2Eq2Ps2iffru1V7LHFgTYbjaaABil3Teqtr1vXRu2+yVdb7t0qF4nrgBh9m9AN65JhQzhbgfg==
+pepto@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pepto/-/pepto-1.0.3.tgz#ac71a340c195904c6db3160014aaf52c6265af38"
+  integrity sha512-X74Kai4eoF3zidYY37BFYfQolTxuaAaFAOJvqNcWFML/qf6wiZhJUDkxGyAVg8EMOEpNesVMQgSTFVCa4qIECg==
 
 performance-now@^2.1.0:
   version "2.1.0"
