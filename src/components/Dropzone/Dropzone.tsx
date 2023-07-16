@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 import { useDropzone } from 'react-dropzone';
 import { MAX_FILES, MAX_SIZE, ONE_MEGABYTE_IN_BYTES } from 'shared/constants';
 
-import { useOnDrop, useStyle } from './hooks';
+import { useOnDrop, useOnDropRejected, useStyle } from './hooks';
 
 export default function Dropzone() {
   const onDrop = useOnDrop();
+  const onDropRejected = useOnDropRejected();
 
   const {
     getInputProps,
@@ -20,7 +21,9 @@ export default function Dropzone() {
   } = useDropzone({
     maxFiles: MAX_FILES.DEFAULT,
     maxSize: MAX_SIZE.DEFAULT,
+    multiple: false,
     onDrop,
+    onDropRejected,
   });
 
   const { style, ...rootProps } = getRootProps({
