@@ -1,6 +1,6 @@
 import { blobToBase64 } from 'file64';
 import { useCallback } from 'react';
-import type { DropEvent, DropzoneOptions, FileRejection } from 'react-dropzone';
+import type { DropzoneOptions, FileRejection } from 'react-dropzone';
 import { MAX_FILES } from 'shared/constants';
 import { useDispatch, useSelector, useSnackbar } from 'src/hooks';
 import { actions } from 'src/store';
@@ -13,13 +13,7 @@ export function useOnDrop() {
   const snackbar = useSnackbar();
 
   const onDrop: OnDrop = useCallback(
-    async (
-      acceptedFiles: File[],
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      fileRejections: FileRejection[],
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      event: DropEvent,
-    ) => {
+    async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       if (!acceptedFiles.length) {
         return;
       }
