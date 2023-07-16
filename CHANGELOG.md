@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/encrypit/encrypit/compare/v1.3.2...v1.4.0) (2023-07-16)
+
+
+### Features
+
+* **Previews:** allow file to be deleted ([6e531c2](https://github.com/encrypit/encrypit/commit/6e531c2dc1926550d10680b3fc7d9ef75590584e))
+
 ## [1.3.2](https://github.com/encrypit/encrypit/compare/v1.3.1...v1.3.2) (2023-07-16)
 
 
