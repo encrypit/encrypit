@@ -1,7 +1,7 @@
-import { LENGTH_REQUIRED } from 'costatus';
+import { LENGTH_REQUIRED, PAYLOAD_TOO_LARGE } from 'costatus';
 import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
-import { FORM_DATA } from 'shared/constants';
+import { FORM_DATA, MAX_SIZE } from 'shared/constants';
 import { generateFileKey } from 'shared/id';
 import type { CustomMetadata } from 'shared/types';
 
@@ -20,6 +20,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   if (!file.size) {
     init.status = LENGTH_REQUIRED;
+    return new Response(body, init);
+  }
+
+  if (file.size > MAX_SIZE.DEFAULT) {
+    init.status = PAYLOAD_TOO_LARGE;
     return new Response(body, init);
   }
 
