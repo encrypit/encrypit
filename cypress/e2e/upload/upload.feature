@@ -21,3 +21,10 @@ Feature: Upload
     Then I see URL "/"
     When I go back
     Then I do not see URL "/"
+
+  Scenario: I can upload a 5MB file
+    Given I visit "/"
+    When I get element by selector "input[type=file]"
+      And I select file "cypress/fixtures/5MB"
+        | force | true |
+    Then I see text "5MB"

@@ -3,7 +3,7 @@ import { MAX_FILES } from 'shared/constants';
 import type { FileData } from 'src/types';
 import { mockFiles, store, wrapper } from 'test/helpers';
 
-import { type OnDrop, useOnDrop } from './useOnDrop';
+import { useOnDrop } from './useOnDrop';
 
 const event = new Event('drop');
 
@@ -57,56 +57,6 @@ describe('error', () => {
         "password": "",
       }
     `);
-  });
-
-  describe('file rejections', () => {
-    const message = 'Too many files';
-    let files: File[];
-    let fileRejections: {
-      errors: {
-        code: string;
-        message: string;
-      }[];
-      file: File;
-    }[];
-    let onDrop: OnDrop;
-
-    beforeEach(() => {
-      files = mockFiles();
-      fileRejections = files.map((file) => ({
-        errors: [{ code: 'too-many-files', message }],
-        file,
-      }));
-      const { result } = renderHook(() => useOnDrop(), { wrapper });
-      onDrop = result.current;
-    });
-
-    it('does not upload if there are file rejections', async () => {
-      await act(async () => {
-        await onDrop(files, fileRejections, event);
-      });
-      expect(store.getState().file).toMatchInlineSnapshot(`
-        {
-          "files": [],
-          "key": "",
-          "password": "",
-        }
-      `);
-    });
-
-    it('opens snackbar message for file rejection', async () => {
-      expect(store.getState().snackbar).toMatchObject({
-        message: '',
-        open: false,
-      });
-      await act(async () => {
-        await onDrop(files, fileRejections, event);
-      });
-      expect(store.getState().snackbar).toMatchObject({
-        message,
-        open: true,
-      });
-    });
   });
 
   it('does not upload more than the max number of files', async () => {
