@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { FORBIDDEN, NOT_FOUND } from 'costatus';
 import type { Env } from 'functions/types';
 import { getBucket, getCustomMetadata, getResponseInit } from 'functions/utils';

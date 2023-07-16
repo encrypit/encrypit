@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { LENGTH_REQUIRED } from 'costatus';
 import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
