@@ -1,5 +1,5 @@
 Feature: Support
-  Scenario: As a user, I see the support page
+  Scenario: I see the support page
     Given I visit "/support"
     Then I see document title "Encrypit Support"
       And I see heading "Support"

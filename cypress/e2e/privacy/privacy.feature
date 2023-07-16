@@ -1,5 +1,5 @@
 Feature: Privacy
-  Scenario: As a user, I see the privacy policy
+  Scenario: I see the privacy policy
     Given I visit "/privacy"
     Then I see document title "Encrypit Privacy Policy"
       And I see heading "Privacy Policy"

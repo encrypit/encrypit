@@ -1,5 +1,5 @@
 Feature: Home
-  Scenario: As a user, I see the homepage
+  Scenario: I see the homepage
     Given I visit "/"
     Then I see heading "Encrypt file"
       And I see button "Drag and drop your file"

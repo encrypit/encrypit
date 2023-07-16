@@ -1,5 +1,5 @@
 Feature: Upload
-  Scenario: As a user, I can upload and delete a file
+  Scenario: I can upload and delete a file
     Given I visit "/"
     When I get element by selector "input[type=file]"
       And I select file "cypress/fixtures/example.json"

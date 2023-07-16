@@ -1,5 +1,5 @@
 Feature: Download
-  Scenario: As a user, I can download a file
+  Scenario: I can download a file
     Given I visit "/"
     When I get element by selector "input[type=file]"
       And I select file "cypress/fixtures/example.json"
