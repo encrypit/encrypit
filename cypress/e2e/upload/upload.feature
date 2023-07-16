@@ -28,3 +28,13 @@ Feature: Upload
       And I select file "cypress/fixtures/5MB"
         | force | true |
     Then I see text "5MB"
+
+  Scenario: I can preview and delete the file before uploading
+    Given I visit "/"
+    When I get element by selector "input[type=file]"
+      And I select file "cypress/fixtures/example.json"
+        | force | true |
+    Then I see text "example.json"
+    When I find element by test ID "CancelIcon"
+      And I click
+    Then I do not see text "example.json"

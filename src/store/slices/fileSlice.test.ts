@@ -51,6 +51,28 @@ describe('addFiles', () => {
   });
 });
 
+describe('deleteFile', () => {
+  it('deletes file by id', () => {
+    const state = {
+      ...initialState,
+      files,
+      key,
+    };
+    const payload = files[0].id;
+    expect(reducer(state, actions.deleteFile(payload)).files).toEqual([]);
+  });
+
+  it('does not delete file if id does not match', () => {
+    const state = {
+      ...initialState,
+      files,
+      key,
+    };
+    const payload = 'uuid';
+    expect(reducer(state, actions.deleteFile(payload))).toEqual(state);
+  });
+});
+
 describe('setFileKeyOrPassword', () => {
   it('sets file key', () => {
     const payload = {
