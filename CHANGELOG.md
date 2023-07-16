@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/encrypit/encrypit/compare/v1.3.0...v1.3.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* **functions:** check file max size & return with 413 Payload Too Large ([376f5f0](https://github.com/encrypit/encrypit/commit/376f5f0c9206eb1a9bdf47e56b0b54dcb80749ca))
+
 ## [1.3.0](https://github.com/encrypit/encrypit/compare/v1.2.1...v1.3.0) (2023-07-04)
 
 
