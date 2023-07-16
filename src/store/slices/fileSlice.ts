@@ -23,6 +23,10 @@ export const fileSlice = createSlice({
       state.files.push(...action.payload);
     },
 
+    deleteFile: (state, action: PayloadAction<string>) => {
+      state.files = state.files.filter((file) => file.id !== action.payload);
+    },
+
     setFileKeyOrPassword: (
       state,
       action: PayloadAction<{ key?: string; password?: string }>,
