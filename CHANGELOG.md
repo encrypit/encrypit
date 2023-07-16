@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/encrypit/encrypit/compare/v1.3.1...v1.3.2) (2023-07-16)
+
+
+### Bug Fixes
+
+* **Dropzone:** show additional onDrop file rejections ([340a39e](https://github.com/encrypit/encrypit/commit/340a39ea64c14fc9f2a254c650ae4a6c2f5a5bb7))
+
 ## [1.3.1](https://github.com/encrypit/encrypit/compare/v1.3.0...v1.3.1) (2023-07-16)
 
 
