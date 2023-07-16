@@ -46,12 +46,3 @@ export const FILE_PASSWORD_REGEX = new RegExp(
 export enum MIME {
   ZIP = 'application/zip',
 }
-
-/**
- * @see {@link https://wikipedia.org/wiki/List_of_HTTP_status_codes}
- */
-export enum HTTP_STATUS_CODES {
-  FORBIDDEN = 403,
-  NOT_FOUND = 404,
-  LENGTH_REQUIRED = 411,
-}

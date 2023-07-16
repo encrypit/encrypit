@@ -1,5 +1,5 @@
 Feature: FAQ
-  Scenario: As a user, I see the FAQ
+  Scenario: I see the FAQ
     Given I visit "/faq"
     Then I see document title "Encrypit FAQ"
       And I see heading "FAQ"

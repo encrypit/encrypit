@@ -1,5 +1,5 @@
 Feature: Error
-  Scenario: As a user, I see a file rejection error if I upload too many files
+  Scenario: I see file rejection error if I upload too many files
     Given I visit "/"
     When I get element by selector "input[type=file]"
       And I select file "cypress/fixtures/example.json"

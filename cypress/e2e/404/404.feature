@@ -1,5 +1,5 @@
 Feature: 404
-  Scenario: As a user, I see the 404 page
+  Scenario: I see the 404 page
     Given I visit "/404"
     Then I see document title "Not Found"
       And I see heading "Not Found"

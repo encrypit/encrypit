@@ -1,5 +1,5 @@
 Feature: Header
-  Scenario: As a user, I see the header
+  Scenario: I see the header
     Given I visit "/"
     Then I see link "Encrypit"
       And I see label "Support"

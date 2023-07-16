@@ -1,6 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { LENGTH_REQUIRED } from 'costatus';
 import type { Env } from 'functions/types';
 import { getBucket, getResponseInit } from 'functions/utils';
-import { FORM_DATA, HTTP_STATUS_CODES } from 'shared/constants';
+import { FORM_DATA } from 'shared/constants';
 import { generateFileKey } from 'shared/id';
 import type { CustomMetadata } from 'shared/types';
 
@@ -18,7 +21,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const file = formData.get(FORM_DATA.FILE) as unknown as File;
 
   if (!file.size) {
-    init.status = HTTP_STATUS_CODES.LENGTH_REQUIRED;
+    init.status = LENGTH_REQUIRED;
     return new Response(body, init);
   }
 

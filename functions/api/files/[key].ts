@@ -1,6 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { FORBIDDEN, NOT_FOUND } from 'costatus';
 import type { Env } from 'functions/types';
 import { getBucket, getCustomMetadata, getResponseInit } from 'functions/utils';
-import { EXPIRATION, HEADERS, HTTP_STATUS_CODES } from 'shared/constants';
+import { EXPIRATION, HEADERS } from 'shared/constants';
 
 type Params = 'key';
 
@@ -19,7 +22,7 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const obj = await bucket.get(fileKey);
 
   if (!obj) {
-    init.status = HTTP_STATUS_CODES.NOT_FOUND;
+    init.status = NOT_FOUND;
     return new Response(body, init);
   }
 
@@ -27,13 +30,13 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const customMetadata = getCustomMetadata(obj);
 
   if (!passwordSHA512 || passwordSHA512 !== customMetadata.passwordSHA512) {
-    init.status = HTTP_STATUS_CODES.FORBIDDEN;
+    init.status = FORBIDDEN;
     return new Response(body, init);
   }
 
   if (hasExpired(obj.uploaded)) {
     await bucket.delete(fileKey);
-    init.status = HTTP_STATUS_CODES.NOT_FOUND;
+    init.status = NOT_FOUND;
     return new Response(body, init);
   }
 
@@ -66,7 +69,7 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
     return new Response(body, init);
   }
 
-  init.status = HTTP_STATUS_CODES.NOT_FOUND;
+  init.status = NOT_FOUND;
   return new Response(body, init);
 };
 
