@@ -3,6 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["esnext"],
+    "moduleResolution": "nodenext",
+    "baseUrl": ".",
     "types": ["@cloudflare/workers-types"],
     "paths": {
       "functions/*": ["./*"],
