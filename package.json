@@ -71,7 +71,7 @@
     "prettier": "^3.0.1",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "vite": "^4.4.8",
+    "vite": "^4.4.9",
     "wrangler": "^3.5.0"
   },
   "private": true,
