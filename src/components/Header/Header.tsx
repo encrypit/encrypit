@@ -48,17 +48,17 @@ export default function Header() {
             <SecurityIcon />
           </IconButton>
 
-          <Link
+          <IconButton
             aria-label="GitHub"
             color="inherit"
-            component={IconButton}
+            component={Link}
             href="https://github.com/encrypit/encrypit"
             target="_blank"
             title="GitHub"
             rel="noopener noreferrer"
           >
             <GitHubIcon />
-          </Link>
+          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

@@ -2,7 +2,7 @@ import MaterialContainer, {
   type ContainerProps,
 } from '@mui/material/Container';
 
-interface Props extends ContainerProps {
+interface Props extends Omit<ContainerProps, 'component'> {
   component?: string;
 }
 
