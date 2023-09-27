@@ -14,11 +14,23 @@
 
 ## How does Encrypit work?
 
-When you drag-and-drop a file in your browser, the file gets encrypted with a randomly generated password. During upload, the encrypted file is stored on our server and a file link is created. When the link is opened, the encrypted file is downloaded and decrypted in the browser. Throughout the entire process, Encrypit does not know what the password is, which ensures that the file remain secure.
+Encrypit uses [end-to-end encryption](https://wikipedia.org/wiki/End-to-end_encryption) so only the sender and the recipient can read/modify the file.
+
+The flow is as follows:
+
+1. The sender drags and drops the file to Encrypit's website.
+2. The browser encrypts the file with a random password.
+3. The sender uploads the encrypted file (but not the password) to Encrypit's server and a file id is created.
+4. The browser generates a download link from the file id and password.
+5. The sender shares the download link with the receiver.
+6. The receiver opens the link, which destroys the file on Encrypit's server.
+7. The browser decrypts the file so the receiver can download it.
+
+Throughout the entire process, Encrypit does not know what the password is, which ensures the file remains secure.
 
 ## Is Encrypit really private?
 
-We're confident that Encrypit is both private and secure and we want to ensure it remains that way. For more details, see our [Privacy Policy](/privacy).
+Privacy is really important to us, and we're confident that Encrypit is private and secure. For more details, check out our [Privacy Policy](/privacy).
 
 ## How can I send my file? Is there a way to send the link via Encrypit?
 
