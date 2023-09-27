@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/encrypit/encrypit/compare/v1.4.0...v1.4.1) (2023-09-27)
+
+
+### Documentation
+
+* **faq:** update "How does Encrypit work?" ([778ce69](https://github.com/encrypit/encrypit/commit/778ce69817750698c2d7be928dfaf3667e56146d))
+
 ## [1.4.0](https://github.com/encrypit/encrypit/compare/v1.3.2...v1.4.0) (2023-07-16)
 
 
