@@ -26,7 +26,7 @@
     "@mui/icons-material": "^5.14.13",
     "@mui/material": "^5.14.13",
     "@reduxjs/toolkit": "^1.9.7",
-    "@types/react": "^18.2.27",
+    "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
     "@zip.js/zip.js": "^2.7.29",
     "costatus": "^1.0.0",
