@@ -32,7 +32,7 @@
     "costatus": "^1.0.0",
     "file64": "^1.0.2",
     "markdown-to-jsx": "^7.3.2",
-    "nanoid": "^5.0.1",
+    "nanoid": "^5.0.2",
     "pepto": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
