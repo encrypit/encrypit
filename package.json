@@ -9,7 +9,7 @@
     "client": "vite --open",
     "cypress:open": "cypress open",
     "lint": "eslint --ignore-path .gitignore .",
-    "lint:fix": "yarn lint --fix",
+    "lint:fix": "npm run lint --fix",
     "lint:tsc": "tsc --noEmit",
     "postinstall": "husky install",
     "preview": "vite preview",
