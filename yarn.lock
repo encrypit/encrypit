@@ -3301,10 +3301,10 @@ csstype@^3.0.2, csstype@^3.1.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
-cypress-cucumber-steps@^3.14.0:
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/cypress-cucumber-steps/-/cypress-cucumber-steps-3.14.0.tgz#25277974b8d8c00aa40db32740009ee77ca2b956"
-  integrity sha512-M2OhM6Djl0wLp26nPh/ND0P9EZ2SJVfnAnoamU2LNF0XvT+dfTSi1Et0GrqLAvX5dYmyFEc4sFHFt4Gipng4Pw==
+cypress-cucumber-steps@^3.15.0:
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/cypress-cucumber-steps/-/cypress-cucumber-steps-3.15.0.tgz#871ef224e92d11fa45191fa9c0c5c604e1672479"
+  integrity sha512-qbzVMgaMdnloZCn/JDol+Fh2KCS3ya3CV4KIGgusNHJu4jnYtbE6T4LxURdraLCizCwCGEGAYSQvr0uWtVJQwg==
 
 cypress@^13.3.2:
   version "13.3.2"
