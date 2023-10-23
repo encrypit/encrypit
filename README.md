@@ -32,7 +32,7 @@ This project is built with:
 
 - [Node.js](https://nodejs.org/)
 - [nvm](https://github.com/nvm-sh/nvm#readme)
-- [Yarn 1](https://classic.yarnpkg.com/en/docs/install)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## Install
 
@@ -52,14 +52,14 @@ nvm use
 Install the dependencies:
 
 ```sh
-yarn
+npm install
 ```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm start`
 
 Runs the web app in the development mode.
 
@@ -72,11 +72,11 @@ You will also see any errors in the console.
 Alternatively, you can run the client and the server separately:
 
 ```sh
-yarn client
+npm run client
 ```
 
 ```sh
-yarn server
+npm run server
 ```
 
 If the server exits without killing the app, then kill the process:
@@ -85,15 +85,15 @@ If the server exits without killing the app, then kill the process:
 kill $(lsof -ti :8788)
 ```
 
-### `yarn lint`
+### `npm run lint`
 
 Runs ESLint.
 
-### `yarn test`
+### `npm test`
 
 Runs Jest tests.
 
-### `yarn build`
+### `npm run build`
 
 Builds the web app for production to the `dist` folder.
 
