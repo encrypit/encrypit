@@ -57,7 +57,7 @@
     "cypress": "13.4.0",
     "cypress-cucumber-steps": "3.16.0",
     "esbuild": "0.19.5",
-    "eslint": "8.52.0",
+    "eslint": "8.53.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-tsdoc": "0.2.17",
