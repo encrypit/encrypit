@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { DEV } from 'src/config';
 
 import { fileApi } from './api';
@@ -11,6 +11,7 @@ export const store = configureStore({
     [snackbarSlice.name]: snackbarSlice.reducer,
     [userSlice.name]: userSlice.reducer,
   },
-  middleware: getDefaultMiddleware().concat(fileApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(fileApi.middleware),
   devTools: DEV,
 });
