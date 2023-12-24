@@ -30,9 +30,7 @@ This project is built with:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/)
 - [nvm](https://github.com/nvm-sh/nvm#readme)
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## Install
 
