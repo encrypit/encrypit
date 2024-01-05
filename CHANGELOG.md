@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.4.1 (2024-01-05)
+
+
+### Features
+
+* **docs:** add FAQ link to support ([9e13f49](https://github.com/encrypit/encrypit/commit/9e13f49b6df4d65e205a082c681e074a0a2a416b))
+* **docs:** create faq.md ([448ac57](https://github.com/encrypit/encrypit/commit/448ac57df8265134ff6d3873f9aa381ac83e061a))
+* **Header:** add support link ([ef0df77](https://github.com/encrypit/encrypit/commit/ef0df77d0923f05001d19f57c130050572ea9270))
+* **Header:** render link to privacy ([493e889](https://github.com/encrypit/encrypit/commit/493e88916d9405dc7d88609cb830bb04e362c66c))
+* **pages:** create FAQ ([efed916](https://github.com/encrypit/encrypit/commit/efed916a96908e06b6093a72320c0bc9cde6dff5))
+* **pages:** create Privacy ([08c100f](https://github.com/encrypit/encrypit/commit/08c100fb3289e196ea233acfaccf86c04f22b7d6))
+* **Previews:** allow file to be deleted ([6e531c2](https://github.com/encrypit/encrypit/commit/6e531c2dc1926550d10680b3fc7d9ef75590584e))
+* **routes:** add "/faq" ([0bece48](https://github.com/encrypit/encrypit/commit/0bece48bb6a9331e237c2a1f340d1fdc4c8f9a89))
+* **routes:** add route "/support" ([836de90](https://github.com/encrypit/encrypit/commit/836de9021baff987a87f05e9be0f2121ee4309f9))
+* **routes:** render Privacy on "/privacy" ([cec7a93](https://github.com/encrypit/encrypit/commit/cec7a935db4be46b0c8c872eebc8da7b330b354f))
+* **Support:** create Support page ([c829738](https://github.com/encrypit/encrypit/commit/c829738ff7952879ee0ad7fd50ea4f6f15357434))
+* **UploadFile:** change copy from "New file" to "Encrypt file" ([6d61d89](https://github.com/encrypit/encrypit/commit/6d61d89fdc6230148f4721f5b923081ada628b63))
+
+
+### Bug Fixes
+
+* **components:** set Header and Layout Container max-width to md ([b9e8573](https://github.com/encrypit/encrypit/commit/b9e857360242bf0fd9a6c398b85c0e2462e61393))
+* **Dropzone:** increase dropzone surface area ([e71660b](https://github.com/encrypit/encrypit/commit/e71660bf70d8b8d356fb3759dc3d5664aa6e2b0d))
+* **Dropzone:** increase padding from 5rem to 6rem ([cebeca5](https://github.com/encrypit/encrypit/commit/cebeca505a51eec6c2a7413a6ac06e2c848dc98a))
+* **Dropzone:** show additional onDrop file rejections ([340a39e](https://github.com/encrypit/encrypit/commit/340a39ea64c14fc9f2a254c650ae4a6c2f5a5bb7))
+* **Dropzone:** show file rejection message in useOnDrop ([3d8d34b](https://github.com/encrypit/encrypit/commit/3d8d34b154386cb129b0f1b261858e44f594cd13))
+* **Dropzone:** show snackbar error for "Too many files" in useOnDrop ([60bf968](https://github.com/encrypit/encrypit/commit/60bf968ab8cb2e7d0f6d4e2846e85b1d973e724a))
+* **functions:** check file max size & return with 413 Payload Too Large ([376f5f0](https://github.com/encrypit/encrypit/commit/376f5f0c9206eb1a9bdf47e56b0b54dcb80749ca))
+* **pages:** capitalize APP_NAME and set document title in home ([4e143a1](https://github.com/encrypit/encrypit/commit/4e143a1eb812d424d8af83ce339e089286958eee))
+* **Privacy:** correct heading level accessibility ([d3508dc](https://github.com/encrypit/encrypit/commit/d3508dc24d9e6677eaa26e1abcf9769a01c3a39b))
+
+
+### Documentation
+
+* **faq:** update "How does Encrypit work?" ([778ce69](https://github.com/encrypit/encrypit/commit/778ce69817750698c2d7be928dfaf3667e56146d))
+
 ## [1.4.1](https://github.com/encrypit/encrypit/compare/v1.4.0...v1.4.1) (2023-09-27)
 
 
