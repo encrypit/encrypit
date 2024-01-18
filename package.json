@@ -72,7 +72,7 @@
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",
     "vite": "5.0.11",
-    "wrangler": "3.22.5"
+    "wrangler": "3.23.0"
   },
   "private": true,
   "license": "MIT"
