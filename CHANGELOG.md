@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/encrypit/encrypit/compare/v1.4.2...v1.4.3) (2024-01-23)
+
+
+### Build System
+
+* **vite:** minify html ([4a4e8ef](https://github.com/encrypit/encrypit/commit/4a4e8ef399cd66e8aa2f3f8b0b1a3e3a2f998998))
+
 ## [1.4.2](https://github.com/encrypit/encrypit/compare/v1.4.1...v1.4.2) (2024-01-05)
 
 ### Miscellaneous Chores
