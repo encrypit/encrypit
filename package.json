@@ -4,7 +4,7 @@
   "description": "Securely encrypt and decrypt files.",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
-    "build": "vite build",
+    "build": "npm run clean && vite build",
     "clean": "rm -rf .wrangler coverage cypress/downloads dist",
     "client": "vite --open",
     "cypress:open": "cypress open",
@@ -72,6 +72,7 @@
     "ts-jest": "29.1.2",
     "ts-node": "10.9.2",
     "vite": "5.0.12",
+    "vite-plugin-html": "3.2.2",
     "wrangler": "3.23.0"
   },
   "private": true,
