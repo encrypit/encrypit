@@ -33,8 +33,10 @@ jobs:
       - name: Run Jest tests
         run: npm run test:ci
 
-      - name: Build app
-        run: npm run build
-
       - name: Codecov
         uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build app
+        run: npm run build
