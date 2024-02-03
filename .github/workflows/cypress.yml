@@ -4,7 +4,6 @@ on: [push, pull_request]
 jobs:
   cypress:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
