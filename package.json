@@ -42,7 +42,7 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "20.0.1",
+    "@badeball/cypress-cucumber-preprocessor": "20.0.2",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "@cloudflare/workers-types": "4.20240222.0",
     "@commitlint/cli": "19.0.3",
