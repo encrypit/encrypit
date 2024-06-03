@@ -1,11 +1,16 @@
 # Changelog
 
-## [1.4.3](https://github.com/encrypit/encrypit/compare/v1.4.2...v1.4.3) (2024-01-23)
+## [1.4.4](https://github.com/encrypit/encrypit/compare/v1.4.3...v1.4.4) (2024-06-03)
 
+### Miscellaneous Chores
+
+- release 1.4.4 ([d10c5ea](https://github.com/encrypit/encrypit/commit/d10c5ea73ac3eeceaf27394c6a2062a04ce219f0))
+
+## [1.4.3](https://github.com/encrypit/encrypit/compare/v1.4.2...v1.4.3) (2024-01-23)
 
 ### Build System
 
-* **vite:** minify html ([4a4e8ef](https://github.com/encrypit/encrypit/commit/4a4e8ef399cd66e8aa2f3f8b0b1a3e3a2f998998))
+- **vite:** minify html ([4a4e8ef](https://github.com/encrypit/encrypit/commit/4a4e8ef399cd66e8aa2f3f8b0b1a3e3a2f998998))
 
 ## [1.4.2](https://github.com/encrypit/encrypit/compare/v1.4.1...v1.4.2) (2024-01-05)
 
