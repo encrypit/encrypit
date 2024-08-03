@@ -10,7 +10,7 @@ it('renders without crashing', () => {
     .mockReturnValueOnce(document.createElement('div'));
 
   act(() => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { root } = require('.');
     root.unmount();
   });
