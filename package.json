@@ -44,7 +44,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "20.1.2",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.1",
-    "@cloudflare/workers-types": "4.20240815.0",
+    "@cloudflare/workers-types": "4.20240821.1",
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
     "@testing-library/jest-dom": "6.4.8",
