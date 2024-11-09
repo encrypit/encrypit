@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig({
+  plugins: [createHtmlPlugin(), react()],
   resolve: {
     alias: {
       docs: resolve(__dirname, 'docs'),
@@ -12,5 +13,4 @@ export default defineConfig({
       test: resolve(__dirname, 'test'),
     },
   },
-  plugins: [createHtmlPlugin(), react()],
 });

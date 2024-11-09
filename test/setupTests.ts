@@ -16,8 +16,6 @@ import fetchMock from 'jest-fetch-mock';
 fetchMock.enableMocks();
 
 import { randomUUID } from 'crypto';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 window.crypto.randomUUID = randomUUID;
 
 import { TextEncoder } from 'util';
