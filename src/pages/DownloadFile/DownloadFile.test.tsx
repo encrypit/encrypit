@@ -56,9 +56,16 @@ beforeEach(() => {
 
 describe('no file key', () => {
   beforeEach(() => {
+    const mockDownloadFileResult = { reset: jest.fn() };
+
     mockedLazyUseDownloadFileQuery
       .mockReset()
-      .mockReturnValue([mockDownloadFile, {}, lastPromiseInfo]);
+      .mockReturnValue([
+        mockDownloadFile,
+        mockDownloadFileResult,
+        lastPromiseInfo,
+      ]);
+
     mockedUseSelector
       .mockReset()
       .mockImplementation((selector) =>
@@ -79,13 +86,19 @@ describe('no file key', () => {
 
 describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
   beforeEach(() => {
-    mockedLazyUseDownloadFileQuery.mockReset().mockReturnValue([
-      mockDownloadFile,
-      {
-        [queryStatus]: true,
-      },
-      lastPromiseInfo,
-    ]);
+    const mockDownloadFileResult = {
+      [queryStatus]: true,
+      reset: jest.fn(),
+    };
+
+    mockedLazyUseDownloadFileQuery
+      .mockReset()
+      .mockReturnValue([
+        mockDownloadFile,
+        mockDownloadFileResult,
+        lastPromiseInfo,
+      ]);
+
     mockedUseSelector.mockImplementation((selector) =>
       selector({ file } as RootState),
     );
@@ -117,9 +130,19 @@ describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
 
 describe('isError', () => {
   beforeEach(() => {
+    const mockDownloadFileResult = {
+      isError: true,
+      reset: jest.fn(),
+    };
+
     mockedLazyUseDownloadFileQuery
       .mockReset()
-      .mockReturnValue([mockDownloadFile, { isError: true }, lastPromiseInfo]);
+      .mockReturnValue([
+        mockDownloadFile,
+        mockDownloadFileResult,
+        lastPromiseInfo,
+      ]);
+
     mockedUseSelector.mockImplementation((selector) =>
       selector({ file } as RootState),
     );
@@ -140,13 +163,20 @@ describe('isError', () => {
   });
 
   it('navigates to /invalid when status is 403', () => {
+    const mockDownloadFileResult = {
+      isError: true,
+      error: { status: 403 },
+      reset: jest.fn(),
+    };
+
     mockedLazyUseDownloadFileQuery
       .mockReset()
       .mockReturnValue([
         mockDownloadFile,
-        { isError: true, error: { status: 403 } },
+        mockDownloadFileResult,
         lastPromiseInfo,
       ]);
+
     renderWithProviders(<DownloadFile />);
     expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
   });
@@ -163,17 +193,23 @@ describe('isSuccess', () => {
 
   beforeEach(() => {
     fetchMock.mockImplementationOnce(
-      (base64: unknown) =>
+      (base64) =>
         ({
           blob: () => new Blob([atob((base64 as string).split(',')[1])]),
         }) as unknown as Promise<Response>,
     );
 
+    const mockDownloadFileResult = {
+      isSuccess: true,
+      data,
+      reset: jest.fn(),
+    };
+
     mockedLazyUseDownloadFileQuery
       .mockReset()
       .mockReturnValue([
         mockDownloadFile,
-        { isSuccess: true, data },
+        mockDownloadFileResult,
         lastPromiseInfo,
       ]);
 
