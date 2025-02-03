@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
+import { createMemoryRouter } from 'react-router-dom';
 import { actions, resetActions, store } from 'src/store';
 
 export { actions, store };
