@@ -24,7 +24,7 @@
     "@emotion/styled": "11.14.0",
     "@fontsource/roboto": "5.1.1",
     "@mui/icons-material": "6.4.2",
-    "@mui/material": "6.4.2",
+    "@mui/material": "6.4.3",
     "@reduxjs/toolkit": "2.5.1",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
