@@ -1,11 +1,16 @@
 # Changelog
 
-## [1.4.5](https://github.com/encrypit/encrypit/compare/v1.4.4...v1.4.5) (2024-10-06)
-
+## [1.4.6](https://github.com/encrypit/encrypit/compare/v1.4.5...v1.4.6) (2025-02-25)
 
 ### Miscellaneous Chores
 
-* release 1.4.5 ([16285e0](https://github.com/encrypit/encrypit/commit/16285e07209fafd4a09ce962e6d4a7ef4fba0bed))
+- release 1.4.6 ([7db7928](https://github.com/encrypit/encrypit/commit/7db7928c6b532d9f3c10b12c9edb3d23a9629706))
+
+## [1.4.5](https://github.com/encrypit/encrypit/compare/v1.4.4...v1.4.5) (2024-10-06)
+
+### Miscellaneous Chores
+
+- release 1.4.5 ([16285e0](https://github.com/encrypit/encrypit/commit/16285e07209fafd4a09ce962e6d4a7ef4fba0bed))
 
 ## [1.4.4](https://github.com/encrypit/encrypit/compare/v1.4.3...v1.4.4) (2024-06-03)
 
