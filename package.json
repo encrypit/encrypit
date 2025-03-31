@@ -59,7 +59,7 @@
     "@vitejs/plugin-react-swc": "3.8.1",
     "cypress": "14.2.1",
     "cypress-cucumber-steps": "3.63.0",
-    "esbuild": "0.25.1",
+    "esbuild": "0.25.2",
     "eslint": "9.23.0",
     "eslint-plugin-prettier": "5.2.5",
     "eslint-plugin-simple-import-sort": "12.1.1",
@@ -76,7 +76,7 @@
     "prettier": "3.5.3",
     "ts-jest": "29.3.0",
     "ts-node": "10.9.2",
-    "vite": "6.2.3",
+    "vite": "6.2.4",
     "vite-plugin-html": "3.2.2",
     "wrangler": "4.5.1"
   },
