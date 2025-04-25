@@ -38,7 +38,7 @@
     "react-dom": "19.0.0",
     "react-dropzone": "14.3.8",
     "react-redux": "9.2.0",
-    "react-router-dom": "7.4.1",
+    "react-router-dom": "7.5.2",
     "typescript": "5.8.2"
   },
   "devDependencies": {
@@ -78,7 +78,7 @@
     "ts-node": "10.9.2",
     "vite": "6.2.6",
     "vite-plugin-html": "3.2.2",
-    "wrangler": "4.7.1"
+    "wrangler": "4.13.1"
   },
   "private": true,
   "license": "MIT"
