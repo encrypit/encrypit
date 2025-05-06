@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.7](https://github.com/encrypit/encrypit/compare/v1.4.6...v1.4.7) (2025-05-06)
+
+
+### Build System
+
+* **package:** upgrade Material UI from v6 to v7 ([d862d8a](https://github.com/encrypit/encrypit/commit/d862d8a5cde77df33ecde8ebeb39c7199d188f71))
+
 ## [1.4.6](https://github.com/encrypit/encrypit/compare/v1.4.5...v1.4.6) (2025-02-25)
 
 ### Miscellaneous Chores
