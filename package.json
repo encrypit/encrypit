@@ -27,7 +27,7 @@
     "@mui/material": "7.1.1",
     "@reduxjs/toolkit": "2.8.2",
     "@types/react": "19.1.6",
-    "@types/react-dom": "19.1.5",
+    "@types/react-dom": "19.1.6",
     "@zip.js/zip.js": "2.7.62",
     "costatus": "1.0.2",
     "file64": "1.0.4",
