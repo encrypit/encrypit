@@ -33,6 +33,8 @@ describe('createZipFile', () => {
     mockedZip.ZipWriter.mockReset().mockReturnValue({
       add: mockZipWriter.add,
       close: mockZipWriter.close,
+      prependZip: jest.fn(),
+      remove: jest.fn(),
     });
   });
 
