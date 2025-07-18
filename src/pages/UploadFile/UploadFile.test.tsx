@@ -125,8 +125,8 @@ describe('with files', () => {
         password,
       });
     });
-    expect(mockedCreateZipFile).toBeCalledTimes(1);
-    expect(mockUploadFile).toBeCalledTimes(1);
+    expect(mockedCreateZipFile).toHaveBeenCalledTimes(1);
+    expect(mockUploadFile).toHaveBeenCalledTimes(1);
   });
 
   it('renders preview', async () => {
@@ -144,6 +144,6 @@ describe('with files', () => {
     await waitFor(() => {
       expect(store.getState().file.key).toBeTruthy();
     });
-    expect(mockNavigate).toBeCalledWith('/share', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/share', { replace: true });
   });
 });

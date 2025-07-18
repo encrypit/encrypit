@@ -51,7 +51,7 @@ describe('when params does not have fileKey', () => {
   it('navigates to /', async () => {
     renderWithProviders(<ConfirmDownload />);
     await waitFor(() => {
-      expect(mockNavigate).toBeCalledWith('/', { replace: true });
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
 });
@@ -73,7 +73,7 @@ describe('when params has fileKey but location hash does not have password', () 
   it('navigates to /invalid', async () => {
     renderWithProviders(<ConfirmDownload />);
     await waitFor(() => {
-      expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+      expect(mockNavigate).toHaveBeenCalledWith('/invalid', { replace: true });
     });
   });
 });
@@ -128,8 +128,10 @@ describe('when params has fileKey and locaton hash has password', () => {
   it('navigates to path without hash', async () => {
     renderWithProviders(<ConfirmDownload />);
     await waitFor(() => {
-      expect(mockNavigate).toBeCalledTimes(1);
-      expect(mockNavigate).toBeCalledWith(params.fileKey, { replace: true });
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith(params.fileKey, {
+        replace: true,
+      });
     });
   });
 });

@@ -27,6 +27,7 @@ export default function ConfirmDownload() {
       return;
     }
 
+    /* istanbul ignore else */
     if (password) {
       dispatch(actions.setFileKeyOrPassword({ key: fileKey, password }));
       navigate(location.pathname, { replace: true });

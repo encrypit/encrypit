@@ -56,7 +56,7 @@ describe('without file key', () => {
 
   it('navigates to home', () => {
     renderWithProviders(<ShareLink />);
-    expect(mockNavigate).toBeCalledWith('/', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
   });
 });
 
@@ -85,7 +85,7 @@ describe('with file key and password', () => {
 
   it('does not navigate away', () => {
     renderWithProviders(<ShareLink />);
-    expect(mockNavigate).not.toBeCalled();
+    expect(mockNavigate).not.toHaveBeenCalled();
   });
 
   it('renders file link', () => {
@@ -103,8 +103,8 @@ describe('with file key and password', () => {
   it('copies link', () => {
     renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Copy link' }));
-    expect(writeText).toBeCalledTimes(1);
-    expect(writeText).toBeCalledWith(link);
+    expect(writeText).toHaveBeenCalledTimes(1);
+    expect(writeText).toHaveBeenCalledWith(link);
   });
 
   it('emails link', () => {
@@ -130,7 +130,7 @@ describe('with file key and password', () => {
     renderWithProviders(<ShareLink />);
     fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
     fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
-    expect(mockDeleteFile).not.toBeCalled();
+    expect(mockDeleteFile).not.toHaveBeenCalled();
   });
 
   describe.each([200, 404])('when delete status is %d', (status) => {
@@ -142,9 +142,9 @@ describe('with file key and password', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
         fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
       });
-      expect(mockDeleteFile).toBeCalledTimes(1);
-      expect(mockDeleteFile).toBeCalledWith(key);
-      expect(unwrap).toBeCalledTimes(1);
+      expect(mockDeleteFile).toHaveBeenCalledTimes(1);
+      expect(mockDeleteFile).toHaveBeenCalledWith(key);
+      expect(unwrap).toHaveBeenCalledTimes(1);
       expect(store.getState().file).toMatchInlineSnapshot(`
       {
         "files": [],

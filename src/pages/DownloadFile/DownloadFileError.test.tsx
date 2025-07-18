@@ -23,7 +23,7 @@ it('renders heading', () => {
 describe('status 403', () => {
   it('navigates to /invalid', () => {
     renderWithProviders(<DownloadFileError status={403} />);
-    expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/invalid', { replace: true });
   });
 });
 
