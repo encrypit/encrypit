@@ -22,7 +22,7 @@ describe('deleteFile', () => {
       deleteFile(key);
     });
 
-    expect(fetchMock).toBeCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
       Request {
         "agent": undefined,
@@ -77,7 +77,7 @@ describe('downloadFile', () => {
           { wrapper },
         );
       });
-      expect(fetchMock).toBeCalledTimes(1);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
       expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
         Request {
           "agent": undefined,
@@ -135,7 +135,7 @@ describe('downloadFile', () => {
         );
         expect(result.current).toBe(null);
       });
-      expect(fetchMock).toBeCalledTimes(1);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
   });
 });
@@ -157,7 +157,7 @@ describe('uploadFile', () => {
       uploadFile(formData);
     });
 
-    expect(fetchMock).toBeCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
       Request {
         "agent": undefined,

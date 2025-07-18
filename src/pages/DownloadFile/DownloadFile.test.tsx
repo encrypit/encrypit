@@ -75,12 +75,12 @@ describe('no file key', () => {
 
   it('navigates to home', () => {
     renderWithProviders(<DownloadFile />);
-    expect(mockNavigate).toBeCalledWith('/', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
   });
 
   it('does not download file', () => {
     renderWithProviders(<DownloadFile />);
-    expect(mockDownloadFile).not.toBeCalled();
+    expect(mockDownloadFile).not.toHaveBeenCalled();
   });
 });
 
@@ -119,7 +119,7 @@ describe.each(['isLoading', 'isFetching'])('%s', (queryStatus) => {
   it('downloads file', async () => {
     renderWithProviders(<DownloadFile />);
     await waitFor(async () => {
-      expect(mockDownloadFile).toBeCalledWith({
+      expect(mockDownloadFile).toHaveBeenCalledWith({
         key: file.key,
         passwordSHA512:
           'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86',
@@ -178,7 +178,7 @@ describe('isError', () => {
       ]);
 
     renderWithProviders(<DownloadFile />);
-    expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith('/invalid', { replace: true });
   });
 });
 
@@ -237,8 +237,11 @@ describe('isSuccess', () => {
   it('unzips file', async () => {
     renderWithProviders(<DownloadFile />);
     await waitFor(() => {
-      expect(mockedUnzip).toBeCalledTimes(1);
-      expect(mockedUnzip).toBeCalledWith(expect.anything(), data.password);
+      expect(mockedUnzip).toHaveBeenCalledTimes(1);
+      expect(mockedUnzip).toHaveBeenCalledWith(
+        expect.anything(),
+        data.password,
+      );
       expect(mockedUnzip.mock.calls[0][0].constructor.name).toBe('Blob');
     });
   });
@@ -247,8 +250,8 @@ describe('isSuccess', () => {
     mockedUnzip.mockRejectedValueOnce(new Error());
     renderWithProviders(<DownloadFile />);
     await waitFor(() => {
-      expect(mockNavigate).toBeCalledTimes(1);
-      expect(mockNavigate).toBeCalledWith('/invalid', { replace: true });
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/invalid', { replace: true });
     });
   });
 
@@ -271,7 +274,7 @@ describe('isSuccess', () => {
   it('downloads file', async () => {
     renderWithProviders(<DownloadFile />);
     await waitFor(async () => {
-      expect(mockDownloadFile).toBeCalledWith({
+      expect(mockDownloadFile).toHaveBeenCalledWith({
         key: file.key,
         passwordSHA512:
           'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86',
@@ -284,7 +287,7 @@ describe('isSuccess', () => {
     await waitFor(() => {
       fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
     });
-    expect(mockDeleteFile).toBeCalledTimes(1);
-    expect(mockDeleteFile).toBeCalledWith(file.key);
+    expect(mockDeleteFile).toHaveBeenCalledTimes(1);
+    expect(mockDeleteFile).toHaveBeenCalledWith(file.key);
   });
 });

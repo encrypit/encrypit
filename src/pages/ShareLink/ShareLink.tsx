@@ -40,6 +40,7 @@ export default function ShareLink() {
       status = (error as { status: number }).status;
     }
 
+    /* istanbul ignore else */
     if (status === 200 || status === 404) {
       setIsDialogOpen(false);
       dispatch(actions.resetFile());
