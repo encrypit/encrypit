@@ -12,7 +12,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-it.each(['1234567', 'abcdefg', 'ABCDEFG', 'Abc456-', '0bc_789'])(
+it.each(['123456789', 'abcdefghi', 'ABCDEFGHI', 'Abc456-89', '0bc_56789'])(
   'does not redirect to /404 when params.fileKey is %p',
   (fileKey) => {
     fileKeyLoader({ params: { fileKey } } as unknown as LoaderFunctionArgs);
@@ -20,7 +20,7 @@ it.each(['1234567', 'abcdefg', 'ABCDEFG', 'Abc456-', '0bc_789'])(
   },
 );
 
-it.each(['123456', '12345678', '123456#'])(
+it.each(['123456', '1234567890', '123456#'])(
   'redirects to /404 when params.fileKey is %p',
   (fileKey) => {
     fileKeyLoader({ params: { fileKey } } as unknown as LoaderFunctionArgs);
