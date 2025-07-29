@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/encrypit/encrypit/compare/v1.4.7...v1.5.0) (2025-07-29)
+
+
+### Features
+
+* **constants:** increase file key length to 9 and password length to 12 ([047ea6c](https://github.com/encrypit/encrypit/commit/047ea6c5a7b2d71c036fedcdf0075b077c9001bf))
+
 ## [1.4.7](https://github.com/encrypit/encrypit/compare/v1.4.6...v1.4.7) (2025-05-06)
 
 
