@@ -33,13 +33,11 @@ export enum FILE {
 }
 
 export const FILE_KEY_REGEX = new RegExp(
-  // TODO: remove `7,`
-  `^[${FILE.KEY_ALPHABET}]{7,${FILE.KEY_LENGTH}}$`,
+  `^[${FILE.KEY_ALPHABET}]{${FILE.KEY_LENGTH}}$`,
 );
 
 export const FILE_PASSWORD_REGEX = new RegExp(
-  // TODO: remove `9,`
-  `^[${FILE.PASSWORD_ALPHABET}]{9,${FILE.PASSWORD_LENGTH}}$`,
+  `^[${FILE.PASSWORD_ALPHABET}]{${FILE.PASSWORD_LENGTH}}$`,
 );
 
 /**
