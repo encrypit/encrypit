@@ -39,7 +39,7 @@
     "react-dropzone": "14.3.8",
     "react-redux": "9.2.0",
     "react-router-dom": "7.8.0",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "22.2.0",
