@@ -1,4 +1,5 @@
 import { type LoaderFunctionArgs, redirect } from 'react-router-dom';
+import { FILE } from 'shared/constants';
 
 import { fileKeyLoader } from './fileKeyLoader';
 
@@ -20,7 +21,9 @@ it.each(['123456789', 'abcdefghi', 'ABCDEFGHI', 'Abc456-89', '0bc_56789'])(
   },
 );
 
-it.each(['123456', '1234567890', '123456#'])(
+const random = (length: number) => String(Date.now()).slice(0, length);
+
+it.each([random(FILE.KEY_LENGTH - 1), random(FILE.KEY_LENGTH + 1), '1234567#'])(
   'redirects to /404 when params.fileKey is %p',
   (fileKey) => {
     fileKeyLoader({ params: { fileKey } } as unknown as LoaderFunctionArgs);

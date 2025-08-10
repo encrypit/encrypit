@@ -79,8 +79,8 @@ describe('when params has fileKey but location hash does not have password', () 
 });
 
 describe('when params has fileKey and locaton hash has password', () => {
-  const password = 'password9';
-  const params = { fileKey: 'fileKey' };
+  const password = 'password_012';
+  const params = { fileKey: 'fileKey_9' };
   const location = { hash: `#${password}`, pathname: params.fileKey };
 
   beforeEach(() => {
