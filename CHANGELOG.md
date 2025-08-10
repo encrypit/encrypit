@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/encrypit/encrypit/compare/v1.5.0...v1.5.1) (2025-08-10)
+
+
+### Code Refactoring
+
+* **constants:** remove deprecated file key and password length ([2431fa4](https://github.com/encrypit/encrypit/commit/2431fa484f69e5e7dae79c65bd00fa44e6533b40))
+
 ## [1.5.0](https://github.com/encrypit/encrypit/compare/v1.4.7...v1.5.0) (2025-07-29)
 
 

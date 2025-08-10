@@ -1,6 +1,6 @@
 {
   "name": "encrypit",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Securely encrypt and decrypt files.",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
