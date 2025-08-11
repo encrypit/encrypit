@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/encrypit/encrypit/compare/v1.5.1...v1.6.0) (2025-08-11)
+
+
+### Features
+
+* **api:** check password hash before deleting file ([8424d27](https://github.com/encrypit/encrypit/commit/8424d27b4b54f228eb44e9f44363653328a03ed7))
+
 ## [1.5.1](https://github.com/encrypit/encrypit/compare/v1.5.0...v1.5.1) (2025-08-10)
 
 
