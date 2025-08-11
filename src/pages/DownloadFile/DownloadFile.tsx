@@ -8,11 +8,7 @@ import { base64ToBlob, blobToBase64 } from 'file64';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  useDeleteFileMutation,
-  useLazyDownloadFileQuery,
-  useSelector,
-} from 'src/hooks';
+import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import { generateFileName, hashPassword, unzip } from 'src/utils';
 
 import DownloadFileError from './DownloadFileError';
@@ -22,7 +18,6 @@ export default function DownloadFile() {
   const navigate = useNavigate();
   const [downloadUrl, setDownloadUrl] = useState('');
   const [downloadFile, downloadFileResult] = useLazyDownloadFileQuery();
-  const [deleteFile] = useDeleteFileMutation();
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -52,7 +47,6 @@ export default function DownloadFile() {
     if (downloadUrl && file.key) {
       /* istanbul ignore next */
       linkRef.current?.click();
-      deleteFile(file.key);
     }
   }, [downloadUrl, file.key]);
 

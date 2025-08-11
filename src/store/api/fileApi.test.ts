@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { createFormData } from 'src/utils';
+import { createFormData, hashPassword } from 'src/utils';
 import { fetchMock, mockFiles, wrapper } from 'test/helpers';
 
 import { fileApi } from './fileApi';
@@ -12,53 +12,60 @@ beforeEach(() => {
 });
 
 describe('deleteFile', () => {
-  it('deletes file given key', async () => {
+  it('deletes file given key and password hash', async () => {
     const { result } = renderHook(() => fileApi.useDeleteFileMutation(), {
       wrapper,
     });
 
-    await act(() => {
+    await act(async () => {
       const [deleteFile] = result.current;
-      deleteFile(key);
+      deleteFile({
+        key,
+        passwordSHA512: await hashPassword(passwordSHA512),
+      });
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toMatchInlineSnapshot(`
-      Request {
-        "agent": undefined,
-        "compress": true,
-        "counter": 0,
-        "follow": 20,
-        "size": 0,
-        "timeout": 0,
-        Symbol(Body internals): {
-          "body": null,
-          "disturbed": false,
-          "error": null,
-        },
-        Symbol(Request internals): {
-          "headers": Headers {
-            Symbol(map): {},
-          },
-          "method": "DELETE",
-          "parsedURL": Url {
-            "auth": null,
-            "hash": null,
-            "host": "localhost",
-            "hostname": "localhost",
-            "href": "http://localhost/api/files/fileKey",
-            "path": "/api/files/fileKey",
-            "pathname": "/api/files/fileKey",
-            "port": null,
-            "protocol": "http:",
-            "query": null,
-            "search": null,
-            "slashes": true,
-          },
-          "redirect": "follow",
-          "signal": AbortSignal {},
-        },
-      }
+     Request {
+       "agent": undefined,
+       "compress": true,
+       "counter": 0,
+       "follow": 20,
+       "size": 0,
+       "timeout": 0,
+       Symbol(Body internals): {
+         "body": null,
+         "disturbed": false,
+         "error": null,
+       },
+       Symbol(Request internals): {
+         "headers": Headers {
+           Symbol(map): {
+             "X-Password-Sha512": [
+               "cc7222b9eb5b430fc446942a1a7b85f9593328f9c42f3a343a9c698e5574fdc3d9b435f94dbc667f82786b1747bbb27abe76bfddc473fbc2145b8d2e3265114e",
+             ],
+           },
+         },
+         "method": "DELETE",
+         "parsedURL": Url {
+           "auth": null,
+           "hash": null,
+           "host": "localhost",
+           "hostname": "localhost",
+           "href": "http://localhost/api/files/fileKey",
+           "path": "/api/files/fileKey",
+           "pathname": "/api/files/fileKey",
+           "port": null,
+           "protocol": "http:",
+           "query": null,
+           "search": null,
+           "slashes": true,
+         },
+         "redirect": "follow",
+         "signal": AbortSignal {},
+       },
+     }
     `);
   });
 });

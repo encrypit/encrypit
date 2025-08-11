@@ -3,12 +3,14 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { NOT_FOUND, OK } from 'costatus';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import DeleteDialog from 'src/components/DeleteDialog';
 import { useDeleteFileMutation, useDispatch, useSelector } from 'src/hooks';
 import { actions } from 'src/store';
+import { hashPassword } from 'src/utils';
 
 export default function ShareLink() {
   const dispatch = useDispatch();
@@ -32,16 +34,21 @@ export default function ShareLink() {
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);
   const handleDeleteFile = useCallback(async () => {
-    let status = 200;
+    let status = 0;
 
     try {
-      await deleteFile(file.key!).unwrap();
+      await deleteFile({
+        key: file.key,
+        passwordSHA512: await hashPassword(file.password),
+      }).unwrap();
+      /* istanbul ignore next */
+      status = OK;
     } catch (error: unknown) {
       status = (error as { status: number }).status;
     }
 
     /* istanbul ignore else */
-    if (status === 200 || status === 404) {
+    if ([OK, NOT_FOUND].includes(status)) {
       setIsDialogOpen(false);
       dispatch(actions.resetFile());
     }

@@ -15,9 +15,12 @@ export const fileApi = createApi({
     /**
      * DELETE /api/files/[key]
      */
-    deleteFile: build.mutation<void, string>({
-      query: (fileKey: string) => ({
-        url: `/${fileKey}`,
+    deleteFile: build.mutation<void, { key: string; passwordSHA512: string }>({
+      query: ({ key, passwordSHA512 }) => ({
+        url: `/${key}`,
+        headers: {
+          [HEADERS.PASSWORD_SHA512]: passwordSHA512,
+        },
         method: 'DELETE',
       }),
     }),
