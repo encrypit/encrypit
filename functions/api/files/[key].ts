@@ -1,5 +1,5 @@
 import { FORBIDDEN, NOT_FOUND } from 'costatus';
-import type { Env } from 'functions/types';
+import type { Context, Env } from 'functions/types';
 import { getBucket, getCustomMetadata, getResponseInit } from 'functions/utils';
 import { EXPIRATION, HEADERS } from 'shared/constants';
 
@@ -18,17 +18,10 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const fileKey = context.params.key as string;
   const bucket = getBucket(context);
   const obj = await bucket.get(fileKey);
+  const status = validateFile(obj, context);
 
-  if (!obj) {
-    init.status = NOT_FOUND;
-    return new Response(body, init);
-  }
-
-  const passwordSHA512 = context.request.headers.get(HEADERS.PASSWORD_SHA512);
-  const customMetadata = getCustomMetadata(obj);
-
-  if (!passwordSHA512 || passwordSHA512 !== customMetadata.passwordSHA512) {
-    init.status = FORBIDDEN;
+  if (status) {
+    init.status = status;
     return new Response(body, init);
   }
 
@@ -41,10 +34,14 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const { readable, writable } = new TransformStream();
   obj.body.pipeTo(writable);
 
+  const customMetadata = getCustomMetadata(obj).passwordSHA512;
+  delete customMetadata.passwordSHA512;
+
   body = readable;
   init.headers['Access-Control-Expose-Headers'] = HEADERS.CUSTOM_METADATA;
-  delete customMetadata.passwordSHA512;
   init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(customMetadata);
+
+  await bucket.delete(fileKey);
   return new Response(body, init);
 };
 
@@ -61,13 +58,14 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
   const fileKey = context.params.key as string;
   const bucket = getBucket(context);
   const obj = await bucket.head(fileKey);
+  const status = validateFile(obj, context);
 
-  if (obj) {
-    await bucket.delete(fileKey);
+  if (status) {
+    init.status = status;
     return new Response(body, init);
   }
 
-  init.status = NOT_FOUND;
+  await bucket.delete(fileKey);
   return new Response(body, init);
 };
 
@@ -95,4 +93,25 @@ function hasExpired(
   const expiration = new Date();
   expiration.setDate(expiration.getDate() + expirationDays);
   return uploaded > expiration;
+}
+
+/**
+ * Validates file.
+ *
+ * @param obj - Bucket object.
+ * @param context - Event context.
+ * @returns - Response status.
+ */
+function validateFile(obj: R2Object, context: Context): string {
+  if (!obj) {
+    return NOT_FOUND;
+  }
+
+  const passwordHash = context.request.headers.get(HEADERS.PASSWORD_SHA512);
+
+  if (!passwordHash || passwordHash !== getCustomMetadata(obj).passwordSHA512) {
+    return FORBIDDEN;
+  }
+
+  return '';
 }

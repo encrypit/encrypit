@@ -1,7 +1,8 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
-import { renderWithProviders, store } from 'test/helpers';
+import { hashPassword } from 'src/utils';
+import { actions, renderWithProviders, store } from 'test/helpers';
 
 import ShareLink from './ShareLink';
 
@@ -133,25 +134,78 @@ describe('with file key and password', () => {
     expect(mockDeleteFile).not.toHaveBeenCalled();
   });
 
+  const files = [
+    {
+      lastModified: 0,
+      name: 'filename',
+      size: 0,
+      type: 'application/octet-stream',
+      data: 'data:application/octet-stream;base64,',
+      id: 'uuid',
+    },
+  ];
+
   describe.each([200, 404])('when delete status is %d', (status) => {
-    it('closes modal and resets store', async () => {
+    beforeEach(async () => {
+      store.dispatch(actions.addFiles(files));
       const unwrap = jest.fn().mockRejectedValueOnce({ status });
       mockDeleteFile.mockReturnValue({ unwrap });
       renderWithProviders(<ShareLink />);
-      await waitFor(() => {
-        fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+
+      await waitFor(async () => {
         fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+        expect(mockDeleteFile).toHaveBeenCalledWith({
+          key,
+          passwordSHA512: await hashPassword(password),
+        });
+        expect(mockDeleteFile).toHaveBeenCalledTimes(1);
+        expect(unwrap).toHaveBeenCalledTimes(1);
       });
-      expect(mockDeleteFile).toHaveBeenCalledTimes(1);
-      expect(mockDeleteFile).toHaveBeenCalledWith(key);
-      expect(unwrap).toHaveBeenCalledTimes(1);
-      expect(store.getState().file).toMatchInlineSnapshot(`
-      {
-        "files": [],
-        "key": "",
-        "password": "",
-      }
-    `);
+    });
+
+    it('closes modal and resets store ', () => {
+      expect(
+        screen.getByText('Are you sure you want to delete this file?'),
+      ).not.toBeVisible();
+
+      expect(store.getState().file).toEqual({
+        files: [],
+        key: '',
+        password: '',
+      });
+    });
+  });
+
+  describe.each([400, 500])('when delete status is %d', (status) => {
+    beforeEach(async () => {
+      store.dispatch(actions.addFiles(files));
+      const unwrap = jest.fn().mockRejectedValueOnce({ status });
+      mockDeleteFile.mockReturnValue({ unwrap });
+      renderWithProviders(<ShareLink />);
+      fireEvent.click(screen.getByRole('button', { name: 'Delete file' }));
+
+      await waitFor(async () => {
+        fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+        expect(mockDeleteFile).toHaveBeenCalledWith({
+          key,
+          passwordSHA512: await hashPassword(password),
+        });
+        expect(mockDeleteFile).toHaveBeenCalledTimes(1);
+        expect(unwrap).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    it('does not close modal and reset store', () => {
+      expect(
+        screen.queryByText('Are you sure you want to delete this file?'),
+      ).toBeVisible();
+
+      expect(store.getState().file).toEqual({
+        files,
+        key: '',
+        password: '',
+      });
     });
   });
 });

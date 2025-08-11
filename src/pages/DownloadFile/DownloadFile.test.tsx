@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { useLazyDownloadFileQuery, useSelector } from 'src/hooks';
 import type { RootState } from 'src/types';
 import { unzip } from 'src/utils';
@@ -12,10 +12,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(() => mockNavigate),
 }));
 
-const mockDeleteFile = jest.fn();
-
 jest.mock('src/hooks', () => ({
-  useDeleteFileMutation: jest.fn(() => [mockDeleteFile]),
   useLazyDownloadFileQuery: jest.fn(),
   useSelector: jest.fn(),
 }));
@@ -280,14 +277,5 @@ describe('isSuccess', () => {
           'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86',
       });
     });
-  });
-
-  it('deletes file on download', async () => {
-    renderWithProviders(<DownloadFile />);
-    await waitFor(() => {
-      fireEvent.click(screen.getByRole('link', { name: 'Download file' }));
-    });
-    expect(mockDeleteFile).toHaveBeenCalledTimes(1);
-    expect(mockDeleteFile).toHaveBeenCalledWith(file.key);
   });
 });
