@@ -28,5 +28,6 @@ Feature: Invalid
     Then I see URL "/download"
       And I see heading "Download error"
       And I see text "File has been deleted or does not exist."
+      And I see link "Upload file"
     When I go back
     Then I do not see URL "/"

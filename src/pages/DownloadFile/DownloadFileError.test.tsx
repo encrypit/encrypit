@@ -28,11 +28,18 @@ describe('status 403', () => {
 });
 
 describe('status 404', () => {
-  it('renders paragraph', () => {
+  beforeEach(() => {
     renderWithProviders(<DownloadFileError status={404} />);
+  });
+
+  it('renders description', () => {
     expect(
       screen.getByText('File has been deleted or does not exist.'),
     ).toBeInTheDocument();
+  });
+
+  it('renders home link', () => {
+    expect(screen.getByText('Upload file')).toHaveAttribute('to', '/');
   });
 });
 
