@@ -1,6 +1,7 @@
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Props {
   status?: number;
@@ -26,6 +27,10 @@ export default function DownloadFileError(props: Props) {
           ? 'File has been deleted or does not exist.'
           : 'File failed to download. Please try again.'}
       </Typography>
+
+      <Button component={Link} replace to="/" variant="outlined">
+        Upload file
+      </Button>
     </>
   );
 }
