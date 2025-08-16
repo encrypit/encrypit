@@ -106,6 +106,11 @@ describe('with file key and password', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Copy link' }));
     expect(writeText).toHaveBeenCalledTimes(1);
     expect(writeText).toHaveBeenCalledWith(link);
+    expect(store.getState().snackbar).toMatchObject({
+      autoHideDuration: 2000,
+      message: 'Copied link',
+      open: true,
+    });
   });
 
   it('emails link', () => {
