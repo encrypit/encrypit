@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/encrypit/encrypit/compare/v1.7.0...v1.8.0) (2025-08-17)
+
+
+### Features
+
+* **ShareLink:** display snackbar message when "Copy link" is pressed ([4c4ae4e](https://github.com/encrypit/encrypit/commit/4c4ae4e3b7621d3f122b357bff45b61d892e79a1))
+
 ## [1.7.0](https://github.com/encrypit/encrypit/compare/v1.6.0...v1.7.0) (2025-08-16)
 
 
