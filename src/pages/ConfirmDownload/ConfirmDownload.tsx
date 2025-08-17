@@ -42,7 +42,9 @@ export default function ConfirmDownload() {
 
       <Typography paragraph>
         You're about to download and delete the file with key{' '}
-        <strong>{fileKey}</strong>
+        <strong>
+          <code>{fileKey}</code>
+        </strong>
       </Typography>
 
       <Stack spacing={1} direction="row">
