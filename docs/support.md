@@ -18,4 +18,6 @@ Want to support the maintainer?
 - [Patreon](https://b.remarkabl.org/patreon)
 - [Ko-fi](https://b.remarkabl.org/ko-fi)
 - [Liberapay](https://b.remarkabl.org/liberapay)
+- [Buy Me a Coffee](https://buymeacoffee.com/remarkablemark)
+- [Thanks.Dev](https://thanks.dev/u/gh/remarkablemark)
 - [Teespring](https://b.remarkabl.org/teespring)

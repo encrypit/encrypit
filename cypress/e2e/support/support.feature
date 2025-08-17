@@ -10,6 +10,8 @@ Feature: Support
       And I see link "Patreon"
       And I see link "Ko-fi"
       And I see link "Liberapay"
+      And I see link "Buy Me a Coffee"
+      And I see link "Thanks.Dev"
       And I see link "Teespring"
     When I click on link "FAQ"
     Then I see URL "/faq"
