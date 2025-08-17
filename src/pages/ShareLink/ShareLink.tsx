@@ -7,8 +7,14 @@ import { NOT_FOUND, OK } from 'costatus';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { ONE_SECOND } from 'shared/constants';
 import DeleteDialog from 'src/components/DeleteDialog';
-import { useDeleteFileMutation, useDispatch, useSelector } from 'src/hooks';
+import {
+  useDeleteFileMutation,
+  useDispatch,
+  useSelector,
+  useSnackbar,
+} from 'src/hooks';
 import { actions } from 'src/store';
 import { hashPassword } from 'src/utils';
 
@@ -16,7 +22,7 @@ export default function ShareLink() {
   const dispatch = useDispatch();
   const file = useSelector((state) => state.file);
   const navigate = useNavigate();
-  const link = `${location.origin}/${file.key}#${file.password}`;
+  const snackbar = useSnackbar();
   const [deleteFile] = useDeleteFileMutation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -26,10 +32,15 @@ export default function ShareLink() {
     }
   }, [file.key]);
 
-  const copyLink = useCallback(
-    () => navigator.clipboard.writeText(link),
-    [link],
-  );
+  const link = `${location.origin}/${file.key}#${file.password}`;
+  const copyLink = useCallback(() => {
+    navigator.clipboard.writeText(link);
+    snackbar({
+      autoHideDuration: ONE_SECOND * 2,
+      message: 'Copied link',
+      open: true,
+    });
+  }, [link, snackbar]);
 
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);

@@ -12,6 +12,8 @@ Feature: Upload
       And I see link "http://localhost:5173/"
       And I see button "Copy link"
       And I see link "Email link"
+    When I click on button "Copy link"
+    Then I see text "Copied link"
     When I click on button "Delete file"
     Then I see heading "Are you sure you want to delete this file?"
       And I see text "This action cannot be undone."

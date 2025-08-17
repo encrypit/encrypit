@@ -46,3 +46,5 @@ export const FILE_PASSWORD_REGEX = new RegExp(
 export enum MIME {
   ZIP = 'application/zip',
 }
+
+export const ONE_SECOND = 1000;

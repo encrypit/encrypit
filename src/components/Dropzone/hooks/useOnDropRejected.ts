@@ -17,7 +17,6 @@ export function useOnDropRejected() {
         message: fileRejections[0].errors[0].message,
         open: true,
       });
-      return;
     },
     [snackbar],
   );
