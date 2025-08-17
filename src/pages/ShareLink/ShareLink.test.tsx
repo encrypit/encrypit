@@ -179,6 +179,12 @@ describe('with file key and password', () => {
         key: '',
         password: '',
       });
+
+      expect(store.getState().snackbar).toMatchObject({
+        autoHideDuration: 2000,
+        message: 'Deleted file',
+        open: true,
+      });
     });
   });
 
@@ -210,6 +216,12 @@ describe('with file key and password', () => {
         files,
         key: '',
         password: '',
+      });
+
+      expect(store.getState().snackbar).toMatchObject({
+        autoHideDuration: 6000,
+        message: '',
+        open: false,
       });
     });
   });
