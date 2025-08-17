@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/encrypit/encrypit/compare/v1.8.0...v1.9.0) (2025-08-17)
+
+
+### Features
+
+* **ShareLink:** display snackbar message "Deleted file" on delete ([61f0640](https://github.com/encrypit/encrypit/commit/61f0640f20f82ac76e6e8c6f6722b0afbb5fc7b7))
+
 ## [1.8.0](https://github.com/encrypit/encrypit/compare/v1.7.0...v1.8.0) (2025-08-17)
 
 
