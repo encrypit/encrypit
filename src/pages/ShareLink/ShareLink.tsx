@@ -40,11 +40,11 @@ export default function ShareLink() {
       message: 'Copied link',
       open: true,
     });
-  }, [link, snackbar]);
+  }, [link]);
 
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);
-  const handleDeleteFile = useCallback(async () => {
+  const onDelete = useCallback(async () => {
     let status = 0;
 
     try {
@@ -62,6 +62,11 @@ export default function ShareLink() {
     if ([OK, NOT_FOUND].includes(status)) {
       setIsDialogOpen(false);
       dispatch(actions.resetFile());
+      snackbar({
+        autoHideDuration: ONE_SECOND * 2,
+        message: 'Deleted file',
+        open: true,
+      });
     }
   }, [file.key]);
 
@@ -111,7 +116,7 @@ export default function ShareLink() {
           content="This action cannot be undone."
           id={file.key}
           onClose={closeDialog}
-          onDelete={handleDeleteFile}
+          onDelete={onDelete}
           open={isDialogOpen}
           title="Are you sure you want to delete this file?"
         />

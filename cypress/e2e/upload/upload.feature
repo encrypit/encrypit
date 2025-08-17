@@ -20,7 +20,8 @@ Feature: Upload
     When I find buttons by text "Delete"
       And I get last element
       And I click
-    Then I see URL "/"
+    Then I see text "Deleted file"
+      And I see URL "/"
     When I go back
     Then I do not see URL "/"
 
