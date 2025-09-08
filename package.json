@@ -28,7 +28,7 @@
     "@reduxjs/toolkit": "2.9.0",
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.9",
-    "@zip.js/zip.js": "2.7.73",
+    "@zip.js/zip.js": "2.8.1",
     "costatus": "1.0.3",
     "file64": "1.0.5",
     "markdown-to-jsx": "7.7.13",
