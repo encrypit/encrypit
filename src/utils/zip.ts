@@ -1,4 +1,10 @@
-import { BlobReader, BlobWriter, ZipReader, ZipWriter } from '@zip.js/zip.js';
+import {
+  BlobReader,
+  BlobWriter,
+  FileEntry,
+  ZipReader,
+  ZipWriter,
+} from '@zip.js/zip.js';
 import { digest } from 'pepto';
 import { MIME } from 'shared/constants';
 
@@ -59,8 +65,8 @@ export async function unzip(file: Blob, password: string): Promise<Blob> {
     password: await stretchPassword(password),
   });
 
-  const [firstFile] = await zipReader.getEntries();
-  const data = await firstFile.getData!(blobWriter);
+  const [firstEntry] = await zipReader.getEntries();
+  const data = await (firstEntry as FileEntry).getData(blobWriter);
   await zipReader.close();
   return data;
 }
