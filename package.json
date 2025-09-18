@@ -76,7 +76,7 @@
     "prettier": "3.6.2",
     "ts-jest": "29.4.3",
     "ts-node": "10.9.2",
-    "vite": "7.1.5",
+    "vite": "7.1.6",
     "vite-plugin-html": "3.2.2",
     "wrangler": "4.37.1"
   },
