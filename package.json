@@ -78,7 +78,7 @@
     "ts-node": "10.9.2",
     "vite": "7.1.9",
     "vite-plugin-html": "3.2.2",
-    "wrangler": "4.42.0"
+    "wrangler": "4.42.1"
   },
   "private": true,
   "license": "MIT"
