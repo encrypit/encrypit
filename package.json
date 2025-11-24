@@ -31,7 +31,7 @@
     "@zip.js/zip.js": "2.8.11",
     "costatus": "1.0.3",
     "file64": "1.0.5",
-    "markdown-to-jsx": "8.0.0",
+    "markdown-to-jsx": "9.1.1",
     "nanoid": "5.1.6",
     "pepto": "1.0.8",
     "react": "19.2.0",
