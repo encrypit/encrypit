@@ -1,53 +1,52 @@
 # Changelog
 
-## [1.9.0](https://github.com/encrypit/encrypit/compare/v1.8.0...v1.9.0) (2025-08-17)
+## [1.9.1](https://github.com/encrypit/encrypit/compare/v1.9.0...v1.9.1) (2025-12-05)
 
+### Miscellaneous Chores
+
+- release 1.9.1 ([bf46f0a](https://github.com/encrypit/encrypit/commit/bf46f0a35417393ea85d885a8976ad646e011bf1))
+
+## [1.9.0](https://github.com/encrypit/encrypit/compare/v1.8.0...v1.9.0) (2025-08-17)
 
 ### Features
 
-* **ShareLink:** display snackbar message "Deleted file" on delete ([61f0640](https://github.com/encrypit/encrypit/commit/61f0640f20f82ac76e6e8c6f6722b0afbb5fc7b7))
+- **ShareLink:** display snackbar message "Deleted file" on delete ([61f0640](https://github.com/encrypit/encrypit/commit/61f0640f20f82ac76e6e8c6f6722b0afbb5fc7b7))
 
 ## [1.8.0](https://github.com/encrypit/encrypit/compare/v1.7.0...v1.8.0) (2025-08-17)
 
-
 ### Features
 
-* **ShareLink:** display snackbar message when "Copy link" is pressed ([4c4ae4e](https://github.com/encrypit/encrypit/commit/4c4ae4e3b7621d3f122b357bff45b61d892e79a1))
+- **ShareLink:** display snackbar message when "Copy link" is pressed ([4c4ae4e](https://github.com/encrypit/encrypit/commit/4c4ae4e3b7621d3f122b357bff45b61d892e79a1))
 
 ## [1.7.0](https://github.com/encrypit/encrypit/compare/v1.6.0...v1.7.0) (2025-08-16)
 
-
 ### Features
 
-* **pages:** render "Upload file" link in DownloadFileError ([b12f8a5](https://github.com/encrypit/encrypit/commit/b12f8a59550ccfa30a54daebddbac9f82c4ac412))
+- **pages:** render "Upload file" link in DownloadFileError ([b12f8a5](https://github.com/encrypit/encrypit/commit/b12f8a59550ccfa30a54daebddbac9f82c4ac412))
 
 ## [1.6.0](https://github.com/encrypit/encrypit/compare/v1.5.1...v1.6.0) (2025-08-11)
 
-
 ### Features
 
-* **api:** check password hash before deleting file ([8424d27](https://github.com/encrypit/encrypit/commit/8424d27b4b54f228eb44e9f44363653328a03ed7))
+- **api:** check password hash before deleting file ([8424d27](https://github.com/encrypit/encrypit/commit/8424d27b4b54f228eb44e9f44363653328a03ed7))
 
 ## [1.5.1](https://github.com/encrypit/encrypit/compare/v1.5.0...v1.5.1) (2025-08-10)
 
-
 ### Code Refactoring
 
-* **constants:** remove deprecated file key and password length ([2431fa4](https://github.com/encrypit/encrypit/commit/2431fa484f69e5e7dae79c65bd00fa44e6533b40))
+- **constants:** remove deprecated file key and password length ([2431fa4](https://github.com/encrypit/encrypit/commit/2431fa484f69e5e7dae79c65bd00fa44e6533b40))
 
 ## [1.5.0](https://github.com/encrypit/encrypit/compare/v1.4.7...v1.5.0) (2025-07-29)
 
-
 ### Features
 
-* **constants:** increase file key length to 9 and password length to 12 ([047ea6c](https://github.com/encrypit/encrypit/commit/047ea6c5a7b2d71c036fedcdf0075b077c9001bf))
+- **constants:** increase file key length to 9 and password length to 12 ([047ea6c](https://github.com/encrypit/encrypit/commit/047ea6c5a7b2d71c036fedcdf0075b077c9001bf))
 
 ## [1.4.7](https://github.com/encrypit/encrypit/compare/v1.4.6...v1.4.7) (2025-05-06)
 
-
 ### Build System
 
-* **package:** upgrade Material UI from v6 to v7 ([d862d8a](https://github.com/encrypit/encrypit/commit/d862d8a5cde77df33ecde8ebeb39c7199d188f71))
+- **package:** upgrade Material UI from v6 to v7 ([d862d8a](https://github.com/encrypit/encrypit/commit/d862d8a5cde77df33ecde8ebeb39c7199d188f71))
 
 ## [1.4.6](https://github.com/encrypit/encrypit/compare/v1.4.5...v1.4.6) (2025-02-25)
 
