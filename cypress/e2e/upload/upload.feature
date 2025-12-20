@@ -1,6 +1,7 @@
 Feature: Upload
   Scenario: I can upload and delete a file
-    Given I visit "/"
+    Given I grant write permission to clipboard
+      And I visit "/"
     When I get element by selector "input[type=file]"
       And I select file "cypress/fixtures/example.json"
         | force | true |
