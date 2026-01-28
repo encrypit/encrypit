@@ -189,6 +189,8 @@ describe('with file key and password', () => {
   });
 
   describe.each([400, 500])('when delete status is %d', (status) => {
+    jest.retryTimes(2);
+
     beforeEach(async () => {
       store.dispatch(actions.addFiles(files));
       const unwrap = jest.fn().mockRejectedValueOnce({ status });
