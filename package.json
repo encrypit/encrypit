@@ -54,7 +54,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "30.0.0",
     "@vitejs/plugin-react-swc": "4.2.3",
-    "cypress": "15.10.0",
+    "cypress": "15.11.0",
     "cypress-cucumber-steps": "3.64.0",
     "esbuild": "0.27.3",
     "eslint": "9.39.2",
