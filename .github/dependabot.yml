@@ -21,6 +21,9 @@ updates:
         patterns:
           - '*eslint*'
           - prettier
+      mui:
+        patterns:
+          - '@mui/*'
       react:
         patterns:
           - react
