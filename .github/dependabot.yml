@@ -10,23 +10,21 @@ updates:
     schedule:
       interval: 'daily'
     groups:
+      cloudflare:
+        patterns:
+          - '@cloudflare/*'
+          - wrangler
       commitlint:
         patterns:
           - '@commitlint/*'
       eslint:
         patterns:
-          - '@eslint/*'
-      prettier:
-        patterns:
+          - '*eslint*'
           - prettier
-          - eslint-plugin-prettier
       react:
         patterns:
           - react
           - react-dom
-      typescript-eslint:
-        patterns:
-          - '@typescript-eslint/*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
