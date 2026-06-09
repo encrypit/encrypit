@@ -44,7 +44,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "24.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.8",
-    "@cloudflare/workers-types": "4.20260608.1",
+    "@cloudflare/workers-types": "4.20260609.1",
     "@commitlint/cli": "20.5.0",
     "@commitlint/config-conventional": "20.5.0",
     "@eslint/compat": "2.0.2",
@@ -76,7 +76,7 @@
     "typescript-eslint": "8.58.0",
     "vite": "8.0.5",
     "vite-plugin-html": "3.2.2",
-    "wrangler": "4.98.0"
+    "wrangler": "4.99.0"
   },
   "private": true,
   "license": "MIT"
