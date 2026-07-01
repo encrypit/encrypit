@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.1 (2026-07-01)
+
+
+### Miscellaneous Chores
+
+* release 1.9.1 ([bf46f0a](https://github.com/encrypit/encrypit/commit/bf46f0a35417393ea85d885a8976ad646e011bf1))
+
 ## [1.9.1](https://github.com/encrypit/encrypit/compare/v1.9.0...v1.9.1) (2025-12-05)
 
 ### Miscellaneous Chores
