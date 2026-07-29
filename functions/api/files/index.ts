@@ -12,7 +12,7 @@ import type { CustomMetadata } from 'shared/types';
  * @returns - Response.
  */
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  let body: BodyInit = null;
+  let body: BodyInit | null = null;
   const init = getResponseInit(context.env.NODE_ENV);
 
   const formData = await context.request.formData();
@@ -34,8 +34,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const customMetadata: CustomMetadata = {
     size: String(file.size),
     type: file.type,
-    version: formData.get(FORM_DATA.VERSION),
-    passwordSHA512: formData.get(FORM_DATA.PASSWORD_SHA512),
+    version: formData.get(FORM_DATA.VERSION) as string,
+    passwordSHA512: formData.get(FORM_DATA.PASSWORD_SHA512) as string,
   };
 
   await bucket.put(fileKey, await file.arrayBuffer(), {
@@ -59,6 +59,6 @@ async function getFileKey(bucket: R2Bucket): Promise<string> {
   if (obj) {
     return getFileKey(bucket);
   }
-  await bucket.put(fileKey, null);
+  await bucket.put(fileKey, new Uint8Array());
   return fileKey;
 }
