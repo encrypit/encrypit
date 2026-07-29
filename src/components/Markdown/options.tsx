@@ -23,15 +23,21 @@ export const options: MarkdownToJSX.Options = {
 };
 
 function Heading1(props: object) {
-  return <Typography component="h1" gutterBottom variant="h4" {...props} />;
+  return (
+    <Typography
+      component="h1"
+      sx={{ marginBottom: 2 }}
+      variant="h4"
+      {...props}
+    />
+  );
 }
 
 function Heading2(props: object) {
   return (
     <Typography
       component="h2"
-      gutterBottom
-      sx={{ fontWeight: 'bold' }}
+      sx={{ fontWeight: 'bold', marginBottom: 1, marginTop: 4 }}
       variant="h5"
       {...props}
     />
@@ -39,5 +45,5 @@ function Heading2(props: object) {
 }
 
 function Paragraph(props: object) {
-  return <Typography paragraph {...props} />;
+  return <Typography component="p" sx={{ marginBottom: 2 }} {...props} />;
 }

@@ -92,8 +92,7 @@ export default function ShareLink() {
 
       <Stack
         direction="row"
-        justifyContent="space-between"
-        sx={{ marginTop: 2 }}
+        sx={{ marginTop: 2, justifyContent: 'space-between' }}
       >
         <Stack direction="row" spacing={1}>
           <Button onClick={copyLink} variant="outlined">
