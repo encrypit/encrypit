@@ -16,7 +16,7 @@ Feature: Error
     When I get element by selector "input[type=file]"
       And I select file "cypress/fixtures/6MB"
         | force | true |
-    Then I see text "File is larger than 5242880 bytes"
+    Then I see text "File is larger than 5 MB"
       And I do not see text "6MB"
     When I click on label "Close"
-    Then I do not see text "File is larger than 5242880 bytes"
+    Then I do not see text "File is larger than 5 MB"

@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
+import type { FileRejection } from 'react-dropzone';
 import { store, wrapper } from 'test/helpers';
 
 import { type OnDropRejected, useOnDropRejected } from './useOnDropRejected';
@@ -26,22 +27,19 @@ it('does not do anything if there are no file rejections', async () => {
 });
 
 describe('file rejections', () => {
-  const message = 'File is larger than 5242880 bytes';
-  let fileRejections: {
-    errors: {
-      code: string;
-      message: string;
-    }[];
-    file: File;
-  }[];
+  const message = 'File is larger than 5 MB';
+  let fileRejections: FileRejection[];
   let onDropRejected: OnDropRejected;
 
   beforeEach(() => {
     fileRejections = Array(2)
       .fill(null)
-      .map((file) => ({
+      .map(() => ({
         errors: [{ code: 'too-many-files', message }],
-        file,
+        file: Object.assign(new File([], ''), {
+          path: '',
+          relativePath: '',
+        }),
       }));
     const { result } = renderHook(() => useOnDropRejected(), { wrapper });
     onDropRejected = result.current;
