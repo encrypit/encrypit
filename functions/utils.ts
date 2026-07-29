@@ -27,7 +27,7 @@ export function getBucket(
  * @param context - R2 object.
  * @returns - Custom metadata.
  */
-export function getCustomMetadata(obj: R2ObjectBody) {
+export function getCustomMetadata(obj: R2Object): CustomMetadata {
   return obj.customMetadata as unknown as CustomMetadata;
 }
 
@@ -37,8 +37,10 @@ export function getCustomMetadata(obj: R2ObjectBody) {
  * @param environment - Node environment.
  * @returns - Response init.
  */
-export function getResponseInit(environment: Env['NODE_ENV']) {
-  const responseInit: ResponseInit = {
+export function getResponseInit(
+  environment: Env['NODE_ENV'],
+): ResponseInit & { headers: Record<string, string> } {
+  const responseInit: ResponseInit & { headers: Record<string, string> } = {
     headers: {},
   };
   if (environment === 'development') {

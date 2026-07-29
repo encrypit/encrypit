@@ -12,7 +12,7 @@ type Params = 'key';
  * @returns - Response.
  */
 export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
-  let body: BodyInit = null;
+  let body: BodyInit | null = null;
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
@@ -25,6 +25,11 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
     return new Response(body, init);
   }
 
+  if (!obj) {
+    init.status = NOT_FOUND;
+    return new Response(body, init);
+  }
+
   if (hasExpired(obj.uploaded)) {
     await bucket.delete(fileKey);
     init.status = NOT_FOUND;
@@ -34,12 +39,12 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
   const { readable, writable } = new TransformStream();
   obj.body.pipeTo(writable);
 
-  const customMetadata = getCustomMetadata(obj).passwordSHA512;
-  delete customMetadata.passwordSHA512;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { passwordSHA512, ...publicMetadata } = getCustomMetadata(obj);
 
   body = readable;
   init.headers['Access-Control-Expose-Headers'] = HEADERS.CUSTOM_METADATA;
-  init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(customMetadata);
+  init.headers[HEADERS.CUSTOM_METADATA] = JSON.stringify(publicMetadata);
 
   await bucket.delete(fileKey);
   return new Response(body, init);
@@ -52,7 +57,7 @@ export const onRequestGet: PagesFunction<Env, Params> = async (context) => {
  * @returns - Response.
  */
 export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
-  const body: BodyInit = null;
+  const body: BodyInit | null = null;
   const init = getResponseInit(context.env.NODE_ENV);
 
   const fileKey = context.params.key as string;
@@ -62,6 +67,11 @@ export const onRequestDelete: PagesFunction<Env, Params> = async (context) => {
 
   if (status) {
     init.status = status;
+    return new Response(body, init);
+  }
+
+  if (!obj) {
+    init.status = NOT_FOUND;
     return new Response(body, init);
   }
 
@@ -102,7 +112,7 @@ function hasExpired(
  * @param context - Event context.
  * @returns - Response status.
  */
-function validateFile(obj: R2Object, context: Context): string {
+function validateFile(obj: R2Object | null, context: Context): number {
   if (!obj) {
     return NOT_FOUND;
   }
@@ -113,5 +123,5 @@ function validateFile(obj: R2Object, context: Context): string {
     return FORBIDDEN;
   }
 
-  return '';
+  return 0;
 }
