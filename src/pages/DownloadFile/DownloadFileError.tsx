@@ -22,7 +22,7 @@ export default function DownloadFileError(props: Props) {
         Download error
       </Typography>
 
-      <Typography paragraph>
+      <Typography gutterBottom>
         {props.status === 404
           ? 'File has been deleted or does not exist.'
           : 'File failed to download. Please try again.'}

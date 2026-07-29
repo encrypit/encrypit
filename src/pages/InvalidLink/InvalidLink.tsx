@@ -7,7 +7,7 @@ export default function InvalidLink() {
         File link invalid
       </Typography>
 
-      <Typography paragraph>
+      <Typography>
         The link is incomplete or incorrect. Please make sure all the characters
         after the <strong>#</strong> are included.
       </Typography>

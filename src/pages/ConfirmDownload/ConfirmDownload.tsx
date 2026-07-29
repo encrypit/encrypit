@@ -40,7 +40,7 @@ export default function ConfirmDownload() {
         Download and delete?
       </Typography>
 
-      <Typography paragraph>
+      <Typography gutterBottom>
         You're about to download and delete the file with key{' '}
         <strong>
           <code>{fileKey}</code>

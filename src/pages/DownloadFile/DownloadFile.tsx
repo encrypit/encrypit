@@ -75,14 +75,14 @@ export default function DownloadFile() {
       )}
 
       {downloadFileResult.isSuccess && (
-        <Typography paragraph>
+        <Typography gutterBottom>
           File has been deleted from the server. Please close this page after
           the download has finished.
         </Typography>
       )}
 
       {downloadUrl && (
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
           <Button
             component={Link}
             download={generateFileName()}
