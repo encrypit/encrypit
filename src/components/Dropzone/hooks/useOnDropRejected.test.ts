@@ -27,7 +27,7 @@ it('does not do anything if there are no file rejections', async () => {
 });
 
 describe('file rejections', () => {
-  const message = 'File is larger than 5242880 bytes';
+  const message = 'File is larger than 5 MB';
   let fileRejections: FileRejection[];
   let onDropRejected: OnDropRejected;
 
