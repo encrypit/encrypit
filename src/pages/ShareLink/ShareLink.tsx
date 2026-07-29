@@ -45,6 +45,7 @@ export default function ShareLink() {
   const openDialog = useCallback(() => setIsDialogOpen(true), []);
   const closeDialog = useCallback(() => setIsDialogOpen(false), []);
   const onDelete = useCallback(async () => {
+    // eslint-disable-next-line no-useless-assignment
     let status = 0;
 
     try {
