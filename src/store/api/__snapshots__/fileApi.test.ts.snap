@@ -16,11 +16,11 @@ Request {
   Symbol(Request internals): {
     "headers": Headers {
       Symbol(map): {
-        "X-Password-Sha512": [
-          "cc7222b9eb5b430fc446942a1a7b85f9593328f9c42f3a343a9c698e5574fdc3d9b435f94dbc667f82786b1747bbb27abe76bfddc473fbc2145b8d2e3265114e",
-        ],
         "accept": [
           "application/json",
+        ],
+        "x-password-sha512": [
+          "cc7222b9eb5b430fc446942a1a7b85f9593328f9c42f3a343a9c698e5574fdc3d9b435f94dbc667f82786b1747bbb27abe76bfddc473fbc2145b8d2e3265114e",
         ],
       },
     },
@@ -61,7 +61,7 @@ Request {
   Symbol(Request internals): {
     "headers": Headers {
       Symbol(map): {
-        "X-Password-Sha512": [
+        "x-password-sha512": [
           "passwordSHA512",
         ],
       },

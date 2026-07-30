@@ -16,6 +16,7 @@
     "noEmit": true,
     "rootDir": ".",
     "jsx": "react-jsx",
+    "types": ["node"],
     "paths": {
       "shared/*": ["./shared/*"],
       "src/*": ["./src/*"],
