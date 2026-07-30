@@ -28,7 +28,7 @@ jobs:
           browser: chrome
           start: |
             npx vite --host
-            npx wrangler pages dev . --r2=EXPIRATION_DAYS_7 --compatibility-date=${{ steps.compatibility_date.outputs.date }}
+            npm run server -- --compatibility-date=${{ steps.compatibility_date.outputs.date }}
           wait-on: 'http://localhost:5173, http://localhost:8788'
 
       - name: Record failed screenshots
