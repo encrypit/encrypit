@@ -18,13 +18,17 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
 
+      - name: Set compatibility date
+        id: compatibility_date
+        run: echo "date=$(date -d "yesterday" +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
       - name: Cypress run
         uses: cypress-io/github-action@v7
         with:
           browser: chrome
           start: |
             npx vite --host
-            npm run server
+            npx wrangler pages dev . --r2=EXPIRATION_DAYS_7 --compatibility-date=${{ steps.compatibility_date.outputs.date }}
           wait-on: 'http://localhost:5173, http://localhost:8788'
 
       - name: Record failed screenshots
