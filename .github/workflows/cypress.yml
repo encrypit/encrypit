@@ -20,7 +20,7 @@ jobs:
 
       - name: Set compatibility date
         id: compatibility_date
-        run: echo "date=$(date -d "1 week ago" +%Y-%m-%d)" >> $GITHUB_OUTPUT
+        run: echo "date=$(date -d "1 month ago" +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
       - name: Cypress run
         uses: cypress-io/github-action@v7
