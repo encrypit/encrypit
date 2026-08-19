@@ -54,7 +54,7 @@
     "@types/jest": "30.0.0",
     "@types/node": "26.1.2",
     "@vitejs/plugin-react-swc": "4.3.3",
-    "cypress": "15.20.0",
+    "cypress": "15.20.1",
     "cypress-cucumber-steps": "3.64.3",
     "esbuild": "0.28.1",
     "eslint": "10.8.1",
