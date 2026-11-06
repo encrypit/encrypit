@@ -25,7 +25,7 @@
     "@fontsource/roboto": "5.3.0",
     "@mui/icons-material": "9.5.0",
     "@mui/material": "9.5.0",
-    "@reduxjs/toolkit": "2.13.0",
+    "@reduxjs/toolkit": "2.14.0",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@zip.js/zip.js": "2.8.57",
